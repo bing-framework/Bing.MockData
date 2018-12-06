@@ -1,0 +1,2 @@
+# Bing.MockData
+Data Generator
