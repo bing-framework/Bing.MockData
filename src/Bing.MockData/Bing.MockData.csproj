@@ -4,4 +4,29 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Datas\Resources\BBAN.txt" />
+    <None Remove="Datas\Resources\CityNames.txt" />
+    <None Remove="Datas\Resources\CountryNames.txt" />
+    <None Remove="Datas\Resources\FemaleNames.txt" />
+    <None Remove="Datas\Resources\IBAN.txt" />
+    <None Remove="Datas\Resources\LastNames.txt" />
+    <None Remove="Datas\Resources\MaleNames.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Datas\Resources\BBAN.txt" />
+    <EmbeddedResource Include="Datas\Resources\CityNames.txt" />
+    <EmbeddedResource Include="Datas\Resources\CountryNames.txt" />
+    <EmbeddedResource Include="Datas\Resources\FemaleNames.txt" />
+    <EmbeddedResource Include="Datas\Resources\MaleNames.txt" />
+    <EmbeddedResource Include="Datas\Resources\LastNames.txt" />
+    <EmbeddedResource Include="Datas\Resources\IBAN.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fare" Version="2.1.1" />
+    <PackageReference Include="NLipsum" Version="1.1.0" />
+  </ItemGroup>
+
 </Project>
