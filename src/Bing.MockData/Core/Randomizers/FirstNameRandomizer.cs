@@ -10,7 +10,7 @@ namespace Bing.MockData.Core.Randomizers
     /// <summary>
     /// 名字随机生成器
     /// </summary>
-    public class FirstNameRandomizer:RandomizerBase<FirstNameFieldOptions>,IStringRandomizer
+    public class FirstNameRandomizer : RandomizerBase<FirstNameFieldOptions>, IStringRandomizer
     {
         /// <summary>
         /// 数字生成器

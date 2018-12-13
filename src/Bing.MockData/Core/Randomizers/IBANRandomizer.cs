@@ -60,7 +60,7 @@ namespace Bing.MockData.Core.Randomizers
             return iban.Generator.Generate();
         }
 
-        /// <summary>
+         /// <summary>
         /// 生成
         /// </summary>
         /// <param name="upperCase">是否大写</param>
