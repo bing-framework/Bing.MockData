@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 城市字段配置
+    /// 城市配置
     /// </summary>
     public class CityFieldOptions : FieldOptionsBase, IStringFieldOptions
     {

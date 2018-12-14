@@ -49,7 +49,7 @@ namespace Bing.MockData.Internals.Generators
         /// </summary>
         public static void Reset()
         {
-            _random=new Random(Environment.TickCount);
+            _random = new Random(Environment.TickCount);
         }
 
         /// <summary>

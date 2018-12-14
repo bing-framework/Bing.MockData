@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 单词字段配置
+    /// 单词配置
     /// </summary>
     public class TextWordsFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

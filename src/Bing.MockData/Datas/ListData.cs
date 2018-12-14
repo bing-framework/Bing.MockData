@@ -16,52 +16,57 @@ namespace Bing.MockData.Datas
         /// <summary>
         /// 姓氏
         /// </summary>
-        public IEnumerable<string> LastNames { get; }
+        public IEnumerable<string> LastNames { get; private set; }
 
         /// <summary>
         /// 男性名称
         /// </summary>
-        public IEnumerable<string> MaleNames { get; }
+        public IEnumerable<string> MaleNames { get; private set; }
 
         /// <summary>
         /// 女性名称
         /// </summary>
-        public IEnumerable<string> FemaleNames { get; }
+        public IEnumerable<string> FemaleNames { get; private set; }
 
         /// <summary>
         /// 城市名称
         /// </summary>
-        public IEnumerable<string> CityNames { get; }
+        public IEnumerable<string> CityNames { get; private set; }
 
         /// <summary>
         /// 国家名称
         /// </summary>
-        public IEnumerable<string> CountryNames { get; }
+        public IEnumerable<string> CountryNames { get; private set; }
 
         /// <summary>
         /// 方向
         /// </summary>
-        public IEnumerable<string> Directions { get; }
+        public IEnumerable<string> Directions { get; private set; }
 
         /// <summary>
         /// 街道类型
         /// </summary>
-        public IEnumerable<string> StreetType { get; }
+        public IEnumerable<string> StreetType { get; private set; }
 
         /// <summary>
         /// 顶级域名
         /// </summary>
-        public IEnumerable<string> TopLevelDomains { get; }
+        public IEnumerable<string> TopLevelDomains { get; private set; }
 
         /// <summary>
         /// 国际银行帐户号码
         /// </summary>
-        public IEnumerable<IBAN> IBANs { get; }
+        public IEnumerable<IBAN> IBANs { get; private set; }
 
         /// <summary>
         /// 基本银行帐户号码
         /// </summary>
-        public IEnumerable<IBAN> BBANs { get; }
+        public IEnumerable<IBAN> BBANs { get; private set; }
+
+        /// <summary>
+        /// 常用简体汉字
+        /// </summary>
+        public string SimplifiedChinese { get; private set; }
 
         /// <summary>
         /// 初始化一个<see cref="ListData"/>类型的实例
@@ -85,6 +90,7 @@ namespace Bing.MockData.Datas
             };
             IBANs = GetResourceAsItems("IBAN", ibanFunc);
             BBANs = GetResourceAsItems("BBAN", ibanFunc);
+            SimplifiedChinese = GetResourceAsString("SimplifiedChinese");
         }
 
         /// <summary>
@@ -120,6 +126,20 @@ namespace Bing.MockData.Datas
         }
 
         /// <summary>
+        /// 从指定资源中获取字符串
+        /// </summary>
+        /// <param name="fileName">文件名称</param>
+        /// <returns></returns>
+        private string GetResourceAsString(string fileName)
+        {
+            var stream = GetResourceAsStream(fileName);
+            using (var reader = new StreamReader(stream, Encoding.UTF8))
+            {
+                return reader.ReadToEnd();
+            }
+        }
+
+        /// <summary>
         /// 从指定资源中获取行列表
         /// </summary>
         /// <param name="fileName">文件名称</param>
@@ -149,8 +169,17 @@ namespace Bing.MockData.Datas
             var lines = GetResourceAsLines(fileName);
             foreach (var line in lines)
             {
-                yield return convert(line.Split('\t'));
+                yield return convert(line.Split('\t'));                
             }
+        }
+
+        /// <summary>
+        /// 加载自定义资源
+        /// </summary>
+        /// <param name="action">加载配置操作</param>
+        public void LoadCustomResource(Action<ListData> action)
+        {
+            action.Invoke(this);
         }
     }
 }

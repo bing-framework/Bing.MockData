@@ -19,7 +19,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <summary>
         /// 初始化一个<see cref="NumberRandomizer{T}"/>类型的实例
         /// </summary>
-        /// <param name="options">数值字段配置</param>
+        /// <param name="options">数值配置</param>
         public NumberRandomizer(NumberFieldOptions<T> options) : base(options)
         {
             _generator = new RandomThingsGenerator<T>(options.Min, options.Max);

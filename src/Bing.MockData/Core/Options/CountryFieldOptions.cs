@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 国家字段配置
+    /// 国家配置
     /// </summary>
     public class CountryFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

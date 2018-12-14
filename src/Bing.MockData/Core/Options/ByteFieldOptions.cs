@@ -1,7 +1,7 @@
 ﻿namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// byte 字段配置
+    /// byte 配置
     /// </summary>
     public class ByteFieldOptions : NumberFieldOptions<byte>
     {

@@ -19,7 +19,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <summary>
         /// 初始化一个<see cref="DateTimeRandomizer"/>类型的实例
         /// </summary>
-        /// <param name="options">日期时间字段配置</param>
+        /// <param name="options">日期时间配置</param>
         public DateTimeRandomizer(DateTimeFieldOptions options) : base(options)
         {
             _generator = new RandomThingsGenerator<DateTime>(options.From, options.To);

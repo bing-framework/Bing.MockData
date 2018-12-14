@@ -1,7 +1,7 @@
 ﻿namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// float 字段配置
+    /// float 配置
     /// </summary>
     public class FloatFieldOptions:NumberFieldOptions<float>
     {

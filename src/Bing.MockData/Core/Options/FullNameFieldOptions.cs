@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 全名字段配置
+    /// 全名配置
     /// </summary>
     public class FullNameFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

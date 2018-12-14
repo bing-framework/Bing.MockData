@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// MAC地址字段配置
+    /// MAC地址配置
     /// </summary>
     public class MACAddressFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

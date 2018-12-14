@@ -17,14 +17,14 @@ namespace Bing.MockData.Core.Randomizers
             new Random(int.Parse(Guid.NewGuid().ToString().Substring(0, 8), NumberStyles.HexNumber));
 
         /// <summary>
-        /// 字段配置
+        /// 配置
         /// </summary>
         protected readonly TOptions Options;
 
         /// <summary>
         /// 初始化一个<see cref="RandomizerBase{TOptions}"/>类型的实例
         /// </summary>
-        /// <param name="options">字段配置</param>
+        /// <param name="options">配置</param>
         protected RandomizerBase(TOptions options)
         {
             Options = options;

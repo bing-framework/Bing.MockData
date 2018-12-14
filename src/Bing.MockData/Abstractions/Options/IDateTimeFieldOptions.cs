@@ -3,7 +3,7 @@
 namespace Bing.MockData.Abstractions.Options
 {
     /// <summary>
-    /// 时间字段配置
+    /// 时间配置
     /// </summary>
     public interface IDateTimeFieldOptions
     {

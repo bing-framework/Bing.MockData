@@ -1,7 +1,7 @@
 ﻿namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// double 字段配置
+    /// double 配置
     /// </summary>
     public class DoubleFieldOptions:NumberFieldOptions<double>
     {

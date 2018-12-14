@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 数值字段配置
+    /// 数值配置
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
     public abstract class NumberFieldOptions<T> : FieldOptionsBase, INumberFieldOptions<T> where T : struct

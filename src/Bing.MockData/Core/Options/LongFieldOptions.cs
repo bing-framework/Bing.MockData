@@ -1,7 +1,7 @@
 ﻿namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// long 字段配置
+    /// long 配置
     /// </summary>
     public class LongFieldOptions:NumberFieldOptions<long>
     {

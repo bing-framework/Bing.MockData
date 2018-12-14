@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 邮箱地址字段配置
+    /// 邮箱地址配置
     /// </summary>
     public class EmailAddressFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

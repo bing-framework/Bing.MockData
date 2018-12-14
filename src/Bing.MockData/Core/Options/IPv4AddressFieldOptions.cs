@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// IP4地址字段配置
+    /// IP4地址配置
     /// </summary>
     public class IPv4AddressFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

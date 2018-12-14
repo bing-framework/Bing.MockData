@@ -4,7 +4,7 @@ using Bing.MockData.Abstractions.Options;
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 时间字段配置
+    /// 时间配置
     /// </summary>
     public class DateTimeFieldOptions:FieldOptionsBase,IDateTimeFieldOptions
     {

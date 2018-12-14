@@ -13,7 +13,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <summary>
         /// 初始化一个<see cref="GuidRandomizer"/>类型的实例
         /// </summary>
-        /// <param name="options">Guid字段配置</param>
+        /// <param name="options">Guid配置</param>
         public GuidRandomizer(GuidFieldOptions options) : base(options)
         {
         }

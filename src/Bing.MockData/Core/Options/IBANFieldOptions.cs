@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 银行账号字段配置
+    /// 银行账号配置
     /// </summary>
     public class IBANFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

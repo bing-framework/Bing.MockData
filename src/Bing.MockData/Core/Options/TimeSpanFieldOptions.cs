@@ -4,7 +4,7 @@ using Bing.MockData.Abstractions.Options;
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 时间跨度字段配置
+    /// 时间跨度配置
     /// </summary>
     public class TimeSpanFieldOptions:FieldOptionsBase,ITimeSpanFieldOptions
     {

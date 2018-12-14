@@ -1,7 +1,7 @@
 ﻿namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 字段配置基类
+    /// 配置基类
     /// </summary>
     public abstract class FieldOptionsBase
     {

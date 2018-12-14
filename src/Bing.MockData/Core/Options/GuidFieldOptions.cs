@@ -3,7 +3,7 @@
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// Guid字段配置
+    /// Guid配置
     /// </summary>
     public class GuidFieldOptions : FieldOptionsBase, IGuidFieldOptions
     {

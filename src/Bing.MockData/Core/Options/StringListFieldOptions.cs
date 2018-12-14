@@ -4,7 +4,7 @@ using Bing.MockData.Abstractions.Options;
 namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// 字符串列表字段配置
+    /// 字符串列表配置
     /// </summary>
     public class StringListFieldOptions:FieldOptionsBase,IStringFieldOptions
     {

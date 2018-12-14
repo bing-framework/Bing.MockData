@@ -19,7 +19,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <summary>
         /// 初始化一个<see cref="CityRandomizer"/>类型的实例
         /// </summary>
-        /// <param name="options">城市字段配置</param>
+        /// <param name="options">城市配置</param>
         public CityRandomizer(CityFieldOptions options) : base(options)
         {
             _generator = new RandomStringFromListGenerator(ListData.Instance.CityNames);

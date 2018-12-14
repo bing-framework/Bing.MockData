@@ -69,6 +69,11 @@ namespace Bing.MockData.Factories
             return Create<ITimeSpanRandomizer>(options);
         }
 
+        public static IMobileRandomizer GetRandomizer(IMobileFieldOptions options)
+        {
+            return Create<IMobileRandomizer>(options);
+        }
+
         /// <summary>
         /// 获取随机生成器并转换成动态对象
         /// </summary>

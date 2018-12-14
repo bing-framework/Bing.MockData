@@ -1,7 +1,7 @@
 ﻿namespace Bing.MockData.Core.Options
 {
     /// <summary>
-    /// short 字段配置
+    /// short 配置
     /// </summary>
     public class ShortFieldOptions:NumberFieldOptions<short>
     {

@@ -19,7 +19,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <summary>
         /// 初始化一个<see cref="CountryRandomizer"/>类型的实例
         /// </summary>
-        /// <param name="options">国家字段配置</param>
+        /// <param name="options">国家配置</param>
         public CountryRandomizer(CountryFieldOptions options) : base(options)
         {
             _generator = new RandomStringFromListGenerator(ListData.Instance.CountryNames);
