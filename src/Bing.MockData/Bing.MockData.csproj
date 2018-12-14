@@ -12,6 +12,7 @@
     <None Remove="Datas\Resources\IBAN.txt" />
     <None Remove="Datas\Resources\LastNames.txt" />
     <None Remove="Datas\Resources\MaleNames.txt" />
+    <None Remove="Datas\Resources\SimplifiedChinese.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +23,7 @@
     <EmbeddedResource Include="Datas\Resources\MaleNames.txt" />
     <EmbeddedResource Include="Datas\Resources\LastNames.txt" />
     <EmbeddedResource Include="Datas\Resources\IBAN.txt" />
+    <EmbeddedResource Include="Datas\Resources\SimplifiedChinese.txt" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,7 +6,7 @@ namespace Bing.MockData.Core.Options
     /// 数值配置
     /// </summary>
     /// <typeparam name="T">数据类型</typeparam>
-    public abstract class NumberFieldOptions<T> : FieldOptionsBase, INumberFieldOptions<T> where T : struct
+    public class NumberFieldOptions<T> : FieldOptionsBase, INumberFieldOptions<T> where T : struct
     {
         /// <summary>
         /// 最小值

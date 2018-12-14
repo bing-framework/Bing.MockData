@@ -129,7 +129,7 @@ namespace Bing.MockData.Factories
             }
             else
             {
-                typeName = optionsFullName.Replace("Options", "Randomizers").Replace("FieldOptions", "Randomizer");
+                typeName = optionsFullName.Replace("FieldOptions", "Randomizer").Replace("Options", "Randomizers");
             }
 
             var type = Type.GetType(typeName, true);
