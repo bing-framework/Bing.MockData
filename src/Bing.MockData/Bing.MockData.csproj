@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Datas\Resources\Banks.json" />
     <None Remove="Datas\Resources\BBAN.txt" />
     <None Remove="Datas\Resources\ChineseAreaCode.json" />
     <None Remove="Datas\Resources\ChineseCityNames.txt" />
@@ -26,6 +27,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Datas\Resources\BBAN.txt" />
+    <EmbeddedResource Include="Datas\Resources\Banks.json" />
     <EmbeddedResource Include="Datas\Resources\ChineseAreaCode.json" />
     <EmbeddedResource Include="Datas\Resources\ChineseRegionList.txt" />
     <EmbeddedResource Include="Datas\Resources\ChineseCityNames.txt" />

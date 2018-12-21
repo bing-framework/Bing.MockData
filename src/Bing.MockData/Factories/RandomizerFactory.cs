@@ -99,6 +99,16 @@ namespace Bing.MockData.Factories
             return Create<IAddressRandomizer>(options);
         }
 
+        /// <summary>
+        /// 获取银行卡号随机生成器
+        /// </summary>
+        /// <param name="options">配置</param>
+        /// <returns></returns>
+        public static IBankCardRandomizer GetRandomizer(IBankCardFieldOptions options)
+        {
+            return Create<IBankCardRandomizer>(options);
+        }
+
 
         /// <summary>
         /// 获取随机生成器并转换成动态对象

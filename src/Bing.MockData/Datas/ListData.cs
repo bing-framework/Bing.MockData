@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Bing.MockData.Datas.Models;
+using Bing.MockData.Datas.Models.Banks;
 using Fare;
 using Newtonsoft.Json;
 
@@ -96,6 +97,11 @@ namespace Bing.MockData.Datas
         public List<string> ChineseFirstNames { get; private set; }
 
         /// <summary>
+        /// 银行信息列表
+        /// </summary>
+        public List<BankInfo> Banks { get; private set; }
+
+        /// <summary>
         /// 初始化一个<see cref="ListData"/>类型的实例
         /// </summary>
         ListData()
@@ -139,6 +145,7 @@ namespace Bing.MockData.Datas
                 "百里", "呼延", "东郭", "南门", "羊舌", "微生", "公户", "公玉", "公仪", "梁丘", "公仲", "公上", "公门", "公山", "公坚", "公伯",
                 "公祖", "第五", "公乘", "贯丘", "公皙", "南荣", "东里", "东宫", "仲长", "子书", "子桑", "即墨", "达奚", "褚师", "吴铭"
             }.ToList();
+            Banks = GetResourceFromJson<List<BankInfo>>("Banks");
         }
 
         /// <summary>

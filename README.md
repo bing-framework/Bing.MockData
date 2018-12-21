@@ -21,9 +21,10 @@
 - 文章段落：`TextLipsumRandomizer`
 - 地址：`ChineseAddressRandomizer`
 - 姓名：`ChineseNameRandomizer`
+- 银行卡号：`BankCardRandomizer`
 
 ## 尚未支持的随机数据
-- 银行卡号码
+
 
 ## 使用方式
 ```c#
@@ -122,6 +123,9 @@ var region = randomizer.GenerateRegion();
 var randomizer = RandomizerFactory.GetRandomizer(new ChineseNameFieldOptions());
 var result = randomizer.Generate();
 
+// 生成随机银行卡号
+var randomizer = RandomizerFactory.GetRandomizer(new BankCardFieldOptions());
+var result = randomizer.Generate();
 ```
 
 ## Nuget 依赖
