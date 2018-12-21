@@ -16,9 +16,14 @@
     <None Remove="Datas\Resources\ChineseCityNames.txt" />
     <None Remove="Datas\Resources\ChineseRegionList.txt" />
     <None Remove="Datas\Resources\CityNames.txt" />
+    <None Remove="Datas\Resources\Colors.en.json" />
+    <None Remove="Datas\Resources\Colors.zh-cn.json" />
     <None Remove="Datas\Resources\CountryNames.txt" />
+    <None Remove="Datas\Resources\Emails.json" />
     <None Remove="Datas\Resources\FemaleNames.txt" />
     <None Remove="Datas\Resources\IBAN.txt" />
+    <None Remove="Datas\Resources\Jobs.en.json" />
+    <None Remove="Datas\Resources\Jobs.zh-cn.json" />
     <None Remove="Datas\Resources\LastNames.txt" />
     <None Remove="Datas\Resources\MaleNames.txt" />
     <None Remove="Datas\Resources\ProvinceCity.txt" />
@@ -26,6 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Datas\Resources\Emails.json" />
+    <EmbeddedResource Include="Datas\Resources\Jobs.en.json" />
+    <EmbeddedResource Include="Datas\Resources\Jobs.zh-cn.json" />
+    <EmbeddedResource Include="Datas\Resources\Colors.en.json" />
+    <EmbeddedResource Include="Datas\Resources\Colors.zh-cn.json" />
     <EmbeddedResource Include="Datas\Resources\BBAN.txt" />
     <EmbeddedResource Include="Datas\Resources\Banks.json" />
     <EmbeddedResource Include="Datas\Resources\ChineseAreaCode.json" />

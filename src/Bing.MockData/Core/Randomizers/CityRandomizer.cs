@@ -22,7 +22,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <param name="options">城市配置</param>
         public CityRandomizer(CityFieldOptions options) : base(options)
         {
-            _generator = new RandomStringFromListGenerator(ListData.Instance.CityNames);
+            _generator = new RandomStringFromListGenerator(CommonData.Instance.CityNames);
         }
 
         /// <summary>

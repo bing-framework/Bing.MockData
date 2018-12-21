@@ -31,14 +31,14 @@ namespace Bing.MockData.Core.Randomizers
                 predicate = (iban) => iban.CountryCode == options.CountryCode;
             }
 
-            var list = ListData.Instance.IBANs;
+            var list = CommonData.Instance.IBANs;
             switch (options.Type)
             {
                 case "BBAN":
-                    list = ListData.Instance.BBANs;
+                    list = CommonData.Instance.BBANs;
                     break;
                 case "BOTH":
-                    list = list.Union(ListData.Instance.BBANs);
+                    list = list.Union(CommonData.Instance.BBANs);
                     break;
             }
 

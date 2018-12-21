@@ -47,19 +47,19 @@ namespace Bing.MockData.Core.Randomizers
         public EmailAddressRandomizer(EmailAddressFieldOptions options) : base(options)
         {
             _lastNamesGenerator =
-                new RandomStringFromListGenerator(ListData.Instance.LastNames.Select(l => l.ToLower()));
+                new RandomStringFromListGenerator(CommonData.Instance.LastNames.Select(l => l.ToLower()));
             _topLevelDomainGenerator =
-                new RandomStringFromListGenerator(ListData.Instance.TopLevelDomains.Select(l => l.ToLower()));
+                new RandomStringFromListGenerator(CommonData.Instance.TopLevelDomains.Select(l => l.ToLower()));
             if (options.Male)
             {
                 _genderSetGenerators.Add(
-                    new RandomStringFromListGenerator(ListData.Instance.MaleNames.Select(l => l.ToLower())));
+                    new RandomStringFromListGenerator(CommonData.Instance.MaleNames.Select(l => l.ToLower())));
             }
 
             if (options.Female)
             {
                 _genderSetGenerators.Add(
-                    new RandomStringFromListGenerator(ListData.Instance.FemaleNames.Select(l => l.ToLower())));
+                    new RandomStringFromListGenerator(CommonData.Instance.FemaleNames.Select(l => l.ToLower())));
             }
 
             _numberGenerator = new RandomThingsGenerator<int>(0, _genderSetGenerators.Count);

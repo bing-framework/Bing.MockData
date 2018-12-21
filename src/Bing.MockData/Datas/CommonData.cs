@@ -12,9 +12,9 @@ using Newtonsoft.Json;
 namespace Bing.MockData.Datas
 {
     /// <summary>
-    /// 列表数据
+    /// 通用数据
     /// </summary>
-    internal sealed class ListData
+    internal sealed class CommonData
     {
         /// <summary>
         /// 姓氏
@@ -102,9 +102,9 @@ namespace Bing.MockData.Datas
         public List<BankInfo> Banks { get; private set; }
 
         /// <summary>
-        /// 初始化一个<see cref="ListData"/>类型的实例
+        /// 初始化一个<see cref="CommonData"/>类型的实例
         /// </summary>
-        ListData()
+        CommonData()
         {
             LastNames = GetResourceAsLines("LastNames");
             MaleNames = GetResourceAsLines("MaleNames");
@@ -151,7 +151,7 @@ namespace Bing.MockData.Datas
         /// <summary>
         /// 实例
         /// </summary>
-        public static ListData Instance => Nested.TextInstance;
+        public static CommonData Instance => Nested.TextInstance;
 
         /// <summary>
         /// 嵌套类
@@ -166,7 +166,7 @@ namespace Bing.MockData.Datas
             /// <summary>
             /// 文本实例
             /// </summary>
-            internal static readonly ListData TextInstance = new ListData();
+            internal static readonly CommonData TextInstance = new CommonData();
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Bing.MockData.Datas
         /// <returns></returns>
         private Stream GetResourceAsStream(string resourceName,string suffix)
         {
-            return typeof(ListData).GetTypeInfo().Assembly
+            return typeof(CommonData).GetTypeInfo().Assembly
                 .GetManifestResourceStream($"Bing.MockData.Datas.Resources.{resourceName}.{suffix}");
         }
 
@@ -251,7 +251,7 @@ namespace Bing.MockData.Datas
         /// 加载自定义资源
         /// </summary>
         /// <param name="action">加载配置操作</param>
-        public void LoadCustomResource(Action<ListData> action)
+        public void LoadCustomResource(Action<CommonData> action)
         {
             action.Invoke(this);
         }

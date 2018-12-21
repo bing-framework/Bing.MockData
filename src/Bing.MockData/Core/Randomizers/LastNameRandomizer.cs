@@ -22,7 +22,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <param name="options">姓氏配置</param>
         public LastNameRandomizer(LastNameFieldOptions options) : base(options)
         {
-            _generator = new RandomStringFromListGenerator(ListData.Instance.LastNames);
+            _generator = new RandomStringFromListGenerator(CommonData.Instance.LastNames);
         }
 
         /// <summary>

@@ -61,7 +61,7 @@ namespace Bing.MockData.Core.Randomizers
         public string Generate()
         {
             var areaCode =
-                $"{ListData.Instance.AreaCodeDict[_generator.GenerateInt(0, ListData.Instance.AreaCodeDict.Count)].Key}{_generator.GenerateInt(9999).ToString().PadLeft(4, '0')}";
+                $"{CommonData.Instance.AreaCodeDict[_generator.GenerateInt(0, CommonData.Instance.AreaCodeDict.Count)].Key}{_generator.GenerateInt(9999).ToString().PadLeft(4, '0')}";
             var birthday = _generator.GenerateDate().ToString("yyyyMMdd");
             var randomCode = _generator.GenerateNumber(3);
             var pre = areaCode + birthday + randomCode;
@@ -76,7 +76,7 @@ namespace Bing.MockData.Core.Randomizers
         public string GenerateIssueOrg()
         {
             return
-                $"{ListData.Instance.CityNameList[_generator.GenerateInt(0, ListData.Instance.CityNameList.Count)]}公安局某某分局";
+                $"{CommonData.Instance.CityNameList[_generator.GenerateInt(0, CommonData.Instance.CityNameList.Count)]}公安局某某分局";
         }
 
         /// <summary>

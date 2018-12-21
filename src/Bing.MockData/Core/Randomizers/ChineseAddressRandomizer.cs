@@ -47,7 +47,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <returns></returns>
         public string GenerateRegion()
         {
-            return ListData.Instance.RegionList[_generator.GenerateInt(0, ListData.Instance.RegionList.Count)];
+            return CommonData.Instance.RegionList[_generator.GenerateInt(0, CommonData.Instance.RegionList.Count)];
         }
 
         /// <summary>
@@ -56,8 +56,8 @@ namespace Bing.MockData.Core.Randomizers
         /// <returns></returns>
         private string GetProvinceAndCity()
         {
-            return ListData.Instance.ProvinceCityList[
-                _generator.GenerateInt(0, ListData.Instance.ProvinceCityList.Count)];
+            return CommonData.Instance.ProvinceCityList[
+                _generator.GenerateInt(0, CommonData.Instance.ProvinceCityList.Count)];
         }
     }
 }

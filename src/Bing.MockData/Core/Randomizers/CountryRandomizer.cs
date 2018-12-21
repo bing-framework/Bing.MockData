@@ -22,7 +22,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <param name="options">国家配置</param>
         public CountryRandomizer(CountryFieldOptions options) : base(options)
         {
-            _generator = new RandomStringFromListGenerator(ListData.Instance.CountryNames);
+            _generator = new RandomStringFromListGenerator(CommonData.Instance.CountryNames);
         }
 
         /// <summary>

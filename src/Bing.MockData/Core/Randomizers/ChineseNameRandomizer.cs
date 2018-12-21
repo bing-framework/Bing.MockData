@@ -33,7 +33,7 @@ namespace Bing.MockData.Core.Randomizers
         public string Generate()
         {
             return
-                $"{ListData.Instance.ChineseFirstNames[_generator.GenerateInt(0, ListData.Instance.ChineseFirstNames.Count)]}{_generator.GenerateRandomLengthChinese(Options.Length)}";
+                $"{CommonData.Instance.ChineseFirstNames[_generator.GenerateInt(0, CommonData.Instance.ChineseFirstNames.Count)]}{_generator.GenerateRandomLengthChinese(Options.Length)}";
         }
 
         /// <summary>

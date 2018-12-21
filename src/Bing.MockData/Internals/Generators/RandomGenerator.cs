@@ -102,7 +102,7 @@ namespace Bing.MockData.Internals.Generators
         /// <returns></returns>
         public string GenerateChinese(int length)
         {
-            return GenerateText(length, ListData.Instance.SimplifiedChinese);
+            return GenerateText(length, CommonData.Instance.SimplifiedChinese);
         }
 
         #endregion
@@ -116,7 +116,7 @@ namespace Bing.MockData.Internals.Generators
         /// <returns></returns>
         public string GenerateRandomLengthChinese(int maxLength)
         {
-            return GenerateRandomLengthText(maxLength, ListData.Instance.SimplifiedChinese);
+            return GenerateRandomLengthText(maxLength, CommonData.Instance.SimplifiedChinese);
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Bing.MockData.Internals.Generators
         /// <returns></returns>
         public string GenerateRandomLengthChinese(int minLength, int maxLength)
         {
-            return GenerateRandomLengthText(minLength, maxLength, ListData.Instance.SimplifiedChinese);
+            return GenerateRandomLengthText(minLength, maxLength, CommonData.Instance.SimplifiedChinese);
         }
 
         #endregion

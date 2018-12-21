@@ -34,16 +34,16 @@ namespace Bing.MockData.Core.Randomizers
         /// <param name="options">全名配置</param>
         public FullNameRandomizer(FullNameFieldOptions options) : base(options)
         {
-            _lastNameGenerator = new RandomStringFromListGenerator(ListData.Instance.LastNames);
+            _lastNameGenerator = new RandomStringFromListGenerator(CommonData.Instance.LastNames);
 
             if (options.Male)
             {
-                _genderSetGenerators.Add(new RandomStringFromListGenerator(ListData.Instance.MaleNames));
+                _genderSetGenerators.Add(new RandomStringFromListGenerator(CommonData.Instance.MaleNames));
             }
 
             if (options.Female)
             {
-                _genderSetGenerators.Add(new RandomStringFromListGenerator(ListData.Instance.FemaleNames));
+                _genderSetGenerators.Add(new RandomStringFromListGenerator(CommonData.Instance.FemaleNames));
             }
 
             _numberGenerator = new RandomThingsGenerator<int>(0, _genderSetGenerators.Count);

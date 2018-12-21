@@ -44,8 +44,8 @@ namespace Bing.MockData.Core.Randomizers
         /// <returns></returns>
         private BankInfo GetBankInfo()
         {
-            var length = ListData.Instance.Banks.Count;
-            var bankInfo = ListData.Instance.Banks[_generator.GenerateInt(0, length)];
+            var length = CommonData.Instance.Banks.Count;
+            var bankInfo = CommonData.Instance.Banks[_generator.GenerateInt(0, length)];
             return bankInfo;
         }
 

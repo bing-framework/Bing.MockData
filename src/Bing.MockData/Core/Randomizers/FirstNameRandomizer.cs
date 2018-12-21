@@ -31,12 +31,12 @@ namespace Bing.MockData.Core.Randomizers
         {
             if (options.Male)
             {
-                _genderSetGenerators.Add(new RandomStringFromListGenerator(ListData.Instance.MaleNames));
+                _genderSetGenerators.Add(new RandomStringFromListGenerator(CommonData.Instance.MaleNames));
             }
 
             if (options.Female)
             {
-                _genderSetGenerators.Add(new RandomStringFromListGenerator(ListData.Instance.FemaleNames));
+                _genderSetGenerators.Add(new RandomStringFromListGenerator(CommonData.Instance.FemaleNames));
             }
 
             _numberGenerator = new RandomThingsGenerator<int>(0, _genderSetGenerators.Count);

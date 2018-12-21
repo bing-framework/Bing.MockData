@@ -1,4 +1,6 @@
-﻿namespace Bing.MockData.Core.Options
+﻿using Bing.MockData.Core.Enums;
+
+namespace Bing.MockData.Core.Options
 {
     /// <summary>
     /// 配置基类
@@ -14,6 +16,11 @@
         /// 是否可输出字符串
         /// </summary>
         public bool ValueAsString { get; set; }
+
+        /// <summary>
+        /// 语言类型。默认：中文
+        /// </summary>
+        public LanguageType Language { get; set; } = LanguageType.Cn;
 
         /// <summary>
         /// 克隆
