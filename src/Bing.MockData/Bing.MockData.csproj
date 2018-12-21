@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>I:\Framework\Bing.MockData\src\Bing.MockData\Bing.MockData.xml</DocumentationFile>
+    <DocumentationFile>..\..\output\release\netstandard2.0\Bing.MockData.xml</DocumentationFile>
+    <OutputPath>..\..\output\release\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
