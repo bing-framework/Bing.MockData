@@ -4,19 +4,31 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>I:\Framework\Bing.MockData\src\Bing.MockData\Bing.MockData.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="Datas\Resources\BBAN.txt" />
+    <None Remove="Datas\Resources\ChineseAreaCode.json" />
+    <None Remove="Datas\Resources\ChineseCityNames.txt" />
+    <None Remove="Datas\Resources\ChineseRegionList.txt" />
     <None Remove="Datas\Resources\CityNames.txt" />
     <None Remove="Datas\Resources\CountryNames.txt" />
     <None Remove="Datas\Resources\FemaleNames.txt" />
     <None Remove="Datas\Resources\IBAN.txt" />
     <None Remove="Datas\Resources\LastNames.txt" />
     <None Remove="Datas\Resources\MaleNames.txt" />
+    <None Remove="Datas\Resources\ProvinceCity.txt" />
     <None Remove="Datas\Resources\SimplifiedChinese.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Datas\Resources\BBAN.txt" />
+    <EmbeddedResource Include="Datas\Resources\ChineseAreaCode.json" />
+    <EmbeddedResource Include="Datas\Resources\ChineseRegionList.txt" />
+    <EmbeddedResource Include="Datas\Resources\ChineseCityNames.txt" />
+    <EmbeddedResource Include="Datas\Resources\ProvinceCity.txt" />
     <EmbeddedResource Include="Datas\Resources\CityNames.txt" />
     <EmbeddedResource Include="Datas\Resources\CountryNames.txt" />
     <EmbeddedResource Include="Datas\Resources\FemaleNames.txt" />
@@ -28,6 +40,7 @@
 
   <ItemGroup>
     <PackageReference Include="Fare" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="NLipsum" Version="1.1.0" />
   </ItemGroup>
 

@@ -17,7 +17,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <summary>
         /// 初始化一个<see cref="MobileRandomizer"/>类型的实例
         /// </summary>
-        /// <param name="options"></param>
+        /// <param name="options">手机号码配置</param>
         public MobileRandomizer(MobileFieldOptions options) : base(options)
         {
             _generator = new RandomGenerator();

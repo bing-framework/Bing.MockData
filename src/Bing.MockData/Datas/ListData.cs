@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using Bing.MockData.Datas.Models;
 using Fare;
+using Newtonsoft.Json;
 
 namespace Bing.MockData.Datas
 {
@@ -69,6 +71,26 @@ namespace Bing.MockData.Datas
         public string SimplifiedChinese { get; private set; }
 
         /// <summary>
+        /// 省市 列表
+        /// </summary>
+        public List<string> ProvinceCityList { get; private set; }
+
+        /// <summary>
+        /// 城市 列表
+        /// </summary>
+        public List<string> CityNameList { get; private set; }
+
+        /// <summary>
+        /// 行政代码 列表
+        /// </summary>
+        public List<KeyValuePair<string,string>> AreaCodeDict { get; private set; }
+
+        /// <summary>
+        /// 大区 列表
+        /// </summary>
+        public List<string> RegionList { get; private set; }
+
+        /// <summary>
         /// 初始化一个<see cref="ListData"/>类型的实例
         /// </summary>
         ListData()
@@ -90,7 +112,11 @@ namespace Bing.MockData.Datas
             };
             IBANs = GetResourceAsItems("IBAN", ibanFunc);
             BBANs = GetResourceAsItems("BBAN", ibanFunc);
-            SimplifiedChinese = GetResourceAsString("SimplifiedChinese");
+            SimplifiedChinese = GetResourceAsString("SimplifiedChinese", "txt");
+            ProvinceCityList = GetResourceAsLines("ProvinceCity").ToList();
+            CityNameList = GetResourceAsLines("ChineseCityNames").ToList();
+            AreaCodeDict = GetResourceFromJson<List<KeyValuePair<string, string>>>("ChineseAreaCode");
+            RegionList = GetResourceAsLines("ChineseRegionList").ToList();
         }
 
         /// <summary>
@@ -118,21 +144,23 @@ namespace Bing.MockData.Datas
         /// 从指定资源名称中获取流
         /// </summary>
         /// <param name="resourceName">资源名称</param>
+        /// <param name="suffix">后缀名</param>
         /// <returns></returns>
-        private Stream GetResourceAsStream(string resourceName)
+        private Stream GetResourceAsStream(string resourceName,string suffix)
         {
             return typeof(ListData).GetTypeInfo().Assembly
-                .GetManifestResourceStream($"Bing.MockData.Datas.Resources.{resourceName}.txt");
+                .GetManifestResourceStream($"Bing.MockData.Datas.Resources.{resourceName}.{suffix}");
         }
 
         /// <summary>
         /// 从指定资源中获取字符串
         /// </summary>
         /// <param name="fileName">文件名称</param>
+        /// <param name="suffix">后缀名</param>
         /// <returns></returns>
-        private string GetResourceAsString(string fileName)
+        private string GetResourceAsString(string fileName,string suffix)
         {
-            var stream = GetResourceAsStream(fileName);
+            var stream = GetResourceAsStream(fileName, suffix);
             using (var reader = new StreamReader(stream, Encoding.UTF8))
             {
                 return reader.ReadToEnd();
@@ -146,7 +174,7 @@ namespace Bing.MockData.Datas
         /// <returns></returns>
         private IEnumerable<string> GetResourceAsLines(string fileName)
         {
-            var stream = GetResourceAsStream(fileName);
+            var stream = GetResourceAsStream(fileName, "txt");
             using (var reader=new StreamReader(stream,Encoding.UTF8))
             {
                 string line;
@@ -171,6 +199,23 @@ namespace Bing.MockData.Datas
             {
                 yield return convert(line.Split('\t'));                
             }
+        }
+
+        /// <summary>
+        /// 从指定资源中获取Json对象
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="fileName">文件名称</param>
+        /// <returns></returns>
+        private T GetResourceFromJson<T>(string fileName)
+        {
+            var json = GetResourceAsString(fileName, "json");
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                return default(T);
+            }
+
+            return JsonConvert.DeserializeObject<T>(json);
         }
 
         /// <summary>

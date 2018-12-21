@@ -14,7 +14,7 @@ namespace Bing.MockData.Tests.Randomizers
         [Fact]
         public void Generate()
         {
-            var randomizer = RandomizerFactory.GetRandomizer<int>(new NumberFieldOptions<int>());
+            var randomizer = RandomizerFactory.GetRandomizer<int>(new NumberFieldOptions<int>() {Min = 0, Max = 1000});
             for (var i = 0; i < 100; i++)
             {
                 var result = randomizer.Generate();

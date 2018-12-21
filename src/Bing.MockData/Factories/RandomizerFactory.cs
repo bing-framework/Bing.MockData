@@ -19,7 +19,7 @@ namespace Bing.MockData.Factories
         private static readonly ConcurrentDictionary<string, object> Cache = new ConcurrentDictionary<string, object>();
 
         /// <summary>
-        /// 获取随机生成器
+        /// 获取字符串随机生成器
         /// </summary>
         /// <param name="options">配置</param>
         /// <returns></returns>
@@ -29,7 +29,7 @@ namespace Bing.MockData.Factories
         }
 
         /// <summary>
-        /// 获取随机生成器
+        /// 获取Guid随机生成器
         /// </summary>
         /// <param name="options">配置</param>
         /// <returns></returns>
@@ -39,7 +39,7 @@ namespace Bing.MockData.Factories
         }
 
         /// <summary>
-        /// 获取随机生成器
+        /// 获取数值随机生成器
         /// </summary>
         /// <typeparam name="T">数据类型</typeparam>
         /// <param name="options">配置</param>
@@ -50,7 +50,7 @@ namespace Bing.MockData.Factories
         }
 
         /// <summary>
-        /// 获取随机生成器
+        /// 获取日期时间随机生成器
         /// </summary>
         /// <param name="options">配置</param>
         /// <returns></returns>
@@ -60,7 +60,7 @@ namespace Bing.MockData.Factories
         }
 
         /// <summary>
-        /// 获取随机生成器
+        /// 获取时间跨度随机生成器
         /// </summary>
         /// <param name="options">配置</param>
         /// <returns></returns>
@@ -69,9 +69,24 @@ namespace Bing.MockData.Factories
             return Create<ITimeSpanRandomizer>(options);
         }
 
+        /// <summary>
+        /// 获取手机号码随机生成器
+        /// </summary>
+        /// <param name="options">配置</param>
+        /// <returns></returns>
         public static IMobileRandomizer GetRandomizer(IMobileFieldOptions options)
         {
             return Create<IMobileRandomizer>(options);
+        }
+
+        /// <summary>
+        /// 获取身份证随机生成器
+        /// </summary>
+        /// <param name="options">配置</param>
+        /// <returns></returns>
+        public static IIdCardRandomizer GetRandomizer(IIdCardFieldOptions options)
+        {
+            return Create<IIdCardRandomizer>(options);
         }
 
         /// <summary>
