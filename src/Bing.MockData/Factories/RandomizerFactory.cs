@@ -90,6 +90,17 @@ namespace Bing.MockData.Factories
         }
 
         /// <summary>
+        /// 获取地址随机生成器
+        /// </summary>
+        /// <param name="options">配置</param>
+        /// <returns></returns>
+        public static IAddressRandomizer GetRandomizer(IAddressFieldOptions options)
+        {
+            return Create<IAddressRandomizer>(options);
+        }
+
+
+        /// <summary>
         /// 获取随机生成器并转换成动态对象
         /// </summary>
         /// <param name="options">配置</param>

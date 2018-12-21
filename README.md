@@ -19,11 +19,11 @@
 - 单词：`TextWordsRandomizer`
 - 时间跨度：`TimeSpanRandomizer`
 - 文章段落：`TextLipsumRandomizer`
+- 地址：`ChineseAddressRandomizer`
 
 ## 尚未支持的随机数据
 - 银行卡号码
 - 姓名
-- 中国地址
 
 ## 使用方式
 ```c#
@@ -112,6 +112,11 @@ var result = randomizer.Generate();
 // 生成随机时间跨度
 var randomizer = RandomizerFactory.GetRandomizer(new TimeSpanFieldOptions() {From = DateTime.Now.TimeOfDay, To = DateTime.Now.AddDays(20).TimeOfDay});
 var result = randomizer.GenerateAsString();
+
+// 生成地址
+var randomizer = RandomizerFactory.GetRandomizer(new ChineseAddressFieldOptions());
+var result = randomizer.Generate();
+var region = randomizer.GenerateRegion();
 
 ```
 
