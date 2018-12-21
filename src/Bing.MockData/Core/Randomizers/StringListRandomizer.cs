@@ -1,5 +1,6 @@
 ﻿using Bing.MockData.Abstractions.Randomizers;
 using Bing.MockData.Core.Options;
+using Bing.MockData.Extensions;
 using Bing.MockData.Internals.Generators;
 
 namespace Bing.MockData.Core.Randomizers
@@ -39,7 +40,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <returns></returns>
         public string Generate(bool upperCase)
         {
-            throw new System.NotImplementedException();
+            return Generate().ToCasedInvariant(upperCase);
         }
     }
 }

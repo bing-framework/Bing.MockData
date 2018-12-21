@@ -448,7 +448,7 @@ namespace Bing.MockData.Internals.Generators
                 return GenerateString(minLength);
             }
 
-            int length = minLength - (GetRandomInt() % maxLength - minLength);
+            int length = minLength + (GetRandomInt() % (maxLength - minLength));
             return GenerateString(length);
         }
 
