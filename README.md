@@ -20,10 +20,10 @@
 - 时间跨度：`TimeSpanRandomizer`
 - 文章段落：`TextLipsumRandomizer`
 - 地址：`ChineseAddressRandomizer`
+- 姓名：`ChineseNameRandomizer`
 
 ## 尚未支持的随机数据
 - 银行卡号码
-- 姓名
 
 ## 使用方式
 ```c#
@@ -113,10 +113,14 @@ var result = randomizer.Generate();
 var randomizer = RandomizerFactory.GetRandomizer(new TimeSpanFieldOptions() {From = DateTime.Now.TimeOfDay, To = DateTime.Now.AddDays(20).TimeOfDay});
 var result = randomizer.GenerateAsString();
 
-// 生成地址
+// 生成随机地址
 var randomizer = RandomizerFactory.GetRandomizer(new ChineseAddressFieldOptions());
 var result = randomizer.Generate();
 var region = randomizer.GenerateRegion();
+
+// 生成随机姓名
+var randomizer = RandomizerFactory.GetRandomizer(new ChineseNameFieldOptions());
+var result = randomizer.Generate();
 
 ```
 
