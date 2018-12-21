@@ -1,4 +1,5 @@
 # Bing.MockData
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://mit-license.org/)
 这是一个创建随机数据的简单生成器。可进行自定义配置，可生成城市、IP地址、MAC地址、Email地址、文章段落、手机号码、身份证号码、姓名、英文名等。
 ## Nuget
 
