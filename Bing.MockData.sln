@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bing.MockData", "src\Bing.MockData\Bing.MockData.csproj", "{EF45E5BD-49F5-4865-9BA6-C0CD23A321CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-document", "00-document", "{75CB25F9-960F-44BA-B05F-4E86DBC22FB3}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-src", "01-src", "{F32ACB0A-876E-4014-939C-2F01A7B128B2}"
 EndProject
@@ -13,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-samples", "03-samples", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-tests", "02-tests", "{D25BAB8B-60C3-4A7F-A12F-148A752F10F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bing.MockData.Tests", "tests\Bing.MockData.Tests\Bing.MockData.Tests.csproj", "{BAA65AAE-6E9B-4B8A-8975-B207C36E91A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bing.MockData.Tests", "tests\Bing.MockData.Tests\Bing.MockData.Tests.csproj", "{BAA65AAE-6E9B-4B8A-8975-B207C36E91A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

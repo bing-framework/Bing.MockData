@@ -1,0 +1,21 @@
+<Project>
+    <PropertyGroup>
+        <VersionMajor>0</VersionMajor>
+        <VersionMinor>0</VersionMinor>
+		<VersionPatch>1</VersionPatch>
+		<VersionQuality>20190114-1</VersionQuality>
+		<VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionPatch)</VersionPrefix>
+        <VersionSuffix>preview-$(VersionQuality)</VersionSuffix>
+    </PropertyGroup>
+    <PropertyGroup>
+        <Authors>简玄冰</Authors>
+        <Company>简玄冰</Company>
+        <Copyright>简玄冰</Copyright>
+        <PackageLicenseUrl>https://github.com/bing-framework/Bing.MockData/blob/master/LICENSE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/bing-framework/Bing.MockData</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/bing-framework/Bing.MockData</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>bing;applicationframework;dotnetcore;aspnetcore;</PackageTags>
+        <PackageReleaseNotes>Bing应用框架以MIT开源发布，可随意使用</PackageReleaseNotes>
+    </PropertyGroup>
+</Project>
