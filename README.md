@@ -160,7 +160,7 @@ var result = randomizer.Generate();
 - 出于成本的考虑，我们不会对已发布的API保持兼容，每当更新代码时，请注意该问题。
 
 ## 开源地址
-[https://github.com/bing-framework/Bing.QRCode](https://github.com/bing-framework/Bing.QRCode)
+[https://github.com/bing-framework/Bing.MockData](https://github.com/bing-framework/Bing.MockData)
 
 ## License
 
