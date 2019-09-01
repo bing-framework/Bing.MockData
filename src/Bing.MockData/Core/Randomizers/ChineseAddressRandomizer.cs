@@ -9,7 +9,7 @@ namespace Bing.MockData.Core.Randomizers
     /// <summary>
     /// 地址随机生成器
     /// </summary>
-    public class ChineseAddressRandomizer:RandomizerBase<ChineseAddressFieldOptions>,IAddressRandomizer
+    public class ChineseAddressRandomizer : RandomizerBase<ChineseAddressFieldOptions>, IAddressRandomizer
     {
         /// <summary>
         /// 生成器
@@ -31,7 +31,7 @@ namespace Bing.MockData.Core.Randomizers
         /// <returns></returns>
         public string Generate()
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append(GetProvinceAndCity());
             sb.Append(_generator.GenerateRandomLengthChinese(2, 4) + "路");
             sb.Append(_generator.GenerateInt(1, 8001) + "号");
