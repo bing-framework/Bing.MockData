@@ -60,7 +60,7 @@ Bing是一个.net core平台下的应用框架，旨在于提升小型团队的�
 
   <ItemGroup>
     <PackageReference Include="Fare" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="NLipsum" Version="1.1.0" />
   </ItemGroup>
 
