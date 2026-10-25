@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../build/version.props" />
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>annotations</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <Description>Offline, versioned read-only catalogs for Bing.MockData.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.13" />
+    <ProjectReference Include="../Bing.MockData/Bing.MockData.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="../../docs/catalog-data-manifest.md" Pack="true" PackagePath="docs/catalog-data-manifest.md" />
+  </ItemGroup>
+</Project>
