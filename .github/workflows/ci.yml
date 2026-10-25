@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.400
+      - name: Verify pack script failure handling
+        shell: pwsh
+        run: |
+          ./build/test-pack-script.ps1
+          ./build/test-pack-domains.ps1
+      - name: Audit, test, pack, and consume package
+        shell: pwsh
+        run: ./build/pack-domains.ps1

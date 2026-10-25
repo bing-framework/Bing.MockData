@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../../build/version.props" />
+  <PropertyGroup>
+    <OutputType Condition="'$(TargetFramework)' == 'net10.0'">Exe</OutputType>
+    <TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <BingMockDataPackageVersion Condition="'$(BingMockDataPackageVersion)' == ''">$(VersionPrefix)-$(VersionSuffix)</BingMockDataPackageVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Bing.MockData" Version="$(BingMockDataPackageVersion)" />
+  </ItemGroup>
+</Project>
