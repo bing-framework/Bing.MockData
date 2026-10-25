@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><TargetFramework>net10.0</TargetFramework><IsPackable>false</IsPackable><IsTestProject>true</IsTestProject><MockDataTargetFramework Condition="'$(MockDataTargetFramework)'==''">net10.0</MockDataTargetFramework></PropertyGroup>
+<PropertyGroup>
+  <DefineConstants Condition="'$(MockDataTargetFramework)'=='netstandard2.0'">$(DefineConstants);MOCKDATA_NETSTANDARD</DefineConstants>
+  <OutputPath>bin/$(Configuration)/$(MockDataTargetFramework)/</OutputPath>
+  <IntermediateOutputPath>obj/$(Configuration)/$(MockDataTargetFramework)/</IntermediateOutputPath>
+</PropertyGroup>
+<ItemGroup><PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.0"/><PackageReference Include="xunit.v3" Version="3.2.2"/><PackageReference Include="xunit.runner.visualstudio" Version="4.0.1"/></ItemGroup>
+<ItemGroup>
+<Compile Include="../Shared/AssetTargetTests.cs" Link="AssetTargetTests.cs" />
+<ProjectReference Include="../../src/Bing.MockData/Bing.MockData.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true"/>
+<ProjectReference Include="../../src/Bing.MockData.Catalogs/Bing.MockData.Catalogs.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true"/>
+<ProjectReference Include="../../src/Bing.MockData.Transport/Bing.MockData.Transport.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true"/>
+<ProjectReference Include="../../src/Bing.MockData.Education/Bing.MockData.Education.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true"/>
+<ProjectReference Include="../../src/Bing.MockData.Healthcare/Bing.MockData.Healthcare.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true"/>
+<ProjectReference Include="../../src/Bing.MockData.Devices/Bing.MockData.Devices.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true"/>
+</ItemGroup></Project>
