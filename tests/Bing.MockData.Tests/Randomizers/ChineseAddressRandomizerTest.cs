@@ -1,7 +1,6 @@
 ﻿using Bing.MockData.Core.Options;
 using Bing.MockData.Factories;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Bing.MockData.Tests.Randomizers
 {
@@ -14,13 +13,18 @@ namespace Bing.MockData.Tests.Randomizers
         [Fact]
         public void Generate()
         {
-            var randomizer = RandomizerFactory.GetRandomizer(new ChineseAddressFieldOptions());
-            for (var i = 0; i < 100; i++)
-            {
-                var result = randomizer.Generate();
-                var region = randomizer.GenerateRegion();
-                Output.WriteLine($"{result}/{region}");
-            }
+            AssertSeeded<ChineseAddressFieldOptions, (string, string)>(
+                new ChineseAddressFieldOptions(),
+                options =>
+                {
+                    var randomizer = RandomizerFactory.GetRandomizer(options);
+                    return () => (randomizer.Generate(), randomizer.GenerateRegion());
+                },
+                value =>
+                {
+                    Assert.False(string.IsNullOrWhiteSpace(value.Item1));
+                    Assert.False(string.IsNullOrWhiteSpace(value.Item2));
+                });
         }
     }
 }

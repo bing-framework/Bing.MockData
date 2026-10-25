@@ -1,49 +1,23 @@
-﻿using System;
+using System;
 using Bing.MockData.Abstractions.Randomizers;
 using Bing.MockData.Core.Options;
 using Bing.MockData.Extensions;
-
 namespace Bing.MockData.Core.Randomizers
 {
-    /// <summary>
-    /// Guid随机生成器
-    /// </summary>
-    public class GuidRandomizer : RandomizerBase<GuidFieldOptions>, IGuidRandomizer
+    /// <summary>可按种子重放的模拟 GUID 生成器。</summary>
+    public class GuidRandomizer : RandomizerBase<GuidFieldOptions>, IGuidRandomizer, IFormattedRandomizer
     {
-        /// <summary>
-        /// 初始化一个<see cref="GuidRandomizer"/>类型的实例
-        /// </summary>
-        /// <param name="options">Guid配置</param>
-        public GuidRandomizer(GuidFieldOptions options) : base(options)
+        string IFormattedRandomizer.Format => Options.Uppercase ? "D!" : "D";
+        /// <summary>复制生成配置。</summary>
+        public GuidRandomizer(GuidFieldOptions options) : base(options) { }
+        /// <summary>生成具有版本 4 和 RFC 变体位的 GUID。</summary>
+        public Guid Generate() => Execute<Guid>(() =>
         {
-        }
-
-        /// <summary>
-        /// 生成
-        /// </summary>
-        /// <returns></returns>
-        public Guid? Generate()
-        {
-            if (IsNull())
-            {
-                return null;
-            }
-
-            return Guid.NewGuid();
-        }
-
-        /// <summary>
-        /// 生成并转换成字符串
-        /// </summary>
-        /// <returns></returns>
-        public string GenerateAsString()
-        {
-            if (IsNull())
-            {
-                return null;
-            }
-
-            return Guid.NewGuid().ToString().ToCasedInvariant(Options.Uppercase);
-        }
+            var bytes = new byte[16];
+            Rnd.NextBytes(bytes);
+            bytes[7] = (byte)((bytes[7] & 0x0f) | 0x40);
+            bytes[8] = (byte)((bytes[8] & 0x3f) | 0x80);
+            return new Guid(bytes);
+        });
     }
 }

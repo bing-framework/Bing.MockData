@@ -1,7 +1,6 @@
 ﻿using Bing.MockData.Core.Options;
 using Bing.MockData.Factories;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Bing.MockData.Tests.Randomizers
 {
@@ -14,12 +13,20 @@ namespace Bing.MockData.Tests.Randomizers
         [Fact]
         public void Generate()
         {
-            var randomizer = RandomizerFactory.GetRandomizer(new DateTimeFieldOptions());
-            for (var i = 0; i < 100; i++)
-            {
-                var result = randomizer.GenerateAsString();
-                Output.WriteLine(result);
-            }
+            var from = new System.DateTime(2030, 1, 2, 0, 0, 0, System.DateTimeKind.Utc);
+            var to = new System.DateTime(2030, 1, 10, 0, 0, 0, System.DateTimeKind.Utc);
+            AssertSeeded<DateTimeFieldOptions, System.DateTime>(
+                new DateTimeFieldOptions { From = from, To = to, IncludeTime = false },
+                options =>
+                {
+                    var randomizer = RandomizerFactory.GetRandomizer(options);
+                    return randomizer.Generate;
+                },
+                value =>
+                {
+                    Assert.InRange(value, from, to);
+                    Assert.Equal(System.TimeSpan.Zero, value.TimeOfDay);
+                });
         }
     }
 }

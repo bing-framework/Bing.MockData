@@ -1,7 +1,6 @@
 ﻿using Bing.MockData.Core.Options;
 using Bing.MockData.Factories;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Bing.MockData.Tests.Randomizers
 {
@@ -14,12 +13,18 @@ namespace Bing.MockData.Tests.Randomizers
         [Fact]
         public void Generate()
         {
-            var randomizer = RandomizerFactory.GetRandomizer(new IPv4AddressFieldOptions());
-            for (var i = 0; i < 100; i++)
-            {
-                var result = randomizer.Generate();
-                Output.WriteLine(result);
-            }
+            AssertSeeded<IPv4AddressFieldOptions, string>(
+                new IPv4AddressFieldOptions(),
+                options =>
+                {
+                    var randomizer = RandomizerFactory.GetRandomizer(options);
+                    return randomizer.Generate;
+                },
+                value =>
+                {
+                    Assert.True(System.Net.IPAddress.TryParse(value, out var address));
+                    Assert.Equal(System.Net.Sockets.AddressFamily.InterNetwork, address.AddressFamily);
+                });
         }
     }
 }

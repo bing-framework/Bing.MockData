@@ -1,7 +1,6 @@
 ﻿using Bing.MockData.Core.Options;
 using Bing.MockData.Factories;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Bing.MockData.Tests.Randomizers
 {
@@ -14,12 +13,14 @@ namespace Bing.MockData.Tests.Randomizers
         [Fact]
         public void Generate()
         {
-            var randomizer = RandomizerFactory.GetRandomizer(new GuidFieldOptions());
-            for (var i = 0; i < 100; i++)
-            {
-                var result = randomizer.GenerateAsString();
-                Output.WriteLine(result);
-            }
+            AssertSeeded<GuidFieldOptions, System.Guid>(
+                new GuidFieldOptions(),
+                options =>
+                {
+                    var randomizer = RandomizerFactory.GetRandomizer(options);
+                    return randomizer.Generate;
+                },
+                value => Assert.NotEqual(System.Guid.Empty, value));
         }
     }
 }

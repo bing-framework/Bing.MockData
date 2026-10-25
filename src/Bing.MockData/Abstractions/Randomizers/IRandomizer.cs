@@ -1,21 +1,15 @@
-﻿namespace Bing.MockData.Abstractions.Randomizers
+namespace Bing.MockData.Abstractions.Randomizers
 {
     /// <summary>
-    /// 随机生成器
+    /// 生成指定类型模拟值的统一契约。
     /// </summary>
-    /// <typeparam name="T">数据类型</typeparam>
-    public interface IRandomizer<T>
+    /// <typeparam name="T">输出类型，支持协变。</typeparam>
+    public interface IRandomizer<out T>
     {
         /// <summary>
-        /// 生成
+        /// 生成一个值。
         /// </summary>
-        /// <returns></returns>
+        /// <returns>生成结果；可空包装器可按配置概率返回空值。</returns>
         T Generate();
-
-        /// <summary>
-        /// 生成并转换成字符串
-        /// </summary>
-        /// <returns></returns>
-        string GenerateAsString();
     }
 }

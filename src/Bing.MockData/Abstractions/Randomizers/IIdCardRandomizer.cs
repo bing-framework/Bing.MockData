@@ -1,16 +1,10 @@
-﻿namespace Bing.MockData.Abstractions.Randomizers
+namespace Bing.MockData.Abstractions.Randomizers
 {
     /// <summary>
     /// 身份证随机生成器
     /// </summary>
-    public interface IIdCardRandomizer
+    public interface IIdCardRandomizer : IRandomizer<string>
     {
-        /// <summary>
-        /// 生成身份证号码
-        /// </summary>
-        /// <returns></returns>
-        string Generate();
-
         /// <summary>
         /// 生成签发机关：XXX公安局/XX区分局
         /// </summary>

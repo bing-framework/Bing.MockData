@@ -1,49 +1,23 @@
-﻿using System.Linq;
+using System;
 using Bing.MockData.Abstractions.Randomizers;
 using Bing.MockData.Core.Options;
 using Bing.MockData.Datas;
 using Bing.MockData.Extensions;
 using Bing.MockData.Internals.Generators;
-
 namespace Bing.MockData.Core.Randomizers
 {
-    /// <summary>
-    /// 姓名随机生成器
-    /// </summary>
-    public class ChineseNameRandomizer:RandomizerBase<ChineseNameFieldOptions>,IStringRandomizer
+    /// <summary>中文姓名生成器；Length 为姓氏之后名字的最大长度。</summary>
+    public class ChineseNameRandomizer : RandomizerBase<ChineseNameFieldOptions>, IStringRandomizer
     {
-        /// <summary>
-        /// 生成器
-        /// </summary>
         private readonly RandomGenerator _generator;
-
-        /// <summary>
-        /// 初始化一个<see cref="ChineseNameRandomizer"/>类型的实例
-        /// </summary>
-        /// <param name="options">配置</param>
+        /// <summary>复制配置并验证名字长度。</summary>
         public ChineseNameRandomizer(ChineseNameFieldOptions options) : base(options)
         {
-            _generator = new RandomGenerator();
+            if (Options.Length < 1) throw new ArgumentOutOfRangeException(nameof(options.Length));
+            _generator = new RandomGenerator(Rnd);
         }
-
-        /// <summary>
-        /// 生成
-        /// </summary>
-        /// <returns></returns>
-        public string Generate()
-        {
-            return
-                $"{CommonData.Instance.ChineseFirstNames[_generator.GenerateInt(0, CommonData.Instance.ChineseFirstNames.Count)]}{_generator.GenerateRandomLengthChinese(Options.Length)}";
-        }
-
-        /// <summary>
-        /// 生成
-        /// </summary>
-        /// <param name="upperCase">是否大写</param>
-        /// <returns></returns>
-        public string Generate(bool upperCase)
-        {
-            return Generate().ToCasedInvariant(upperCase);
-        }
+        /// <summary>生成姓名。</summary>
+        public string Generate() => Execute(() => CommonData.Instance.ChineseFirstNames[Rnd.Next(CommonData.Instance.ChineseFirstNames.Count)] +
+            _generator.GenerateRandomLengthChinese(Options.Length));
     }
 }

@@ -1,14 +1,9 @@
-﻿namespace Bing.MockData.Abstractions.Randomizers
+namespace Bing.MockData.Abstractions.Randomizers
 {
     /// <summary>
     /// 银行卡号随机生成器
     /// </summary>
-    public interface IBankCardRandomizer
+    public interface IBankCardRandomizer : IRandomizer<string>
     {
-        /// <summary>
-        /// 生成
-        /// </summary>
-        /// <returns></returns>
-        string Generate();
-    }
+}
 }

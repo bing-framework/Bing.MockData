@@ -1,19 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <Import Project="../../build/version.props"></Import>
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>annotations</Nullable>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Description>Bing.MockData是Bing应用框架的模拟数据操作类库。
 Bing是一个.net core平台下的应用框架，旨在于提升小型团队的开发能力，由常用公共操作类、架构基类、第三方组件封装、第三方业务接口封装等组成。</Description>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>..\..\output\release\</OutputPath>
-    <DocumentationFile>..\..\output\release\netstandard2.0\Bing.MockData.xml</DocumentationFile>
+    <OutputPath>..\..\output\Release\</OutputPath>
+    <DocumentationFile>..\..\output\Release\$(TargetFramework)\Bing.MockData.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>..\..\output\release\</OutputPath>
-    <DocumentationFile>..\..\output\release\netstandard2.0\Bing.MockData.xml</DocumentationFile>
+    <OutputPath>..\..\output\Debug\</OutputPath>
+    <DocumentationFile>..\..\output\Debug\$(TargetFramework)\Bing.MockData.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,10 +44,11 @@ Bing是一个.net core平台下的应用框架，旨在于提升小型团队的�
 
   <ItemGroup>
     <EmbeddedResource Include="Datas\Resources\Emails.json" />
-    <EmbeddedResource Include="Datas\Resources\Jobs.en.json" />
-    <EmbeddedResource Include="Datas\Resources\Jobs.zh-cn.json" />
-    <EmbeddedResource Include="Datas\Resources\Colors.en.json" />
-    <EmbeddedResource Include="Datas\Resources\Colors.zh-cn.json" />
+    <EmbeddedResource Include="Datas\Resources\ChinaDivisions2025.json" />
+    <EmbeddedResource Include="Datas\Resources\Jobs.en.json" WithCulture="false" />
+    <EmbeddedResource Include="Datas\Resources\Jobs.zh-cn.json" WithCulture="false" />
+    <EmbeddedResource Include="Datas\Resources\Colors.en.json" WithCulture="false" />
+    <EmbeddedResource Include="Datas\Resources\Colors.zh-cn.json" WithCulture="false" />
     <EmbeddedResource Include="Datas\Resources\BBAN.txt" />
     <EmbeddedResource Include="Datas\Resources\Banks.json" />
     <EmbeddedResource Include="Datas\Resources\ChineseAreaCode.json" />
@@ -59,9 +65,17 @@ Bing是一个.net core平台下的应用框架，旨在于提升小型团队的�
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+    <None Include="../../docs/data-sources.md" Pack="true" PackagePath="THIRD-PARTY-NOTICES.md" />
+    <None Include="../../tools/data/yescallop-areacodes-2da87e7/LICENSE" Pack="true" PackagePath="licenses/areacodes-CC0.txt" />
+    <None Include="../../tools/data/faker-names/LICENSE.txt" Pack="true" PackagePath="licenses/faker-MIT.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Fare" Version="2.1.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="NLipsum" Version="1.1.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
   </ItemGroup>
 
 </Project>

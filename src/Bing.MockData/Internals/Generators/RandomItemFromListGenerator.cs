@@ -1,37 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace Bing.MockData.Internals.Generators
 {
-    /// <summary>
-    /// 随机列表项生成器
-    /// </summary>
-    /// <typeparam name="T">数据类型</typeparam>
     internal class RandomItemFromListGenerator<T>
     {
-        /// <summary>
-        /// 列表
-        /// </summary>
-        private readonly T[] _list;
-
-        /// <summary>
-        /// 初始化一个<see cref="RandomItemFromListGenerator{T}"/>类型的实例
-        /// </summary>
-        /// <param name="list">数据源</param>
-        /// <param name="predicate">条件</param>
-        public RandomItemFromListGenerator(IEnumerable<T> list, Func<T, bool> predicate = null)
+        private readonly IReadOnlyList<T> _list;
+        private readonly Random _random;
+        public RandomItemFromListGenerator(Random random, IEnumerable<T> list, Func<T, bool> predicate = null)
         {
-            _list = predicate == null ? list.ToArray() : list.Where(predicate).ToArray();
+            if (list == null) throw new ArgumentNullException(nameof(list));
+            _list = predicate == null ? (list as IReadOnlyList<T> ?? list.ToArray()) : list.Where(predicate).ToArray();
+            if (_list.Count == 0) throw new ArgumentException("候选列表不能为空。", nameof(list));
+            if (_list.Any(item => ReferenceEquals(item, null)))
+                throw new ArgumentException("候选列表不能包含 null。", nameof(list));
+            _random = random;
         }
-
-        /// <summary>
-        /// 生成
-        /// </summary>
-        /// <returns></returns>
-        public T Generate()
-        {
-            return _list.Length > 0 ? _list[RandomValueGenerator.Next(0, _list.Length)] : default(T);
-        }
+        public T Generate() => _list[_random.Next(_list.Count)];
     }
 }

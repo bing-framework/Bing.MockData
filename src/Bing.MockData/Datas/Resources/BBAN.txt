@@ -1,4 +1,4 @@
-﻿Albania	AL	^\d{8}[0-9A-Z]{16}$
+Albania	AL	^\d{8}[0-9A-Z]{16}$
 Andorra	AD	^\d{8}[0-9A-Z]{12}$
 Austria	AT	^\d{16}$
 Kingdom of Bahrain	BH	^[A-Z]{4}[0-9A-Z]{14}$
@@ -49,6 +49,6 @@ Spain	ES	^\d{20}$
 Sweden	SE	^\d{20}$
 Switzerland	CH	^\d{5}[0-9A-Z]{12}$
 Tunisia	TN	^\d{20}$
-Turkey	TR	^\d{5}[0-9A-Z]{17}$
+Turkey	TR	^\d{6}[0-9A-Z]{16}$
 United Arab Emirates	AE	^\d{19}$
 United Kingdom	GB	^[A-Z]{4}\d{14}$

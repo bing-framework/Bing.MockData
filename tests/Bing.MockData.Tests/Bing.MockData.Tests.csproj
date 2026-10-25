@@ -1,19 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
+    <MockDataTargetFramework Condition="'$(MockDataTargetFramework)' == ''">net10.0</MockDataTargetFramework>
+    <DefineConstants Condition="'$(MockDataTargetFramework)' == 'netstandard2.0'">$(DefineConstants);MOCKDATA_NETSTANDARD</DefineConstants>
+    <OutputPath>bin/$(Configuration)/$(MockDataTargetFramework)/</OutputPath>
+    <IntermediateOutputPath>obj/$(Configuration)/$(MockDataTargetFramework)/</IntermediateOutputPath>
 
     <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.10.0" />
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Bing.MockData\Bing.MockData.csproj" />
+    <ProjectReference Include="..\..\src\Bing.MockData\Bing.MockData.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>
 
 </Project>

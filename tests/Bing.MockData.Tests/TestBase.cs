@@ -1,4 +1,6 @@
-﻿using Xunit.Abstractions;
+using System;
+using Bing.MockData.Core.Options;
+using Xunit;
 
 namespace Bing.MockData.Tests
 {
@@ -19,6 +21,29 @@ namespace Bing.MockData.Tests
         protected TestBase(ITestOutputHelper output)
         {
             Output = output;
+        }
+
+        protected void AssertSeeded<TOptions, TValue>(
+            TOptions options,
+            Func<TOptions, Func<TValue>> createGenerator,
+            Action<TValue> assertContract)
+            where TOptions : FieldOptionsBase
+        {
+            var firstOptions = (TOptions)options.Clone();
+            var secondOptions = (TOptions)options.Clone();
+            firstOptions.Seed = 94157;
+            secondOptions.Seed = 94157;
+
+            var first = createGenerator(firstOptions);
+            var second = createGenerator(secondOptions);
+            for (var i = 0; i < 100; i++)
+            {
+                var value = first();
+                Assert.Equal(value, second());
+                Assert.NotNull(value);
+                assertContract(value);
+                Output.WriteLine("{0}", value);
+            }
         }
     }
 }

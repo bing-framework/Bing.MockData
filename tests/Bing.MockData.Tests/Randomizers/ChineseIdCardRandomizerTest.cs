@@ -1,7 +1,6 @@
 ﻿using Bing.MockData.Core.Options;
 using Bing.MockData.Factories;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Bing.MockData.Tests.Randomizers
 {
@@ -14,14 +13,19 @@ namespace Bing.MockData.Tests.Randomizers
         [Fact]
         public void Generate()
         {
-            var randomizer = RandomizerFactory.GetRandomizer(new ChineseIdCardFieldOptions());
-            for (var i = 0; i < 100; i++)
-            {
-                var idcard = randomizer.Generate();
-                var time = randomizer.GenerateValidPeriod();
-                var address = randomizer.GenerateIssueOrg();
-                Output.WriteLine($"{idcard}/{time}/{address}");
-            }
+            AssertSeeded<ChineseIdCardFieldOptions, (string, string, string)>(
+                new ChineseIdCardFieldOptions(),
+                options =>
+                {
+                    var randomizer = RandomizerFactory.GetRandomizer(options);
+                    return () => (randomizer.Generate(), randomizer.GenerateValidPeriod(), randomizer.GenerateIssueOrg());
+                },
+                value =>
+                {
+                    Assert.Matches(@"^[0-9]{17}[0-9X]$", value.Item1);
+                    Assert.False(string.IsNullOrWhiteSpace(value.Item2));
+                    Assert.False(string.IsNullOrWhiteSpace(value.Item3));
+                });
         }
     }
 }

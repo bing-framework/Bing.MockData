@@ -32,5 +32,13 @@ namespace Bing.MockData.Core.Options
         /// 手机号码长度
         /// </summary>
         public int Length { get; set; } = 11;
+
+        /// <summary>复制配置及手机号前缀数组。</summary>
+        public override FieldOptionsBase Clone()
+        {
+            var copy = (MobileFieldOptions)base.Clone();
+            copy.MobilePrefixs = MobilePrefixs == null ? null : (int[])MobilePrefixs.Clone();
+            return copy;
+        }
     }
 }

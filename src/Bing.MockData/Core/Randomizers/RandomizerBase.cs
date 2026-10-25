@@ -1,42 +1,40 @@
-﻿using System;
-using System.Globalization;
+using System;
+using System.Security.Cryptography;
 using Bing.MockData.Core.Options;
-
 namespace Bing.MockData.Core.Randomizers
 {
-    /// <summary>
-    /// 随机生成器基类
-    /// </summary>
-    /// <typeparam name="TOptions"></typeparam>
-    public abstract class RandomizerBase<TOptions> where TOptions : FieldOptionsBase
+    /// <summary>保存配置快照与实例随机状态的生成器基类。</summary>
+    /// <typeparam name="TOptions">配置类型。</typeparam>
+    public abstract class RandomizerBase<TOptions> : IRandomizerSnapshot where TOptions : FieldOptionsBase
     {
-        /// <summary>
-        /// 随机数器
-        /// </summary>
-        protected readonly Random Rnd =
-            new Random(int.Parse(Guid.NewGuid().ToString().Substring(0, 8), NumberStyles.HexNumber));
-
-        /// <summary>
-        /// 配置
-        /// </summary>
+        /// <summary>实例随机源；仅在 Execute 的同步范围内使用。</summary>
+        protected readonly Random Rnd;
+        /// <summary>构造时复制的配置。</summary>
         protected readonly TOptions Options;
-
-        /// <summary>
-        /// 初始化一个<see cref="RandomizerBase{TOptions}"/>类型的实例
-        /// </summary>
-        /// <param name="options">配置</param>
+        private readonly object _gate = new object();
+        /// <summary>复制配置并初始化独立随机源。</summary>
         protected RandomizerBase(TOptions options)
         {
-            Options = options;
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            Options = (TOptions)options.Clone();
+            Options.Seed = Options.Seed ?? CreateSeed();
+            if (Options.MaxTextLength < 0) throw new ArgumentOutOfRangeException(nameof(options.MaxTextLength));
+            Rnd = new Random(Options.Seed.Value);
         }
-
-        /// <summary>
-        /// 是否为空
-        /// </summary>
-        /// <returns></returns>
-        protected virtual bool IsNull()
+        private static int CreateSeed()
         {
-            return Options.UseNullValues && Rnd.Next(0, 10) == 5;
+            var bytes = new byte[4];
+            using (var source = RandomNumberGenerator.Create()) source.GetBytes(bytes);
+            return BitConverter.ToInt32(bytes, 0);
         }
+        /// <summary>同步执行一次完整生成操作。</summary>
+        protected TResult Execute<TResult>(Func<TResult> generate)
+        {
+            lock (_gate) { Options.CancellationToken.ThrowIfCancellationRequested(); var result = generate(); Options.CancellationToken.ThrowIfCancellationRequested();
+                if (result is string text && text.Length > Options.MaxTextLength) throw new MockLimitException(nameof(FieldOptionsBase.MaxTextLength), Options.MaxTextLength);
+                return result; }
+        }
+        object IRandomizerSnapshot.Restart(int? seed) { var copy = (TOptions)Options.Clone(); copy.Seed = seed ?? Options.Seed; return Factories.RandomizerFactory.Create(copy); }
+        int IRandomizerSnapshot.Seed => Options.Seed.Value;
     }
 }
