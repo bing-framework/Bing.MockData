@@ -1,7 +1,56 @@
 # Bing.MockData
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://mit-license.org/)
 
-这是一个创建随机数据的简单生成器。可进行自定义配置，可生成城市、IP地址、MAC地址、Email地址、文章段落、手机号码、身份证号码、姓名、英文名等。
+Bing.MockData 提供可重放的模拟数据、完整对象规则、关联业务模板及流式导出，支持 `netstandard2.0` 和 `net10.0`。开发与测试使用 .NET SDK 10.0.400。
+
+当前补齐结果见 [交付报告](docs/domain-gap-closure-report.md)；新增关联场景见 [使用示例](docs/domain-gap-examples.md)。目录严格关系校验仍包含 PCI 原始来源的 46 条缺失引用，详见报告。
+
+本轮新增 [链式 Schema 与可配置航班](docs/domain-next-examples.md)，详见 [方案](docs/domain-next-plan.md) 与 [交付结果](docs/domain-next-report.md)。
+
+最新补齐：[组合约束与嵌套自动生成](docs/constraint-completion-examples.md)、[职业/商品/客户端/颜色配置](docs/configurable-samples.md)。本轮使用 `domain-v3` 重放契约，详见[实施方案](docs/constraint-completion-plan.md)与[交付证据](docs/constraint-completion-report.md)。
+
+## 快速开始
+
+```csharp
+using Bing.MockData;
+
+using var mock = new MockContext(new MockOptions
+{
+    Seed = 42,
+    ReferenceTime = new DateTimeOffset(2026, 1, 1, 0, 0, 0, TimeSpan.Zero),
+    Locale = "zh-CN"
+});
+var people = mock.Templates.Person("110000").Build().GenerateMany(10);
+var users = mock.Templates.User().Build().GenerateMany(20);
+var products = mock.Templates.Product().Build().GenerateMany(10);
+var orders = mock.Templates.Order(users, products).Build();
+using var file = File.Create("orders.jsonl");
+MockExport.Write(orders.Enumerate(1000000), file, MockExportFormat.JsonLines);
+```
+
+`GenerateMany` 立即返回小批量集合；`Enumerate` 逐条生成，不保留已消费结果。`EnumerateParallel(count, 4)` 显式启用有界并行，并按记录顺序输出。相同规则、Seed、参考时间和数据版本下可通过 `At(recordIndex)` 单独重放一条记录。
+
+- [使用指南：对象、重放、并发、字典、资源、DI 与 xUnit](docs/capabilities-guide.md)
+- [能力升级迁移对照](docs/capabilities-migration.md)
+- [22 项实施计划与验收证据](docs/capabilities-plan.md)
+- [行政区划来源、截止日期与 CC0 许可](docs/data-sources.md)
+- [此前范围与安全修复记录](docs/execution.md)
+
+`IRandomizer<out T>` 统一为一个 `Generate()` 契约。数值、日期、GUID 默认返回非空值；空值必须通过 `.Nullable(probability)` 或 `.OrNull(probability)` 显式配置。中国地址采用完整县级及以上区划快照；街道门牌和英文地址是模拟文本。
+
+## 构建与验证
+
+```powershell
+dotnet restore Bing.MockData.sln --locked-mode
+dotnet test tests/Bing.MockData.Tests/Bing.MockData.Tests.csproj --no-restore
+dotnet test tests/Bing.MockData.Tests/Bing.MockData.Tests.csproj --no-restore -p:MockDataTargetFramework=netstandard2.0
+pwsh -NoProfile -File build/test-pack-script.ps1
+pwsh -NoProfile -File build/pack.ps1
+```
+
+最后一条命令执行锁定还原及依赖审计、两套程序集的完整 Release 测试、双目标显式构建、打包资产检查、隔离缓存中的包消费编译与运行，默认不发布。`netstandard2.0` 的共享测试在 .NET 10 测试宿主上加载该目标程序集；不等于在每个 .NET Standard 实现上都运行过。现代异步枚举、DateOnly、TimeOnly 和异步释放只在 `net10.0` 提供。
+
+资源探针：`dotnet run --project tools/CapabilityProbe -c Release -- 1000000 4`。探针使用丢弃输出的接收端，记录条数、耗时、累计分配量、采样托管内存、进程峰值和实际并行度，不设未经确认的性能门槛。
 
 ## Nuget
 |Nuget|版本号|说明|
@@ -29,10 +78,10 @@
 - 姓名：`ChineseNameRandomizer`
 - 银行卡号：`BankCardRandomizer`
 
-## 尚未支持的随机数据
+## 单项生成器
 
+以下是可独立使用的兼容入口。扩展格式化、可空和批量方法需要 `using Bing.MockData;`；配置与工厂分别位于 `Bing.MockData.Core.Options`、`Bing.MockData.Factories`。跨字段一致的人物信息应使用 `Templates.Person()`。
 
-## 使用方式
 ```c#
 // 生成随机身份证
 var randomizer = RandomizerFactory.GetRandomizer(new ChineseIdCardFieldOptions());
@@ -117,7 +166,7 @@ var randomizer = RandomizerFactory.GetRandomizer(new TextWordsFieldOptions() {Mi
 var result = randomizer.Generate();
 
 // 生成随机时间跨度
-var randomizer = RandomizerFactory.GetRandomizer(new TimeSpanFieldOptions() {From = DateTime.Now.TimeOfDay, To = DateTime.Now.AddDays(20).TimeOfDay});
+var randomizer = RandomizerFactory.GetRandomizer(new TimeSpanFieldOptions() {From = TimeSpan.Zero, To = TimeSpan.FromDays(20)});
 var result = randomizer.GenerateAsString();
 
 // 生成随机地址
@@ -169,3 +218,15 @@ var result = randomizer.Generate();
 > 这意味着你可以在任意场景下使用 Bing 应用框架而不会有人找你要钱。
 
 > Bing 会尽量引入开源免费的第三方技术框架，如有意外，还请自行了解。
+
+
+## 全领域数据扩展
+
+本地实现新增 Catalogs、Schema、Transport、Education、Healthcare、Devices 六个扩展包，均与核心包一样输出 `netstandard2.0` / `net10.0`。目录数据按版本单独交付，运行时离线读取。
+
+- [21 项能力与最小示例](docs/domain-examples.md)
+- [模型、金额、重放和目录迁移](docs/domain-migration.md)
+- [数据来源、许可证和覆盖范围](docs/catalog-data-manifest.md)
+- [本轮计划和验收状态](docs/domain-capabilities-plan.md)
+
+本地完整门禁：`pwsh ./build/pack-domains.ps1`。脚本执行双目标验证、七个代码包检查、独立数据归档和隔离包消费者；不会提交或发布。
