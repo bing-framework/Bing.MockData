@@ -134,20 +134,21 @@ def missing_history_counts(db, missing_predicate):
     return {"endedRows": ended or 0, "withoutEndDateRows": open_ended or 0}
 
 
-def snapshot(db, dataset_id):
+def snapshot(db, dataset_id, expected_version=None):
     db.row_factory = sqlite3.Row
     info = dict(db.execute("SELECT Id, Version, SnapshotDate, RecordCount, SourceSha256 FROM CatalogInfo").fetchone())
     actual_count = scalar(db, "SELECT count(*) FROM Records")
     if info["Id"] != dataset_id or info["RecordCount"] != actual_count:
         raise ValueError(f"{dataset_id} CatalogInfo does not match its Records table")
+    expected_version = expected_version or EXPECTED_VERSIONS[dataset_id]
     return {
         "id": info["Id"],
         "version": info["Version"],
         "snapshotDate": info["SnapshotDate"],
         "recordCount": actual_count,
         "sourceSha256": info["SourceSha256"],
-        "expectedVersion": EXPECTED_VERSIONS[dataset_id],
-        "versionMatchesExpected": info["Version"] == EXPECTED_VERSIONS[dataset_id],
+        "expectedVersion": expected_version,
+        "versionMatchesExpected": info["Version"] == expected_version,
     }
 
 
@@ -394,10 +395,9 @@ def pci_source_evidence(path, targets, wanted_references):
     return vendors, references
 
 
-def validate_pci(data_dir, raw_dir=None):
-    path = data_dir / "pci-ids.sqlite3"
+def validate_pci_snapshot(path, dataset_id, expected_version, raw_dir=None):
     with closing(connect(path)) as db:
-        info = snapshot(db, "pci-ids")
+        info = snapshot(db, dataset_id, expected_version)
         checks = {
             "device.vendorId -> vendor": key_relation(db, "device.vendorId -> vendor", "device", ["vendorId"],
                                                        "'vendor|' || json_extract(s.PayloadJson, '$.vendorId')"),
@@ -459,6 +459,19 @@ def validate_pci(data_dir, raw_dir=None):
         checks["subsystem.subvendorId -> vendor"]["missingReferenceClassifications"] = source_evidence["missingReferenceClassifications"]
         checks["subsystem.subvendorId -> vendor"]["sourceAllowedMissingReason"] = "pci.ids provides no documented exception for missing subsystem vendor targets; all such references remain missing."
     return {"snapshot": info, "sourceEvidence": source_evidence, "checks": checks}
+
+
+def validate_pci(data_dir, raw_dir=None):
+    """Validate the unmodified source snapshot; the 46 source-level links remain failures."""
+    return validate_pci_snapshot(data_dir / "pci-ids.sqlite3", "pci-ids",
+                                 EXPECTED_VERSIONS["pci-ids"], raw_dir)
+
+
+def validate_pci_resolved(data_dir):
+    """Validate the explicitly derived relationship-closed PCI snapshot."""
+    version = EXPECTED_VERSIONS["pci-ids"] + "-resolved-v1"
+    return validate_pci_snapshot(data_dir / "pci-ids-resolved.sqlite3",
+                                 "pci-ids-resolved", version)
 
 
 def validate_ourairports(data_dir):
@@ -626,6 +639,14 @@ def verify_full(data_dir, output_path):
         print(file.name, count, flush=True)
     report["status"] = "PASS"
     report["totalRecords"] = sum(catalog["records"] for catalog in report["catalogs"])
+    if (data_dir / "pci-ids-resolved.sqlite3").exists():
+        report["relationships"]["pciOriginal"] = validate_pci(data_dir)
+        resolved = validate_pci_resolved(data_dir)
+        report["relationships"]["pciResolved"] = resolved
+        assert all(check["unexpectedMissingCount"] == 0 for check in resolved["checks"].values())
+        assert resolved["snapshot"]["versionMatchesExpected"]
+        report["pciOriginalStrictStatus"] = "FAIL_SOURCE_MISSING_REFERENCES" if any(check["unexpectedMissingCount"] for check in report["relationships"]["pciOriginal"]["checks"].values()) else "PASS"
+        report["pciResolvedStrictStatus"] = "PASS"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
     return report
@@ -648,7 +669,7 @@ def main(argv=None):
         print(json.dumps(report, indent=2, ensure_ascii=False))
         return 0 if report["status"] == "PASS" else 1
 
-    verify_full(args.data_dir, ROOT / "artifacts" / "domain-upgrade" / "catalog-validation.json")
+    verify_full(args.data_dir, args.output or ROOT / "artifacts" / "domain-upgrade" / "catalog-validation.json")
     return 0
 
 

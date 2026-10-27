@@ -7,7 +7,8 @@ import unittest
 from contextlib import closing
 from pathlib import Path
 
-from verify import validate_cldr, validate_ourairports, validate_pci
+from derive_pci import DERIVED_VERSION, SOURCE_VERSION, derive_pci, sha256_file
+from verify import validate_cldr, validate_ourairports, validate_pci, validate_pci_resolved
 
 
 class CatalogRelationshipTests(unittest.TestCase):
@@ -30,6 +31,26 @@ class CatalogRelationshipTests(unittest.TestCase):
                     (index, key, kind, country, name, json.dumps(payload))
                     for index, (key, kind, country, name, payload) in enumerate(records, 1)
                 ])
+
+    def write_pci_catalog(self, records):
+        path = self.data_dir / "pci-ids.sqlite3"
+        with closing(sqlite3.connect(path)) as db:
+            with db:
+                db.execute("PRAGMA application_id=1112364081")
+                db.execute("PRAGMA user_version=1")
+                db.execute("CREATE TABLE CatalogInfo (Id TEXT NOT NULL PRIMARY KEY, Version TEXT NOT NULL, SourceUri TEXT NOT NULL, License TEXT NOT NULL, SnapshotDate TEXT NOT NULL, RecordCount INTEGER NOT NULL, SourceSha256 TEXT NOT NULL, Coverage TEXT NOT NULL, FileFormatVersion INTEGER NOT NULL)")
+                db.execute("CREATE TABLE Records (Ordinal INTEGER NOT NULL PRIMARY KEY, Key TEXT NOT NULL COLLATE BINARY UNIQUE, Kind TEXT NOT NULL, CountryCode TEXT NULL, Name TEXT NOT NULL, PayloadJson TEXT NOT NULL)")
+                db.execute("CREATE INDEX IX_Records_KindCountryKey ON Records (Kind, CountryCode, Key COLLATE BINARY)")
+                db.execute("CREATE INDEX IX_Records_NameKey ON Records (Name COLLATE BINARY, Key COLLATE BINARY)")
+                db.execute("INSERT INTO CatalogInfo VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", (
+                    "pci-ids", SOURCE_VERSION, "https://github.com/pciutils/pciids/tree/" + SOURCE_VERSION,
+                    "BSD-3-Clause OR GPL-2.0-or-later (BSD-3-Clause selected)", "2026-10-24",
+                    len(records), "a" * 64, "PCI fixture; excluded duplicate keys: 0", 1))
+                db.executemany("INSERT INTO Records VALUES (?, ?, ?, ?, ?, ?)", [
+                    (index, key, kind, country, name, json.dumps(payload, separators=(",", ":")))
+                    for index, (key, kind, country, name, payload) in enumerate(records, 1)
+                ])
+        return path
 
     def write_cldr_raw(self, territories_en, territories_zh, currencies_en, currencies_zh, currency_regions):
         folder = self.data_dir / "raw" / "cldr" / "49.0.0"
@@ -156,6 +177,54 @@ class CatalogRelationshipTests(unittest.TestCase):
                          check["missingReferenceClassifications"][1]["classification"])
         self.assertEqual([{"target": "0000", "referenceRows": 1}],
                          check["missingReferenceClassifications"][1]["targets"])
+
+    def test_pci_derivation_preserves_source_and_closes_only_missing_subvendor(self):
+        records = [
+            ("vendor|1111", "vendor", None, "Vendor", {"vendorId": "1111", "name": "Vendor"}),
+            ("vendor|2222", "vendor", None, "Subsystem vendor", {"vendorId": "2222", "name": "Subsystem vendor"}),
+            ("device|1111|0001", "device", None, "Device", {"vendorId": "1111", "deviceId": "0001", "name": "Device"}),
+            ("subsystem|1111|0001|2222|0002", "subsystem", None, "Known subsystem",
+             {"vendorId": "1111", "deviceId": "0001", "subvendorId": "2222", "subdeviceId": "0002", "name": "Known subsystem"}),
+            ("subsystem|1111|0001|9999|0003", "subsystem", None, "Unresolved subsystem",
+             {"vendorId": "1111", "deviceId": "0001", "subvendorId": "9999", "subdeviceId": "0003", "name": "Unresolved subsystem"}),
+            ("class|01", "class", None, "Mass storage", {"classId": "01", "name": "Mass storage"}),
+            ("subclass|01|06", "subclass", None, "SATA", {"classId": "01", "subclassId": "06", "name": "SATA"}),
+            ("interface|01|06|01", "interface", None, "AHCI",
+             {"classId": "01", "subclassId": "06", "interfaceId": "01", "name": "AHCI"}),
+        ]
+        source_path = self.write_pci_catalog(records)
+        source_hash = sha256_file(source_path)
+
+        report = derive_pci(
+            source_path=source_path,
+            output_path=self.data_dir / "pci-ids-resolved.sqlite3",
+            manifest_path=self.data_dir / "pci-ids-resolved.manifest.json",
+            exclusions_path=self.data_dir / "pci-ids-resolved.exclusions.json",
+            raw_dir=None,
+        )
+
+        self.assertEqual(source_hash, sha256_file(source_path))
+        self.assertEqual("pci-ids", validate_pci(self.data_dir)["snapshot"]["id"])
+        self.assertEqual(DERIVED_VERSION, report["derived"]["snapshot"]["version"])
+        self.assertEqual(8, report["closure"]["sourceRecords"])
+        self.assertEqual(7, report["closure"]["derivedRecords"])
+        self.assertEqual(1, report["closure"]["excludedRecords"])
+        self.assertTrue(report["closure"]["unionMatchesSource"])
+        self.assertTrue(report["closure"]["retainedContentUnchanged"])
+        self.assertTrue(all(check["unexpectedMissingCount"] == 0
+                            for check in validate_pci_resolved(self.data_dir)["checks"].values()))
+
+        exclusions = json.loads((self.data_dir / "pci-ids-resolved.exclusions.json").read_text(encoding="utf-8"))
+        self.assertEqual(1, exclusions["excludedRecordCount"])
+        self.assertEqual("subsystem|1111|0001|9999|0003", exclusions["records"][0]["originalKey"])
+        self.assertEqual("vendor|9999", exclusions["records"][0]["targetKey"])
+        self.assertEqual(SOURCE_VERSION, exclusions["records"][0]["sourceVersion"])
+        self.assertEqual("subsystem", exclusions["records"][0]["original"]["Kind"])
+        with closing(sqlite3.connect(self.data_dir / "pci-ids-resolved.sqlite3")) as db:
+            info = db.execute("SELECT Id, Version, RecordCount FROM CatalogInfo").fetchone()
+            ordinals = [row[0] for row in db.execute("SELECT Ordinal FROM Records ORDER BY Ordinal")]
+        self.assertEqual(("pci-ids-resolved", DERIVED_VERSION, 7), info)
+        self.assertEqual(list(range(1, 8)), ordinals)
 
     def test_cldr_source_localization_values_and_missing_flags_are_checked(self):
         self.write_catalog("cldr.sqlite3", "cldr", "49.0.0-import-v2", [
