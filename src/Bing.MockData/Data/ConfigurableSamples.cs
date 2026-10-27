@@ -387,12 +387,13 @@ namespace Bing.MockData
             var values = CareerCatalog.Departments(_c.Locale, industry);
             if (values.Length == 0) throw new ArgumentException("没有该行业的部门样本。", nameof(industry));
             DomainGuard.Count(_c, values.Length);
+            foreach (var value in values) DomainGuard.Text(_c, value);
             return Array.AsReadOnly(values);
         }
 
         /// <summary>获取当前语言下的内置模拟行业样本。</summary>
         public IReadOnlyList<string> Industries()
-        { _c.Check(); var values = CareerCatalog.Industries(_c.Locale); DomainGuard.Count(_c, values.Length); return Array.AsReadOnly(values); }
+        { _c.Check(); var values = CareerCatalog.Industries(_c.Locale); DomainGuard.Count(_c, values.Length); foreach (var value in values) DomainGuard.Text(_c, value); return Array.AsReadOnly(values); }
     }
 
     public readonly partial struct CommerceData
@@ -586,6 +587,6 @@ namespace Bing.MockData
 
         /// <summary>获取完整 CSS 命名色表或指定色系的只读副本。</summary>
         public IReadOnlyList<MockColor> Palette(ColorFamily? family = null)
-        { _c.Check(); var values = CssNamedColors.ForFamily(family); DomainGuard.Count(_c, values.Length); return Array.AsReadOnly(values); }
+        { _c.Check(); var values = CssNamedColors.ForFamily(family); DomainGuard.Count(_c, values.Length); foreach (var value in values) DomainGuard.Text(_c, value.Name); return Array.AsReadOnly(values); }
     }
 }

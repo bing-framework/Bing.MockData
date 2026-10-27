@@ -108,12 +108,19 @@ namespace Bing.MockData
         /// <summary>在指定 UTF-16 长度区间内构造有限正则文本；无可用候选时明确失败。</summary>
         public string Regex(string pattern, int minLength, int maxLength)
         {
+            return GenerateRegex(pattern, minLength, maxLength, false);
+        }
+
+        internal string RegexCodePoints(string pattern, int minLength, int maxLength) => GenerateRegex(pattern, minLength, maxLength, true);
+
+        private string GenerateRegex(string pattern, int minLength, int maxLength, bool codePoints)
+        {
             _context.Check();
-            if(minLength<0||maxLength<minLength)throw new ArgumentOutOfRangeException(nameof(minLength));
-            if(maxLength>_context.Budget.MaxTextLength)throw new MockLimitException(nameof(MockLimits.MaxTextLength),_context.Budget.MaxTextLength);
-            var generator=new BoundedRegexGenerator(pattern,_context.Budget.MaxTextLength,true);
-            var context=_context;
-            return context.WithRandom(random=>generator.Generate(random,context.CancellationToken,minLength,maxLength,context.Budget.MaxAttempts));
+            if (minLength < 0 || maxLength < minLength) throw new ArgumentOutOfRangeException(nameof(minLength));
+            if (maxLength > _context.Budget.MaxTextLength) throw new MockLimitException(nameof(MockLimits.MaxTextLength), _context.Budget.MaxTextLength);
+            var generator = new BoundedRegexGenerator(pattern, _context.Budget.MaxTextLength, true, _context.CancellationToken);
+            var context = _context;
+            return context.WithRandom(random => generator.Generate(random, context.CancellationToken, minLength, maxLength, context.Budget.MaxAttempts, codePoints));
         }
 
         /// <summary>

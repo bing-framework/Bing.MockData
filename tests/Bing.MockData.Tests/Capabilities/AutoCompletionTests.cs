@@ -59,13 +59,18 @@ public class AutoCompletionTests
         using var cancel=new CancellationTokenSource();cancel.Cancel();Assert.ThrowsAny<OperationCanceledException>(()=>c.AutoBuilder<Graph>().Build().At(0,cancel.Token));
     }
 
-    [Fact] public void Registered_nested_types_take_precedence_and_old_replays_are_rejected()
+    [Theory]
+    [InlineData("domain-v2")]
+    [InlineData("domain-v3")]
+    [InlineData("domain-v4")]
+    public void Registered_nested_types_take_precedence_and_old_replays_are_rejected(string oldContract)
     {
         var options=new MockOptions{Seed=91};options.Register<Child>("child",_=>new Child{Age=21,Name="fixed",Confirmation="fixed"});
         using var c=new MockContext(options);var graph=c.AutoBuilder<ReadOnlyGraph>().Build().At(0);
         Assert.Equal(2,graph.Map.Count);Assert.All(graph.Map.Values,child=>Assert.Equal("fixed",child.Name));
-        var r=c.Replay;var old=new ReplayInfo(r.Seed,r.ReferenceTime,r.Locale,r.AlgorithmVersion,"china-2025-12-31-domain-v2",r.LibraryVersion,r.RuntimeVersion,0,"",r.Limits,"domain-v2",r.ExtensionVersions);
+        var r=c.Replay;var old=new ReplayInfo(r.Seed,r.ReferenceTime,r.Locale,r.AlgorithmVersion,r.DataVersion,r.LibraryVersion,r.RuntimeVersion,0,"",r.Limits,oldContract,r.ExtensionVersions);
         Assert.Throws<InvalidOperationException>(()=>old.ToOptions());
+        Assert.Equal(c.Seed,r.ToOptions().Seed);
     }
 
     [Fact] public void Product_template_freezes_compatible_category_and_brand()

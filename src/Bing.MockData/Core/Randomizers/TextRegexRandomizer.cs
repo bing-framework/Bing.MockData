@@ -16,7 +16,7 @@ namespace Bing.MockData.Core.Randomizers
         public TextRegexRandomizer(TextRegexFieldOptions options) : base(options)
         {
             if (string.IsNullOrEmpty(Options.Pattern)) throw new ArgumentException("正则模式不能为空。", nameof(options.Pattern));
-            _generator = new BoundedRegexGenerator(Options.Pattern, Options.MaxTextLength);
+            _generator = new BoundedRegexGenerator(Options.Pattern, Options.MaxTextLength, cancellationToken: Options.CancellationToken);
         }
         /// <summary>生成匹配模式的文本；生成期间检查取消令牌。</summary>
         public string Generate() => Execute(() => _generator.Generate(Rnd, Options.CancellationToken));

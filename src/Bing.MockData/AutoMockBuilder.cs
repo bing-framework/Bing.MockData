@@ -14,6 +14,7 @@ namespace Bing.MockData
     {
         private readonly MockContext _context;
         private readonly Dictionary<string,Func<MockContext,T,object>> _rules=new Dictionary<string,Func<MockContext,T,object>>(StringComparer.Ordinal);
+        private readonly List<string> _ruleOrder=new List<string>();
         private readonly HashSet<string> _ignored=new HashSet<string>(StringComparer.Ordinal);
         private Func<MockContext,T> _constructor;
         private readonly Type[] _typePath;
@@ -29,7 +30,7 @@ namespace Bing.MockData
         public AutoMockBuilder<T> RuleFor<TValue>(Expression<Func<T,TValue>> expression,Func<MockContext,TValue> generate)
         {if(generate==null)throw new ArgumentNullException(nameof(generate));return RuleFor(expression,(c,_)=>generate(c));}
         public AutoMockBuilder<T> RuleFor<TValue>(Expression<Func<T,TValue>> expression,Func<MockContext,T,TValue> generate)
-        {var p=Property(expression);if(generate==null)throw new ArgumentNullException(nameof(generate));if(_ignored.Contains(p.Name)||_rules.ContainsKey(p.Name))throw new ArgumentException("重复规则："+p.Name);_rules.Add(p.Name,(c,x)=>generate(c,x));return this;}
+        {var p=Property(expression);if(generate==null)throw new ArgumentNullException(nameof(generate));if(_ignored.Contains(p.Name)||_rules.ContainsKey(p.Name))throw new ArgumentException("重复规则："+p.Name);_rules.Add(p.Name,(c,x)=>generate(c,x));_ruleOrder.Add(p.Name);return this;}
         public AutoMockBuilder<T> Ignore<TValue>(Expression<Func<T,TValue>> expression)
         {var p=Property(expression);if(_rules.ContainsKey(p.Name)||!_ignored.Add(p.Name))throw new ArgumentException("重复规则："+p.Name);return this;}
         private static PropertyInfo Property<TValue>(Expression<Func<T,TValue>> expression)
@@ -42,21 +43,32 @@ namespace Bing.MockData
             var getters=properties.ToDictionary(p=>p.Name,p=>Getter(p),StringComparer.Ordinal);
             var setters=properties.ToDictionary(p=>p.Name,p=>Setter(p),StringComparer.Ordinal);
             var attributesByName=properties.ToDictionary(p=>p.Name,p=>p.GetCustomAttributes<ValidationAttribute>(true).ToArray(),StringComparer.Ordinal);
-            var actions=new List<Action<MockContext,T>>();var comparisons=new List<Action<T>>();var compareLinks=new Dictionary<string,PropertyInfo>(StringComparer.Ordinal);
+            var automaticActions=new List<Action<MockContext,T>>();var explicitActions=new List<Action<MockContext,T>>();var comparisons=new List<Action<T>>();var compareLinks=new Dictionary<string,PropertyInfo>(StringComparer.Ordinal);
             foreach(var p in properties)
             {
                 if(_ignored.Contains(p.Name))continue;
-                if(_rules.TryGetValue(p.Name,out var explicitRule)){actions.Add((c,x)=>setters[p.Name](x,explicitRule(c.ForField(p.Name),x)));continue;}
+                if(_rules.ContainsKey(p.Name))continue;
                 var attributes=attributesByName[p.Name];
                 var compare=attributes.OfType<CompareAttribute>().SingleOrDefault();
                 if(compare!=null){var other=typeof(T).GetProperty(compare.OtherProperty);if(other==null||!p.PropertyType.IsAssignableFrom(other.PropertyType))throw new InvalidOperationException(typeof(T).Name+"."+p.Name+": Compare 无效。");compareLinks.Add(p.Name,other);continue;}
                 Func<MockContext,object> generate=Compile(p.PropertyType,attributes,_context,typeof(T).Name+"."+p.Name,_planDepth);
-                actions.Add((c,x)=>
+                automaticActions.Add((c,x)=>
                 {
                     var field=c.ForField(p.Name);
                     try { setters[p.Name](x,generate(field)); }
                     catch(OperationCanceledException){throw;}catch(MockLimitException){throw;}catch(MockGenerationException){throw;}
                     catch(Exception error){throw new MockGenerationException("DataAnnotations:"+typeof(T).Name+"."+p.Name,field,error);}
+                });
+            }
+            foreach(var name in _ruleOrder)
+            {
+                var ruleName=name;var setter=setters[ruleName];var explicitRule=_rules[ruleName];
+                explicitActions.Add((c,x)=>
+                {
+                    var field=c.ForField(ruleName);
+                    try { setter(x,explicitRule(field,x)); }
+                    catch(OperationCanceledException){throw;}catch(MockLimitException){throw;}catch(MockGenerationException){throw;}
+                    catch(Exception error){throw new MockGenerationException("DataAnnotations:"+typeof(T).Name+"."+ruleName,field,error);}
                 });
             }
             var ordered=new HashSet<string>(StringComparer.Ordinal);var pending=new HashSet<string>(StringComparer.Ordinal);
@@ -74,7 +86,7 @@ namespace Bing.MockData
                 for(int attempt=0;attempt<c.Budget.MaxAttempts;attempt++)
                 {
                     var current=nested.ForField("attempt["+attempt+"]");var instance=ctor(current.ForField("$constructor"))??throw new InvalidOperationException("构造器返回 null。");
-                    foreach(var action in actions){current.Check();action(current,instance);}foreach(var compare in comparisons){current.Check();compare(instance);}
+                    foreach(var action in automaticActions){current.Check();action(current,instance);}foreach(var action in explicitActions){current.Check();action(current,instance);}foreach(var compare in comparisons){current.Check();compare(instance);}
                     foreach(var getter in getters.Values)
                     {var value=getter(instance);if(value is string text&&text.Length>c.Budget.MaxTextLength)throw new MockLimitException(nameof(MockLimits.MaxTextLength),c.Budget.MaxTextLength);if(value is System.Collections.ICollection collection)DomainGuard.Count(c,collection.Count);}
                     last=instance;results=new List<ValidationResult>();if(Validator.TryValidateObject(instance,new ValidationContext(instance),results,true))return instance;
@@ -123,7 +135,7 @@ namespace Bing.MockData
                 if(max>context.Budget.MaxTextLength)max=context.Budget.MaxTextLength;
                 if(min>max)throw new MockLimitException(nameof(MockLimits.MaxTextLength),context.Budget.MaxTextLength);
                 var regex=a.OfType<RegularExpressionAttribute>().SingleOrDefault();
-                var regexGenerator=regex==null?null:new BoundedRegexGenerator(regex.Pattern,context.Budget.MaxTextLength,true);
+                var regexGenerator=regex==null?null:new BoundedRegexGenerator(regex.Pattern,context.Budget.MaxTextLength,true,context.CancellationToken);
                 return c=>
                 {
                     if(regexGenerator!=null)return c.WithRandom(random=>regexGenerator.Generate(random,c.CancellationToken,min,max,c.Budget.MaxAttempts));

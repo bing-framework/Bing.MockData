@@ -78,8 +78,11 @@ namespace Bing.MockData
         /// </summary>
         /// <param name="context">要记录其生成参数的上下文。</param>
         internal ReplayInfo(MockContext context)
-            : this(context.Seed, context.ReferenceTime, context.Locale, "fnv64-mix-v1", "china-2025-12-31-domain-v3",
-                typeof(MockContext).Assembly.GetName().Version.ToString(), Environment.Version.ToString(), context.RecordIndex, context.FieldPath, context.Budget, "domain-v3", context.ExtensionVersions) { }
+            : this(context.Seed, context.ReferenceTime, context.Locale, "fnv64-mix-v1", CurrentDataVersion,
+                typeof(MockContext).Assembly.GetName().Version.ToString(), Environment.Version.ToString(), context.RecordIndex, context.FieldPath, context.Budget, CurrentGenerationContract, context.ExtensionVersions) { }
+
+        internal const string CurrentDataVersion = "china-2025-12-31-domain-v5";
+        internal const string CurrentGenerationContract = "domain-v6";
 
         /// <summary>
         /// 从序列化字段创建重放元数据。
@@ -128,9 +131,9 @@ namespace Bing.MockData
         /// <exception cref="InvalidOperationException">重放版本与当前环境不匹配。</exception>
         public MockOptions ToOptions()
         {
-            if (GenerationContractVersion != "domain-v3" || AlgorithmVersion != "fnv64-mix-v1" || DataVersion != "china-2025-12-31-domain-v3" ||
+            if (GenerationContractVersion != CurrentGenerationContract || AlgorithmVersion != "fnv64-mix-v1" || DataVersion != CurrentDataVersion ||
                 LibraryVersion != typeof(MockContext).Assembly.GetName().Version.ToString() || RuntimeVersion != Environment.Version.ToString())
-                throw new InvalidOperationException("重放版本不匹配；需要相同库、运行时、派生算法和内置数据版本。");
+                throw new InvalidOperationException($"重放版本不匹配；需要相同库、运行时、派生算法和内置数据版本。契约 {GenerationContractVersion} → {CurrentGenerationContract}；数据 {DataVersion} → {CurrentDataVersion}。");
             return new MockOptions { Seed = Seed, ReferenceTime = ReferenceTime, Locale = Locale, Limits = Limits, ExpectedExtensionVersions = ExtensionVersions };
         }
     }
