@@ -1,0 +1,625 @@
+{
+  "formatVersion": 1,
+  "version": "catalogs-2026-10-27-banks-v1",
+  "archive": {
+    "name": "catalogs-2026-10-27-banks-v1.zip",
+    "bytes": 382219455,
+    "sha256": "d1923d11d5ced8ace342566c93299fb5d7d7f7183cd5cef3b9c8f3b4133e0115"
+  },
+  "files": [
+    {
+      "path": "bank-bins.sqlite3",
+      "bytes": 172437504,
+      "sha256": "646a7ec092b0b019d17ed5723c64b0c2ece648231d595cf0fa901c6d8ebe5d86"
+    },
+    {
+      "path": "catalogs.manifest.json",
+      "bytes": 18406,
+      "sha256": "7eb79b61470a88143b57862d0199bbe3eb8b2b4916de4637781ba16107e52772"
+    },
+    {
+      "path": "cldr.sqlite3",
+      "bytes": 356352,
+      "sha256": "7c256d778bf5ca29eb784425d73d021a879ed902db986f6678fe4dceba9175b4"
+    },
+    {
+      "path": "crossref-books.manifest.json",
+      "bytes": 21078,
+      "sha256": "fe6b5d39bcb89416d47377166327ee62242dc46aee7e8ce628627c1c1aac46b1"
+    },
+    {
+      "path": "crossref-books.sqlite3",
+      "bytes": 57073664,
+      "sha256": "7d9857f85eecdb7faabdea0a5da8e2b4354735ba83aad1f7185ce0ed42691391"
+    },
+    {
+      "path": "geonames-cities.sqlite3",
+      "bytes": 24887296,
+      "sha256": "373c58841bbe87c742341402d77aee6e8809243b95e9b532fef7b5a40439e7e3"
+    },
+    {
+      "path": "geonames-postal-0.sqlite3",
+      "bytes": 446251008,
+      "sha256": "2f67b0234162a3fffe53e56b2fcfcfce0bf438e69569e88a4415d50991c7c4f3"
+    },
+    {
+      "path": "geonames-postal-1.sqlite3",
+      "bytes": 446197760,
+      "sha256": "a41de1ca23080b616102b6bc1a44fe301aba41a9ec7c87f15593645a8e2b5c4e"
+    },
+    {
+      "path": "icd10cm.manifest.json",
+      "bytes": 1161,
+      "sha256": "82025d5e0f21b42c691e58214ed384cff58507c6ab069070f9dbe5f8bd68db0c"
+    },
+    {
+      "path": "icd10cm.sqlite3",
+      "bytes": 43769856,
+      "sha256": "8fc366ecf09f916df81e9594335bdc958ffc3c6f40e61c8985060948411d3283"
+    },
+    {
+      "path": "industry.manifest.json",
+      "bytes": 35731,
+      "sha256": "76f46891de399bd906e67f30e60cbff36e9272bf4bb41af1326777c42074da1f"
+    },
+    {
+      "path": "libphonenumber.sqlite3",
+      "bytes": 692224,
+      "sha256": "e68cf394a9289f82bd33613e5b502f3588769075b906654f99ac03dc96fce3a0"
+    },
+    {
+      "path": "mime-db.sqlite3",
+      "bytes": 483328,
+      "sha256": "ef4fcdd78043d059ad8c1ad8744122f92ed8bb801676f2f2a54f3c3157befe2c"
+    },
+    {
+      "path": "notices/bank-bins-CC-BY-4.0-LICENSE.txt",
+      "bytes": 18651,
+      "sha256": "2a82ac9bbc3e3ee066908381e8d373896db5a6025d083fbd59692fe9ccfb9111"
+    },
+    {
+      "path": "notices/bank-bins-conflicts.csv",
+      "bytes": 18554498,
+      "sha256": "e936861e24aad6668bba6c49ed45b87863e62bd7ed37774d8b76d7e78ebbf355"
+    },
+    {
+      "path": "notices/bank-bins-NOTICE.txt",
+      "bytes": 1424,
+      "sha256": "e937f449781cf8e7fcf23353b81af840dc81c3519add048b0c4cfab65f05d2c7"
+    },
+    {
+      "path": "notices/bank-bins-README.md",
+      "bytes": 2921,
+      "sha256": "09ad86c4aeba39588967b68b801c64845a44530f0c776ef00b1db1c4629dbbae"
+    },
+    {
+      "path": "notices/bank-bins-upstream-summary.json",
+      "bytes": 625,
+      "sha256": "05b47e9edb9908794fb4bfc15e57afbcbe37a69bcd77941b2b651e850274185c"
+    },
+    {
+      "path": "notices/cldr-Unicode-License.txt",
+      "bytes": 1995,
+      "sha256": "e7a93b009565cfce55919a381437ac4db883e9da2126fa28b91d12732bc53d96"
+    },
+    {
+      "path": "notices/crossref.txt",
+      "bytes": 320,
+      "sha256": "4015b2aa0c158756b7e7567f548b232b97aa0206ca81e5edc2f41d1873f16eda"
+    },
+    {
+      "path": "notices/geonames-cities-readme.txt",
+      "bytes": 8843,
+      "sha256": "b1957379b6c1242c700c98ac9a8aa0a09f56c3c0a50ee72175527005f48ef2c5"
+    },
+    {
+      "path": "notices/geonames-postal-readme.txt",
+      "bytes": 2893,
+      "sha256": "fff60148da20f4d182859d926518efa5b0f3949f3c3273a284901325f1f8f008"
+    },
+    {
+      "path": "notices/icd10cm.txt",
+      "bytes": 373,
+      "sha256": "739ffaf204331c72a1be77b51d2b9e2ee27f6e20cc6227f14e37048ebec2cfb8"
+    },
+    {
+      "path": "notices/libphonenumber-Apache-2.0-LICENSE.txt",
+      "bytes": 10173,
+      "sha256": "a6cba85bc92e0cff7a450b1d873c0eaa2e9fc96bf472df0247a26bec77bf3ff9"
+    },
+    {
+      "path": "notices/mime-db-MIT-LICENSE.txt",
+      "bytes": 1172,
+      "sha256": "cc1dfd4dafa27271e8212cd3b274eeb3f262e40a6fdab36ddc3f9696f706f58b"
+    },
+    {
+      "path": "notices/ourairports-public-domain.html",
+      "bytes": 13278,
+      "sha256": "3b0b668482919e97b88f7b93b562228e9a94879325593b58739e7fbefd07b54e"
+    },
+    {
+      "path": "notices/pciids-README.md",
+      "bytes": 585,
+      "sha256": "4caf3739c59c70273bf72fb69db6f1b8e534dec425da3863777db2d9cc01ff1f"
+    },
+    {
+      "path": "notices/ror.txt",
+      "bytes": 196,
+      "sha256": "e542da53afa318b37ebb406a0b6bdedd1a937f31065432e2124422878086a873"
+    },
+    {
+      "path": "notices/rxnorm-cpc.txt",
+      "bytes": 383,
+      "sha256": "264d3237862152f32a563def877ac4e717954dc0e5dab1344b8e7ca6a40eee63"
+    },
+    {
+      "path": "notices/vehicles.txt",
+      "bytes": 10003,
+      "sha256": "e41714335092f7f89059457f8658fc35ebfda0612403751a7f53de7b5ce3c3c9"
+    },
+    {
+      "path": "notices/wikidata-airlines.txt",
+      "bytes": 263,
+      "sha256": "300688d001817a2d8add073013e90771716ba306814caa039e6c5bef680a4f01"
+    },
+    {
+      "path": "ourairports.sqlite3",
+      "bytes": 95903744,
+      "sha256": "80db10ddcc70f2c8fca11e596d68507445d9aba51ddce6b65827329b44cf9097"
+    },
+    {
+      "path": "pci-ids-resolved.exclusions.json",
+      "bytes": 31975,
+      "sha256": "6b164a1c5cd0ffcb93fdf9c000c0ea3d0e4bb932fb5fa1e7f3f50cb1669b0815"
+    },
+    {
+      "path": "pci-ids-resolved.manifest.json",
+      "bytes": 1627,
+      "sha256": "cb1fdefcbc5236f0df1e453319bfc0c86eb4a801f57f1e5b0004f7855765171d"
+    },
+    {
+      "path": "pci-ids-resolved.sqlite3",
+      "bytes": 20488192,
+      "sha256": "62d527ec5fa6f3c36816868d566bc6005f045dafcc36a1a0bbae9e3f5b12c71f"
+    },
+    {
+      "path": "pci-ids.sqlite3",
+      "bytes": 12759040,
+      "sha256": "67abc2b82c9d0b95ca4cc33d5123614d0001384157889d5f0acd7cb6121818eb"
+    },
+    {
+      "path": "ror.manifest.json",
+      "bytes": 826,
+      "sha256": "13dee16479ec40b645342e90a66cff050c8fdc0dda57e9e4ad03fbbb70a65d41"
+    },
+    {
+      "path": "ror.sqlite3",
+      "bytes": 209301504,
+      "sha256": "831e0bd1ff3d37167b38e89c7e9771957075010074f068b5758a0ae14b18a8f1"
+    },
+    {
+      "path": "rxnorm-cpc-relations-1.manifest.json",
+      "bytes": 872,
+      "sha256": "d55e570b87d0449e9333d531cb579c0b2491e08f9477952e0f026e10cae181a6"
+    },
+    {
+      "path": "rxnorm-cpc-relations-1.sqlite3",
+      "bytes": 179003392,
+      "sha256": "18093138a4aa1d7bf7d70625884b9aed8d54f12476a283294eedbffbe42dd555"
+    },
+    {
+      "path": "rxnorm-cpc-relations-2.manifest.json",
+      "bytes": 872,
+      "sha256": "2f00d862a9e108c99fbfc3214c45712aec2289f756f7708854c566f2d9c4cf57"
+    },
+    {
+      "path": "rxnorm-cpc-relations-2.sqlite3",
+      "bytes": 179470336,
+      "sha256": "ddb47892850e32939b6925fc86d16c397a2b404fe2377b878aa7a768d7727502"
+    },
+    {
+      "path": "rxnorm-cpc-relations-3.manifest.json",
+      "bytes": 872,
+      "sha256": "d147c577c7f31748650e4a683c4a385af66502bb6550ece998ceef3f12b87a12"
+    },
+    {
+      "path": "rxnorm-cpc-relations-3.sqlite3",
+      "bytes": 182378496,
+      "sha256": "2791b579a5d6e4c83ba05e9a5b332b94525c98ac73e3d4ab5649ed26b27f6dae"
+    },
+    {
+      "path": "rxnorm-cpc-relations-4.manifest.json",
+      "bytes": 872,
+      "sha256": "8c1d9d1eeeda54e983e0aed1c34e03e03051c707103efdf65b911e4e0680da26"
+    },
+    {
+      "path": "rxnorm-cpc-relations-4.sqlite3",
+      "bytes": 180400128,
+      "sha256": "589afc339a151e30d2839bf9a61a1fecaded2ee72692b6563a0cc2633dcdcc5e"
+    },
+    {
+      "path": "rxnorm-cpc-relations-5.manifest.json",
+      "bytes": 872,
+      "sha256": "e26c0d1c8fd1b8daa6e0865ec073d05818bdff0e92d26073aa3b6c6ad9cdb1fd"
+    },
+    {
+      "path": "rxnorm-cpc-relations-5.sqlite3",
+      "bytes": 179671040,
+      "sha256": "3694b6bbdfaa0c9d2f9f2ee17f5becde3c417ad1f831ce5b08e8ccbdef7839e7"
+    },
+    {
+      "path": "rxnorm-cpc-relations-6.manifest.json",
+      "bytes": 872,
+      "sha256": "8e988c0b439e61860694c583bd665f730d62c90ee8fa34f60ed97318b4d6ef73"
+    },
+    {
+      "path": "rxnorm-cpc-relations-6.sqlite3",
+      "bytes": 165466112,
+      "sha256": "5149d8a0db1632e2be92b18651ca48295c49c67306c2b89c0ad2ed4e387e81ce"
+    },
+    {
+      "path": "rxnorm-cpc-relations-7.manifest.json",
+      "bytes": 872,
+      "sha256": "e24ba596b7e576030869e2de6e87bdf407913684df1eb4a0309ab86f62b45003"
+    },
+    {
+      "path": "rxnorm-cpc-relations-7.sqlite3",
+      "bytes": 78118912,
+      "sha256": "9cfaf88a2c70a996685f97aabbb1cb0466ec766fa8c126129034b27a842c4d56"
+    },
+    {
+      "path": "rxnorm-cpc.manifest.json",
+      "bytes": 907,
+      "sha256": "8ced242dee9eda6b11e1eea02956ccec51f26129a475d6e43ef4d0138d0c0b40"
+    },
+    {
+      "path": "rxnorm-cpc.sqlite3",
+      "bytes": 186138624,
+      "sha256": "e998716fcba2bf914871bd1eb733896b64132239331df3f57af713f46844096a"
+    },
+    {
+      "path": "vehicles.manifest.json",
+      "bytes": 1092,
+      "sha256": "58d6654470295ab83eeddb635ed0ac90f44354cb38884a5422b861459eb970b0"
+    },
+    {
+      "path": "vehicles.sqlite3",
+      "bytes": 29724672,
+      "sha256": "9bcebe3f64985221425d252ad655f37e102835698b59b1211b0b2c7b80ce14fd"
+    },
+    {
+      "path": "wikidata-airlines.manifest.json",
+      "bytes": 1212,
+      "sha256": "7a9b9acfd202bae9325cfa74c40d32faa485466192d30ba027670cbf36b73e61"
+    },
+    {
+      "path": "wikidata-airlines.sqlite3",
+      "bytes": 2588672,
+      "sha256": "0f2ff6cce0bdd49d2adca1b1e2bacfd524bfb6c000e6e5836dff617f2f362d74"
+    }
+  ],
+  "datasets": [
+    {
+      "path": "bank-bins.sqlite3",
+      "metadata": {
+        "Id": "bank-bins-techbuddie",
+        "Version": "fcc907c81cf02b12e396b0c12a8c16472b47619a-import-v1",
+        "SourceUri": "https://github.com/Techbuddie-Solutions/binlist-data/tree/fcc907c81cf02b12e396b0c12a8c16472b47619a",
+        "License": "CC-BY-4.0",
+        "SnapshotDate": "2026-09-03",
+        "RecordCount": 458051,
+        "SourceSha256": "4db6fd3e0fd0a9baa2973776bfa6559ce584952e287fa5d1a16414445b891126",
+        "Coverage": "Community-compiled issuer/BIN metadata; this snapshot contains 7 five-digit, 454496 six-digit, and 3548 eight-digit prefixes. The upstream README describes six-digit prefixes with a small number of five-digit legacy rows and states that eight-digit BINs are not covered by open sources, which conflicts with the included rows. All source rows are preserved; the dataset is not official or exhaustive, PAN length is not provided, and empty source cells are unknown and stored as null.",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "cldr.sqlite3",
+      "metadata": {
+        "Id": "cldr",
+        "Version": "49.0.0-import-v2",
+        "SourceUri": "https://github.com/unicode-org/cldr-json/tree/49.0.0",
+        "License": "Unicode-3.0",
+        "SnapshotDate": "2026-10-21",
+        "RecordCount": 1141,
+        "SourceSha256": "d9a14c5bd1d463ac0a713e37b87411dd3708bc57a2966310bbfbfed000922b1e",
+        "Coverage": "CLDR territories/currencies; active and historic currency metadata; region-currency references; missing localized names flagged; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "crossref-books.sqlite3",
+      "metadata": {
+        "Id": "crossref-books",
+        "Version": "2026-10-25",
+        "SourceUri": "https://api.crossref.org/works",
+        "License": "CC0-1.0 factual metadata",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 100000,
+        "SourceSha256": "38c6391773a371c96db7f5e6fd8063f44992d03260ec02076c9d0982ec59bb47",
+        "Coverage": "First 100000 qualifying book records from a frozen cursor harvest; DOI stable keys; abstracts/full text excluded; excluded={\"harvest-cap\": 993, \"missing-title-or-doi\": 7}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "geonames-cities.sqlite3",
+      "metadata": {
+        "Id": "geonames-cities",
+        "Version": "modified:2026-10-24",
+        "SourceUri": "https://download.geonames.org/export/dump/cities15000.zip",
+        "License": "CC-BY-4.0",
+        "SnapshotDate": "2026-10-24",
+        "RecordCount": 34180,
+        "SourceSha256": "4c921f81f2cf4cc65cd00e2d7c03a6f6f91da4871044e3640dcea886451f45c7",
+        "Coverage": "Global cities15000 extract; places with source feature class and population threshold, not all settlements; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "geonames-postal-0.sqlite3",
+      "metadata": {
+        "Id": "geonames-postal-0",
+        "Version": "modified:2026-10-24:shard-0-of-2",
+        "SourceUri": "https://download.geonames.org/export/zip/allCountries.zip",
+        "License": "CC-BY-4.0",
+        "SnapshotDate": "2026-10-24",
+        "RecordCount": 913482,
+        "SourceSha256": "7aff9e9cf85d16a1ee978e55aeab38c59ed79cb58cf299998fd76dc844042c68",
+        "Coverage": "All GeoNames postal-code rows, source row modulo 2 equals 0; postal granularity and accuracy retained; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "geonames-postal-1.sqlite3",
+      "metadata": {
+        "Id": "geonames-postal-1",
+        "Version": "modified:2026-10-24:shard-1-of-2",
+        "SourceUri": "https://download.geonames.org/export/zip/allCountries.zip",
+        "License": "CC-BY-4.0",
+        "SnapshotDate": "2026-10-24",
+        "RecordCount": 913483,
+        "SourceSha256": "7aff9e9cf85d16a1ee978e55aeab38c59ed79cb58cf299998fd76dc844042c68",
+        "Coverage": "All GeoNames postal-code rows, source row modulo 2 equals 1; postal granularity and accuracy retained; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "icd10cm.sqlite3",
+      "metadata": {
+        "Id": "icd10cm",
+        "Version": "FY2027",
+        "SourceUri": "https://ftp.cdc.gov/pub/Health_Statistics/NCHS/Publications/ICD10CM/2027/icd10cm-table-and-index-2027.zip",
+        "License": "US-government-public-domain",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 98403,
+        "SourceSha256": "a47764e8fcad68b88a9411d1b5364efff9b16e08f5596f8120688e95edc1d0f0",
+        "Coverage": "US diagnostic classification effective 2026-10-01 through 2027-09-30; tabular hierarchy plus complete ordered codes including seventh-character expansions; parent is closest published code ancestor; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "libphonenumber.sqlite3",
+      "metadata": {
+        "Id": "libphonenumber",
+        "Version": "git:6d349ac62b76a86eccba0ac1d2fc83ea2b00a841",
+        "SourceUri": "https://github.com/google/libphonenumber/tree/6d349ac62b76a86eccba0ac1d2fc83ea2b00a841",
+        "License": "Apache-2.0",
+        "SnapshotDate": "2026-10-23",
+        "RecordCount": 492,
+        "SourceSha256": "1274b3356dc726e8531a00c8d188e5b8f5c6aa2d7d4c56f459e74ba81ae8f18d",
+        "Coverage": "Phone numbering patterns and calling codes by region; format metadata only, not allocation evidence; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "mime-db.sqlite3",
+      "metadata": {
+        "Id": "mime-db",
+        "Version": "1.54.0",
+        "SourceUri": "https://registry.npmjs.org/mime-db/1.54.0",
+        "License": "MIT",
+        "SnapshotDate": "2025-03-18",
+        "RecordCount": 1291,
+        "SourceSha256": "5c3f4b798b81976b1496ec0d81b600d5c366e47bba0727c13ba7143ea1989a77",
+        "Coverage": "npm package tarball; aliases retained; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "ourairports.sqlite3",
+      "metadata": {
+        "Id": "ourairports",
+        "Version": "git:711cf6754ef05a1ccedc2482cc1e838032249d3c",
+        "SourceUri": "https://github.com/davidmegginson/ourairports-data/tree/711cf6754ef05a1ccedc2482cc1e838032249d3c",
+        "License": "Public Domain",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 180283,
+        "SourceSha256": "ae78ac51c8de9b2897d90bd1e75579f192ec2f0fe41c2223098e26d5b9fafcf9",
+        "Coverage": "Global airports, runways, frequencies, navaids, countries and regions; airlines/routes excluded; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "pci-ids-resolved.sqlite3",
+      "metadata": {
+        "Id": "pci-ids-resolved",
+        "Version": "fe7fceb2e1153d495e1deefacf59c5d61c36ef8e-resolved-v1",
+        "SourceUri": "https://github.com/pciutils/pciids/tree/fe7fceb2e1153d495e1deefacf59c5d61c36ef8e",
+        "License": "BSD-3-Clause OR GPL-2.0-or-later (BSD-3-Clause selected)",
+        "SnapshotDate": "2026-10-24",
+        "RecordCount": 42503,
+        "SourceSha256": "c536d82778aaafb7344204239a806fb89d13138467aae4c3d22125fe02d482a0",
+        "Coverage": "PCI vendors, devices, subsystems and classes from upstream database; excluded duplicate keys: 0; derived from pci-ids@fe7fceb2e1153d495e1deefacf59c5d61c36ef8e; excluded 46 subsystem rows whose subvendor IDs have no vendor definition",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "pci-ids.sqlite3",
+      "metadata": {
+        "Id": "pci-ids",
+        "Version": "fe7fceb2e1153d495e1deefacf59c5d61c36ef8e",
+        "SourceUri": "https://github.com/pciutils/pciids/tree/fe7fceb2e1153d495e1deefacf59c5d61c36ef8e",
+        "License": "BSD-3-Clause OR GPL-2.0-or-later (BSD-3-Clause selected)",
+        "SnapshotDate": "2026-10-24",
+        "RecordCount": 42549,
+        "SourceSha256": "c536d82778aaafb7344204239a806fb89d13138467aae4c3d22125fe02d482a0",
+        "Coverage": "PCI vendors, devices, subsystems and classes from upstream database; excluded duplicate keys: 0",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "ror.sqlite3",
+      "metadata": {
+        "Id": "ror",
+        "Version": "v2.15-2026-10-20",
+        "SourceUri": "https://zenodo.org/api/records/23500708/files/v2.15-2026-10-20-ror-data.zip/content",
+        "License": "CC0-1.0",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 146716,
+        "SourceSha256": "6f7515b11c8dc71426c8d8140e170aaa60a27df23febd802b33add7c23d07031",
+        "Coverage": "Full ROR v2 snapshot; original labels and relationships; country filters use first listed location; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc-relations-1.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc-relations-1",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 400000,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC RXNREL partition; stable source order, maximum 400000 rows per part; references RXCUI in rxnorm-cpc; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc-relations-2.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc-relations-2",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 400000,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC RXNREL partition; stable source order, maximum 400000 rows per part; references RXCUI in rxnorm-cpc; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc-relations-3.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc-relations-3",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 400000,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC RXNREL partition; stable source order, maximum 400000 rows per part; references RXCUI in rxnorm-cpc; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc-relations-4.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc-relations-4",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 400000,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC RXNREL partition; stable source order, maximum 400000 rows per part; references RXCUI in rxnorm-cpc; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc-relations-5.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc-relations-5",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 400000,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC RXNREL partition; stable source order, maximum 400000 rows per part; references RXCUI in rxnorm-cpc; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc-relations-6.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc-relations-6",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 400000,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC RXNREL partition; stable source order, maximum 400000 rows per part; references RXCUI in rxnorm-cpc; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc-relations-7.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc-relations-7",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 189722,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC RXNREL partition; stable source order, maximum 400000 rows per part; references RXCUI in rxnorm-cpc; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "rxnorm-cpc.sqlite3",
+      "metadata": {
+        "Id": "rxnorm-cpc",
+        "Version": "2026-10-05",
+        "SourceUri": "https://download.nlm.nih.gov/rxnorm/RxNorm_full_prescribe_10052026.zip",
+        "License": "NLM-CPC-unrestricted",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 329717,
+        "SourceSha256": "35c21d511ab1bb5d9a7cb7a9758e2435b6ea9e4ee6a1e0b6a592f8dc160f81bf",
+        "Coverage": "Complete CPC terms and supplied relationships; one representative term per RXCUI (prefer RXNORM source); source terms retained separately; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "vehicles.sqlite3",
+      "metadata": {
+        "Id": "vehicles",
+        "Version": "v2026.10.4",
+        "SourceUri": "https://github.com/vehiclesdb/vehiclesdb/releases/download/v2026.10.4/",
+        "License": "CC-BY-4.0 (plus upstream notices)",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 55609,
+        "SourceSha256": "82e2c7d3fbb9820bef636f40ee00f6612c188d23b83ebd056390357b36002c8d",
+        "Coverage": "Full published makes/models; one model-country evidence row per availability entry; simulated VIN has no catalog mapping; excluded={}",
+        "FileFormatVersion": 1
+      }
+    },
+    {
+      "path": "wikidata-airlines.sqlite3",
+      "metadata": {
+        "Id": "wikidata-airlines",
+        "Version": "2026-10-25",
+        "SourceUri": "https://query.wikidata.org/sparql?query=SELECT+%3Fairline+%3FairlineLabel+%3Fiata+%3Ficao+%3FcountryCode+WHERE+%7B+%3Fairline+wdt%3AP31%2Fwdt%3AP279%2A+wd%3AQ46970+.+OPTIONAL+%7B+%3Fairline+wdt%3AP229+%3Fiata+%7D+OPTIONAL+%7B+%3Fairline+wdt%3AP230+%3Ficao+%7D+OPTIONAL+%7B+%3Fairline+wdt%3AP17%2Fwdt%3AP297+%3FcountryCode+%7D+SERVICE+wikibase%3Alabel+%7B+bd%3AserviceParam+wikibase%3Alanguage+%22en%22.+%7D+%7D&format=json",
+        "License": "CC0-1.0",
+        "SnapshotDate": "2026-10-25",
+        "RecordCount": 6284,
+        "SourceSha256": "025366c332074d4daaf93233513b1f76734b05ff2bbf88dd8ae1ea8849383696",
+        "Coverage": "SPARQL airline instances and subclasses including historical carriers; no real route dataset; excluded={\"duplicate-key\": 91}",
+        "FileFormatVersion": 1
+      }
+    }
+  ]
+}

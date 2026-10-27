@@ -26,6 +26,28 @@ public static class Program
     public static void Main(string[] args)
     {
         string data=args[0];
+        using(var banks=new MockContext(new MockOptions{Seed=39}.UseCatalogFile("bank-bins",Path.Combine(data,"bank-bins.sqlite3"))))
+        {
+            var card=banks.Finance.BankCard("308",Bing.MockData.Datas.Models.Banks.CardType.CreditCard);
+            int sum=0;bool doubled=false;
+            for(int i=card.Length-1;i>=0;i--){int n=card[i]-'0';if(doubled){n*=2;if(n>9)n-=9;}sum+=n;doubled=!doubled;}
+            if(sum%10!=0||banks.Replay.GenerationContractVersion!="domain-v6")throw new Exception("Bank card contract failed.");
+            var bins=banks.BankBins();
+            if(bins.Count()!=458051||bins.Count(new CatalogQuery{CountryCode="CN"})!=18389)throw new Exception("BIN coverage failed.");
+            var sample=bins.Sample();
+            if(!bins.TryGet(sample.Bin,out var same)||same.Key!=sample.Key)throw new Exception("BIN lookup failed.");
+            if(!banks.Generator(c=>c.BankBins().Sample().Key).Enumerate(20).SequenceEqual(banks.Generator(c=>c.BankBins().Sample().Key).EnumerateParallel(20,4)))throw new Exception("BIN replay failed.");
+        }
+        using(var phoneCatalog=SqliteMockCatalog.Open(Path.Combine(data,"libphonenumber.sqlite3")))
+        using(var phoneContext=new MockContext(new MockOptions{Seed=39}.UsePhoneMetadataCatalog(phoneCatalog)))
+        {
+            var phone=phoneContext.Phone.NonGeographicNumber("870",extension:true);
+            if(phone.CountryCode!="001"||!phone.E164.StartsWith("+870")||phone.Extension.Length!=4)throw new Exception("Non-geographic phone failed.");
+        }
+        using(var resolved=new MockContext(new MockOptions{Seed=39}.UseCatalogFile("devices",Path.Combine(data,"pci-ids-resolved.sqlite3"))))
+        {
+            if(resolved.Catalog("devices").Info.Id!="pci-ids-resolved"||resolved.Devices().Device().Build().At(0).Model==null)throw new Exception("Resolved PCI snapshot failed.");
+        }
         var options=new MockOptions{Seed=101,ReferenceTime=new DateTimeOffset(2026,10,25,0,0,0,TimeSpan.Zero)}
             .UseCatalogFile("devices",Path.Combine(data,"pci-ids.sqlite3"))
             .UseCatalogFile("airports",Path.Combine(data,"ourairports.sqlite3"))

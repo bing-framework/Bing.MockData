@@ -13,7 +13,7 @@ using Xunit;
 namespace Bing.MockData.Domains.Tests;
 public class IndustryTests
 {
-    private static string Data(string file){var dir=new DirectoryInfo(AppContext.BaseDirectory);while(dir!=null){string p=Path.Combine(dir.FullName,"src","Bing.MockData.Catalogs","Data",file);if(File.Exists(p))return p;dir=dir.Parent;}throw new FileNotFoundException(file);}
+    private static string Data(string file) => Bing.MockData.Tests.Infrastructure.CatalogData.FilePath(file);
     [Fact]public void Device_models_resolve_real_manufacturers_and_identifiers_have_checksums()
     {
         using var c=new MockContext(new MockOptions{Seed=13}.UseCatalogFile("devices",Data("pci-ids.sqlite3")));

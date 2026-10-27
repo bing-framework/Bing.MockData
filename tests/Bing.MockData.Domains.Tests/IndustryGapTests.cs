@@ -15,11 +15,7 @@ namespace Bing.MockData.Domains.Tests;
 public class IndustryGapTests
 {
     internal static string Data(string name)
-    {
-        var folder=new DirectoryInfo(AppContext.BaseDirectory);
-        while(folder!=null){var path=Path.Combine(folder.FullName,"src","Bing.MockData.Catalogs","Data",name);if(File.Exists(path))return path;folder=folder.Parent;}
-        throw new FileNotFoundException(name);
-    }
+        => Bing.MockData.Tests.Infrastructure.CatalogData.FilePath(name);
     [Fact]
     public void Vehicles_expose_manufacturer_and_category_from_the_same_source_model()
     {
