@@ -52,6 +52,7 @@ Bing是一个.net core平台下的应用框架，旨在于提升小型团队的�
     <EmbeddedResource Include="Datas\Resources\BBAN.txt" />
     <EmbeddedResource Include="Datas\Resources\Banks.json" />
     <EmbeddedResource Include="Datas\Resources\ChineseAreaCode.json" />
+    <EmbeddedResource Include="Datas\Resources\ChineseLastNames.txt" />
     <EmbeddedResource Include="Datas\Resources\ChineseRegionList.txt" />
     <EmbeddedResource Include="Datas\Resources\ChineseCityNames.txt" />
     <EmbeddedResource Include="Datas\Resources\ProvinceCity.txt" />
@@ -69,6 +70,12 @@ Bing是一个.net core平台下的应用框架，旨在于提升小型团队的�
     <None Include="../../docs/data-sources.md" Pack="true" PackagePath="THIRD-PARTY-NOTICES.md" />
     <None Include="../../tools/data/yescallop-areacodes-2da87e7/LICENSE" Pack="true" PackagePath="licenses/areacodes-CC0.txt" />
     <None Include="../../tools/data/faker-names/LICENSE.txt" Pack="true" PackagePath="licenses/faker-MIT.txt" />
+    <None Include="../../tools/CatalogImport/raw/cldr/49.0.0/unicode-license.txt" Pack="true" PackagePath="licenses/cldr-Unicode-3.0.txt" />
+    <None Include="../../tools/CatalogImport/raw/geonames/cities15000/readme.txt" Pack="true" PackagePath="licenses/geonames-attribution.txt" />
+    <None Include="Datas/Notices/iban-js-LICENSE.txt" Pack="true" PackagePath="licenses/iban-js-MIT.txt" />
+    <None Include="Datas/Notices/bankcardinfo-ISC.txt" Pack="true" PackagePath="licenses/bankcardinfo-ISC.txt" />
+    <None Include="Datas/Notices/bankcardinfo-NOTICE.txt" Pack="true" PackagePath="licenses/bankcardinfo-NOTICE.txt" />
+    <None Include="Datas/Notices/w3c-color4.txt" Pack="true" PackagePath="licenses/w3c-color4.txt" />
   </ItemGroup>
 
   <ItemGroup>

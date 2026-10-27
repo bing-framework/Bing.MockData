@@ -1,0 +1,58 @@
+{
+  "package": "bankcardinfo",
+  "version": "2.0.4",
+  "published": "2018-04-20T11:29:29.785Z",
+  "sourceRepository": "https://github.com/navyxie/bankcardinfo",
+  "sourceCommitLocator": "https://github.com/navyxie/bankcardinfo/tree/f0393148c98247348b515ece601939de51f12b23",
+  "npmTarball": "https://registry.npmjs.org/bankcardinfo/-/bankcardinfo-2.0.4.tgz",
+  "archiveSha256": "76a663e1e34185984a86cc43c639a24c9e0fb3cda6fb0beb7099f25cb2fd5f00",
+  "author": {
+    "name": "navyxie",
+    "attribution": "package.json author field; not asserted to be the copyright holder"
+  },
+  "license": {
+    "declaredInPackageJson": "ISC",
+    "standaloneLicenseInPublishedArchive": false,
+    "supplementalText": "src/Bing.MockData/Datas/Notices/bankcardinfo-ISC.txt",
+    "supplementalTextIsUpstreamFile": false
+  },
+  "includedPackageFiles": {
+    "package/package.json": "b58af8e6515dd9c64c1bdbc82464efe4d112b77d28de5d10503fc939ec9d816c",
+    "package/README.md": "cdee21a0a761ea2d96dec46856ab4ea0c6134f8a009e572615e1f22f88dd7001",
+    "package/index.js": "e402a568120405ee72e927242c320ad70fc984e693207e9a1279490a20ad86a0",
+    "legacy-banks-baseline.json": "c5f09b283b8b608dac16a33c51bf4f7a94e434db2d279331c2ace08de7024fb6"
+  },
+  "legacyBaselineSnapshot": {
+    "path": "tools/data/bankcardinfo-2.0.4/legacy-banks-baseline.json",
+    "sha256": "c5f09b283b8b608dac16a33c51bf4f7a94e434db2d279331c2ace08de7024fb6"
+  },
+  "archiveMembers": [
+    "package/.coveralls.yml",
+    "package/.npmignore",
+    "package/.travis.yml",
+    "package/README.md",
+    "package/index.js",
+    "package/package.json",
+    "package/test.js"
+  ],
+  "sourceDescription": "The upstream README describes the bundled rules as a 2013 domestic bankcard collection and documents an Alipay API fallback. This conversion reads only the static bankcardList literal; it does not execute JavaScript or make API requests.",
+  "scope": {
+    "sourceBankCount": 124,
+    "sourceAliasCount": 121,
+    "mappedSourceBankCount": 8,
+    "mappedBankCount": 8,
+    "mappedAliases": [
+      "PSBC",
+      "ICBC",
+      "ABC",
+      "BOC",
+      "CCB",
+      "COMM",
+      "CMB",
+      "CMBC"
+    ],
+    "outsideCoverageBanks": 116,
+    "outsideCoverageRules": 969,
+    "outsideCoverageUniqueRules": 960
+  }
+}

@@ -3,6 +3,12 @@
 ###############################################################################
 * text=auto
 
+# Preserve pinned bank inputs byte-for-byte for source checksum verification.
+tools/data/bankcardinfo-2.0.4/** -text
+tools/CatalogImport/raw/bank-bins/** -text
+src/Bing.MockData/Datas/Resources/Banks.json text eol=lf
+src/Bing.MockData/Datas/Notices/bankcardinfo-*.txt text eol=lf
+
 ###############################################################################
 # Set default behavior for command prompt diff.
 #

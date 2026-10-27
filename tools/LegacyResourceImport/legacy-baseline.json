@@ -1,0 +1,17 @@
+{
+  "CountryNames.txt": { "records": 240, "sha256": "91ec1cd0f2f665cae97ddf8bc6c65632fea890246e12ce1d39e037b0d1581539" },
+  "CityNames.txt": { "records": 1809, "sha256": "547ae451ea236afee124f39079bd3cde8f25bab36c1a23d16c4ad89d6e9ea80d" },
+  "ChineseCityNames.txt": { "records": 339, "sha256": "320238b871d2c3c41667f64c97577aa95044d075098a022c617cb74a142827e7" },
+  "ChineseRegionList.txt": { "records": 7, "sha256": "5d7a4aa861590d89eecdc82be1ead4ce3fdbebedce3ea53ca6419c87477b47f7" },
+  "ProvinceCity.txt": { "records": 345, "sha256": "a0da8bb19c31437095f73c5ac4b4eb2c8b1b709794a3a3d6e6a0034a0fb303cd" },
+  "ChineseAreaCode.json": { "records": 35, "sha256": "ff0628f1cbdeefbce37f42c101009ba95d8acf507d2aee6e069f9d42f38726c2" },
+  "FemaleNames.txt": { "records": 1181, "sha256": "4d8487691fd02619f50492981412292a4d94b6bff15a35946352d04ddf38c7cd" },
+  "LastNames.txt": { "records": 709, "sha256": "fc05f6e143559221a2713c297938a762b982783fff19c12910d65129a467f2b2" },
+  "MaleNames.txt": { "records": 322, "sha256": "885f5bd81d6ededbb67bed55e2c5d0705505100ef494e30a67fd173c68c8b9b1" },
+  "Jobs.en.json": { "records": 18, "sha256": "bd0cf9ddf9c515b8ff87cc2a0b6998f739bbbf9c9950d343708a0ea34a852541" },
+  "Jobs.zh-cn.json": { "records": 302, "sha256": "78e324f0be2be19b2f9ca6a32fd9e8c09c529c9c7c335b1eb783e57ddd6ac541" },
+  "Colors.en.json": { "records": 15, "sha256": "c6c26bb73af299565e57b5c35533fe3acaf0354c912f181e478ec8daa80f76ac" },
+  "Colors.zh-cn.json": { "records": 15, "sha256": "e5c872ce3eacc6f5962f023dc60209ac97005774416a6947cd4a3f22a4e4d131" },
+  "Emails.json": { "records": 22, "sha256": "ed06f5e2027eb69e204a699c45d4aadf283d3a1ce352d377ac74649e360d8a4e" },
+  "SimplifiedChinese.txt": { "records": 2499, "sha256": "0a43b9b88896f7442434f2263c3b1634d2d36aa40bd157c470c0c7163723524e" }
+}

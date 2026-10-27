@@ -1,0 +1,13 @@
+Bankcard rule data provenance
+
+Source: bankcardinfo npm package 2.0.4
+Archive: https://registry.npmjs.org/bankcardinfo/-/bankcardinfo-2.0.4.tgz
+Archive SHA-256: 76a663e1e34185984a86cc43c639a24c9e0fb3cda6fb0beb7099f25cb2fd5f00
+Repository: https://github.com/navyxie/bankcardinfo
+Source locator: f0393148c98247348b515ece601939de51f12b23
+Package author field: navyxie (attribution only; not asserted as copyright holder)
+Package license field: ISC
+
+The published archive contains no standalone LICENSE file and provides no copyright holder/year notice. The companion bankcardinfo-ISC.txt is supplemental standard license text, not an upstream file.
+
+Conversion scope: statically parse only the bankcardList literal in package/index.js; do not execute JavaScript or call the package's API fallback. Expand prefix alternatives and retain unique (source bank, prefix, suffix digit count, card type) rules in source order. The eight source aliases map to legacy codes as recorded in artifacts/bank-resource-closure/banks-conversion.json. The suffix digit count includes the Luhn check digit. The converted rules are sample-generation inputs, not a current official directory and not evidence that a generated number is issued, active, or payable.

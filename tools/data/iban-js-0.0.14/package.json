@@ -1,0 +1,16 @@
+{
+  "name": "iban",
+  "version": "0.0.14",
+  "description": "A javascript library to validate, format and convert IBAN (International Bank Account Number) and BBAN (Basic Bank Account Number)",
+  "main": "iban.js",
+  "devDependencies": {
+    "mocha": "~1.14.0",
+    "chai": "~1.8.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "https://github.com/arhs/iban.js",
+  "author": "Laurent VB",
+  "license": "MIT"
+}

@@ -1,54 +1,54 @@
-Albania	AL	^AL\d{2}\d{8}[0-9A-Z]{16}$
-Andorra	AD	^AD\d{2}\d{8}[0-9A-Z]{12}$
-Austria	AT	^AT\d{2}\d{16}$
-Kingdom of Bahrain	BH	^BH\d{2}[A-Z]{4}[0-9A-Z]{14}$
-Belgium	BE	^BE\d{2}\d{12}$
-Bosnia and Herzegovina	BA	^BA\d{2}\d{16}$
-Bulgaria	BG	^BG\d{2}[A-Z]{4}\d{6}[0-9A-Z]{8}$
-Croatia	HR	^HR\d{2}\d{17}$
-Cyprus	CY	^CY\d{2}\d{8}[0-9A-Z]{16}$
-Czech Republic	CZ	^CZ\d{2}\d{20}$
-Denmark	DK	^DK\d{2}\d{14}$
-Dominican Republic	DO	^DO\d{2}[0-9A-Z]{4}\d{20}$
-Estonia	EE	^EE\d{2}\d{16}$
-Finland	FI	^FI\d{2}\d{14}$
-France	FR	^FR\d{2}\d{10}[0-9A-Z]{11}\d{2}$
-Georgia	GE	^GE\d{2}[A-Z]{2}\d{16}$
-Germany	DE	^DE\d{2}\d{18}$
-Gibraltar	GI	^GI\d{2}[A-Z]{4}[0-9A-Z]{15}$
-Greece	GR	^GR\d{2}\d{7}[0-9A-Z]{16}$
-Hungary	HU	^HU\d{2}\d{24}$
-Iceland	IS	^IS\d{2}\d{22}$
-Ireland	IE	^IE\d{2}[A-Z]{4}\d{14}$
-Israel	IL	^IL\d{2}\d{19}$
-Italy	IT	^IT\d{2}[A-Z]\d{10}[0-9A-Z]{12}$
-Kazakhstan	KZ	^KZ\d{2}\d{3}[0-9A-Z]{13}$
-KUWAIT	KW	^KW\d{2}[A-Z]{4}[0-9A-Z]{22}$
-Latvia	LV	^LV\d{2}[A-Z]{4}[0-9A-Z]{13}$
-LEBANON	LB	^LB\d{2}\d{4}[0-9A-Z]{20}$
-Liechtenstein (Principality of)	LI	^LI\d{2}\d{5}[0-9A-Z]{12}$
-Lithuania	LT	^LT\d{2}\d{16}$
-Luxembourg	LU	^LU\d{2}\d{3}[0-9A-Z]{13}$
-Macedonia	MK	^MK\d{2}\d{3}[0-9A-Z]{10}\d{2}$
-Malta	MT	^MT\d{2}[A-Z]{4}\d{5}[0-9A-Z]{18}$
-Mauritania	MR	^MR\d{2}\d{23}$
-Mauritius	MU	^MU\d{2}[A-Z]{4}\d{19}[A-Z]{3}$
-Monaco	MC	^MC\d{2}\d{10}[0-9A-Z]{11}\d{2}$
-Montenegro	ME	^ME\d{2}\d{18}$
-The Netherlands	NL	^NL\d{2}[A-Z]{4}\d{10}$
-Norway	NO	^NO\d{2}\d{11}$
-Poland	PL	^PL\d{2}\d{24}$
-Portugal	PT	^PT\d{2}\d{21}$
-Romania	RO	^RO\d{2}[A-Z]{4}[0-9A-Z]{16}$
-San Marino	SM	^SM\d{2}[A-Z]\d{10}[0-9A-Z]{12}$
-Saudi Arabia	SA	^SA\d{2}\d{2}[0-9A-Z]{18}$
-Serbia	RS	^RS\d{2}\d{18}$
-Slovak Republic	SK	^SK\d{2}\d{20}$
-Slovenia	SI	^SI\d{2}\d{15}$
-Spain	ES	^ES\d{2}\d{20}$
-Sweden	SE	^SE\d{2}\d{20}$
-Switzerland	CH	^CH\d{2}\d{5}[0-9A-Z]{12}$
-Tunisia	TN	^TN\d{2}\d{20}$
-Turkey	TR	^TR\d{2}\d{6}[0-9A-Z]{16}$
-United Arab Emirates	AE	^AE\d{2}\d{19}$
-United Kingdom	GB	^GB\d{2}[A-Z]{4}\d{14}$
+Andorra	AD	^AD[0-9]{2}[0-9]{4}[0-9]{4}[0-9A-Z]{12}$
+United Arab Emirates	AE	^AE[0-9]{2}[0-9]{3}[0-9]{16}$
+Albania	AL	^AL[0-9]{2}[0-9]{8}[0-9A-Z]{16}$
+Austria	AT	^AT[0-9]{2}[0-9]{5}[0-9]{11}$
+Bosnia & Herzegovina	BA	^BA[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{8}[0-9]{2}$
+Belgium	BE	^BE[0-9]{2}[0-9]{3}[0-9]{7}[0-9]{2}$
+Bulgaria	BG	^BG[0-9]{2}[A-Z]{4}[0-9]{4}[0-9]{2}[0-9A-Z]{8}$
+Bahrain	BH	^BH[0-9]{2}[A-Z]{4}[0-9A-Z]{14}$
+Switzerland	CH	^CH[0-9]{2}[0-9]{5}[0-9A-Z]{12}$
+Cyprus	CY	^CY[0-9]{2}[0-9]{3}[0-9]{5}[0-9A-Z]{16}$
+Czechia	CZ	^CZ[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{10}$
+Germany	DE	^DE[0-9]{2}[0-9]{8}[0-9]{10}$
+Denmark	DK	^DK[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}$
+Dominican Republic	DO	^DO[0-9]{2}[A-Z]{4}[0-9]{20}$
+Estonia	EE	^EE[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{11}[0-9]{1}$
+Spain	ES	^ES[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{1}[0-9]{1}[0-9]{10}$
+Finland	FI	^FI[0-9]{2}[0-9]{6}[0-9]{7}[0-9]{1}$
+France	FR	^FR[0-9]{2}[0-9]{5}[0-9]{5}[0-9A-Z]{11}[0-9]{2}$
+United Kingdom	GB	^GB[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}$
+Georgia	GE	^GE[0-9]{2}[A-Z]{2}[0-9]{16}$
+Gibraltar	GI	^GI[0-9]{2}[A-Z]{4}[0-9A-Z]{15}$
+Greece	GR	^GR[0-9]{2}[0-9]{3}[0-9]{4}[0-9A-Z]{16}$
+Croatia	HR	^HR[0-9]{2}[0-9]{7}[0-9]{10}$
+Hungary	HU	^HU[0-9]{2}[0-9]{3}[0-9]{4}[0-9]{1}[0-9]{15}[0-9]{1}$
+Ireland	IE	^IE[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}$
+Israel	IL	^IL[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{13}$
+Iceland	IS	^IS[0-9]{2}[0-9]{4}[0-9]{2}[0-9]{6}[0-9]{10}$
+Italy	IT	^IT[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[0-9A-Z]{12}$
+Kuwait	KW	^KW[0-9]{2}[A-Z]{4}[0-9A-Z]{22}$
+Kazakhstan	KZ	^KZ[0-9]{2}[0-9]{3}[0-9A-Z]{13}$
+Lebanon	LB	^LB[0-9]{2}[0-9]{4}[0-9A-Z]{20}$
+Liechtenstein	LI	^LI[0-9]{2}[0-9]{5}[0-9A-Z]{12}$
+Lithuania	LT	^LT[0-9]{2}[0-9]{5}[0-9]{11}$
+Luxembourg	LU	^LU[0-9]{2}[0-9]{3}[0-9A-Z]{13}$
+Latvia	LV	^LV[0-9]{2}[A-Z]{4}[0-9A-Z]{13}$
+Monaco	MC	^MC[0-9]{2}[0-9]{5}[0-9]{5}[0-9A-Z]{11}[0-9]{2}$
+Montenegro	ME	^ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}$
+North Macedonia	MK	^MK[0-9]{2}[0-9]{3}[0-9A-Z]{10}[0-9]{2}$
+Mauritania	MR	^MR[0-9]{2}[0-9]{5}[0-9]{5}[0-9]{11}[0-9]{2}$
+Malta	MT	^MT[0-9]{2}[A-Z]{4}[0-9]{5}[0-9A-Z]{18}$
+Mauritius	MU	^MU[0-9]{2}[A-Z]{4}[0-9]{2}[0-9]{2}[0-9]{12}[0-9]{3}[A-Z]{3}$
+Netherlands	NL	^NL[0-9]{2}[A-Z]{4}[0-9]{10}$
+Norway	NO	^NO[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{1}$
+Poland	PL	^PL[0-9]{2}[0-9]{8}[0-9]{16}$
+Portugal	PT	^PT[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{11}[0-9]{2}$
+Romania	RO	^RO[0-9]{2}[A-Z]{4}[0-9A-Z]{16}$
+Serbia	RS	^RS[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}$
+Saudi Arabia	SA	^SA[0-9]{2}[0-9]{2}[0-9A-Z]{18}$
+Sweden	SE	^SE[0-9]{2}[0-9]{3}[0-9]{16}[0-9]{1}$
+Slovenia	SI	^SI[0-9]{2}[0-9]{5}[0-9]{8}[0-9]{2}$
+Slovakia	SK	^SK[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{10}$
+San Marino	SM	^SM[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[0-9A-Z]{12}$
+Tunisia	TN	^TN[0-9]{2}[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}$
+Türkiye	TR	^TR[0-9]{2}[0-9]{5}[0-9]{1}[0-9A-Z]{16}$

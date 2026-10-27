@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "Name": "邮政银行",
     "AbbrName": null,
@@ -1289,6 +1289,146 @@
       {
         "CardPrefix": "621763",
         "Length": 13,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "402791",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "427028",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "427038",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "548259",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621376",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621423",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621428",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621434",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621761",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621749",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621300",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621378",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "622944",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "622949",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621371",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621730",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621734",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621433",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621370",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621764",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621464",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621765",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621750",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621377",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621367",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621374",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621731",
+        "Length": 10,
+        "Type": 1
+      },
+      {
+        "CardPrefix": "621781",
+        "Length": 10,
         "Type": 1
       },
       {
@@ -3672,81 +3812,6 @@
         "Type": 1
       },
       {
-        "CardPrefix": "402658",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "410062",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "468203",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "512425",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "524011",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "622580",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "622588",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "622598",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "622609",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "95555",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "621286",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "621483",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "621485",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "621486",
-        "Length": 11,
-        "Type": 1
-      },
-      {
-        "CardPrefix": "621299",
-        "Length": 11,
-        "Type": 1
-      },
-      {
         "CardPrefix": "690755",
         "Length": 9,
         "Type": 1
@@ -3759,197 +3824,197 @@
       {
         "CardPrefix": "356885",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "356886",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "356887",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "356888",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "356890",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "439188",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "439227",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "479228",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "479229",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "521302",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "356889",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "545620",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "545621",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "545947",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "545948",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "552534",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "552587",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "622575",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "622576",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "622577",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "622578",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "622579",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "545619",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "622581",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "622582",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "545623",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "628290",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "439225",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "518710",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "518718",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "628362",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "439226",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "628262",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "625802",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "625803",
         "Length": 10,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "370285",
         "Length": 9,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "370286",
         "Length": 9,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "370287",
         "Length": 9,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "370289",
         "Length": 9,
-        "Type": 3
+        "Type": 2
       },
       {
         "CardPrefix": "620520",

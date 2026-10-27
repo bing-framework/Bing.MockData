@@ -1,0 +1,11 @@
+{
+  "source": "https://raw.githubusercontent.com/joke2k/faker/df289bfde6b6c739bbac696ef432d69c9ec33ac1/faker/providers/person/zh_CN/__init__.py",
+  "commit": "df289bfde6b6c739bbac696ef432d69c9ec33ac1",
+  "license": "MIT",
+  "downloaded": "2026-10-27",
+  "sourceSha256": "c27bc139ec31885a485d5d2e1cb1d36e4df3a4a0341f1d0fe28898edb6a4865a",
+  "records": 400,
+  "conversion": "Keep unique surnames in OrderedDict declaration order; exclude one duplicate key; discard weights; no population ranking claim",
+  "outputRecords": 399,
+  "excludedDuplicateKeys": 1
+}

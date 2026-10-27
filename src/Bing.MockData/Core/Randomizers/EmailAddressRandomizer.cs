@@ -17,11 +17,10 @@ namespace Bing.MockData.Core.Randomizers
         {
             var first = _names.First().ToLowerInvariant();
             var last = _names.Last().ToLowerInvariant();
-            var company = LipsumWords.Word(Rnd);
-            var domains = CommonData.Instance.TopLevelDomains;
+            var domains = CommonData.Instance.EmailDomains;
             var domain = domains[Rnd.Next(domains.Count)];
             var local = Options.Left2Right ? first + "." + last : last + "." + first;
-            return local + "@" + company + "." + domain;
+            return local + "@" + domain;
         });
     }
 }

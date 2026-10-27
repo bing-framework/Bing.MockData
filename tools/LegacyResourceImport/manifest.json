@@ -1,0 +1,353 @@
+{
+  "formatVersion": 1,
+  "generatedBy": "tools/LegacyResourceImport/import_resources.py",
+  "inputs": {
+    "fakerCommit": "df289bfde6b6c739bbac696ef432d69c9ec33ac1",
+    "cldrVersion": "49.0.0-import-v2",
+    "geonamesVersion": "modified:2026-10-24",
+    "chinaDivisionVersion": "2025-12-31"
+  },
+  "resources": [
+    {
+      "resource": "FemaleNames.txt",
+      "source": {
+        "source": "Faker en_US person provider",
+        "version": "git:df289bfde6b6c739bbac696ef432d69c9ec33ac1",
+        "uri": "https://github.com/joke2k/faker/blob/df289bfde6b6c739bbac696ef432d69c9ec33ac1/faker/providers/person/en_US/__init__.py",
+        "license": "MIT",
+        "inputSha256": "6f8e0ea280dd8875f06c804c1855c7da01df8db04d51f16be1877aa11c3bfe58",
+        "transformation": "AST-extract OrderedDict string keys; weights discarded; source order preserved"
+      },
+      "legacyBaseline": {
+        "records": 1181,
+        "sha256": "4d8487691fd02619f50492981412292a4d94b6bff15a35946352d04ddf38c7cd"
+      },
+      "outputRecords": 381,
+      "uniqueOutputRecords": 381,
+      "outputSha256": "ba11cf1136b5273951cf98eac9c51f08a059871fe42fa27f53ff46d6fc6e8a22",
+      "outputBytes": 2682
+    },
+    {
+      "resource": "MaleNames.txt",
+      "source": {
+        "source": "Faker en_US person provider",
+        "version": "git:df289bfde6b6c739bbac696ef432d69c9ec33ac1",
+        "uri": "https://github.com/joke2k/faker/blob/df289bfde6b6c739bbac696ef432d69c9ec33ac1/faker/providers/person/en_US/__init__.py",
+        "license": "MIT",
+        "inputSha256": "6f8e0ea280dd8875f06c804c1855c7da01df8db04d51f16be1877aa11c3bfe58",
+        "transformation": "AST-extract OrderedDict string keys; weights discarded; source order preserved"
+      },
+      "legacyBaseline": {
+        "records": 322,
+        "sha256": "885f5bd81d6ededbb67bed55e2c5d0705505100ef494e30a67fd173c68c8b9b1"
+      },
+      "outputRecords": 322,
+      "uniqueOutputRecords": 322,
+      "outputSha256": "ab13b52d2369ae8cd1d696abd4c7dccce9080c4ea5e170a5fb625cbbf578e5ea",
+      "outputBytes": 2121
+    },
+    {
+      "resource": "LastNames.txt",
+      "source": {
+        "source": "Faker en_US person provider",
+        "version": "git:df289bfde6b6c739bbac696ef432d69c9ec33ac1",
+        "uri": "https://github.com/joke2k/faker/blob/df289bfde6b6c739bbac696ef432d69c9ec33ac1/faker/providers/person/en_US/__init__.py",
+        "license": "MIT",
+        "inputSha256": "6f8e0ea280dd8875f06c804c1855c7da01df8db04d51f16be1877aa11c3bfe58",
+        "transformation": "AST-extract OrderedDict string keys; weights discarded; source order preserved"
+      },
+      "legacyBaseline": {
+        "records": 709,
+        "sha256": "fc05f6e143559221a2713c297938a762b982783fff19c12910d65129a467f2b2"
+      },
+      "outputRecords": 1000,
+      "uniqueOutputRecords": 1000,
+      "outputSha256": "ae9af1dd0704013af8b23f41d7cba41151b898d951e54bbebfce03005aa742fa",
+      "outputBytes": 7084
+    },
+    {
+      "resource": "CountryNames.txt",
+      "source": {
+        "source": "cldr",
+        "version": "49.0.0-import-v2",
+        "uri": "https://github.com/unicode-org/cldr-json/tree/49.0.0",
+        "license": "Unicode-3.0",
+        "inputSha256": "7c256d778bf5ca29eb784425d73d021a879ed902db986f6678fe4dceba9175b4",
+        "upstreamSourceSha256": "d9a14c5bd1d463ac0a713e37b87411dd3708bc57a2966310bbfbfed000922b1e",
+        "transformation": "CLDR region rows projected to two-letter country/territory codes with English names; groups, pseudo-regions, unknown region and missing names excluded"
+      },
+      "legacyBaseline": {
+        "records": 240,
+        "sha256": "91ec1cd0f2f665cae97ddf8bc6c65632fea890246e12ce1d39e037b0d1581539"
+      },
+      "outputRecords": 257,
+      "uniqueOutputRecords": 257,
+      "outputSha256": "2881e85dc1600f674733c692bb6e7cec5668e900d1f4bff682a2693c0ac36f64",
+      "outputBytes": 2828,
+      "sourceRows": 328,
+      "excluded": {
+        "nonRegionCode": 56,
+        "nonCountryRegionCode": 7,
+        "missingEnglishName": 8
+      }
+    },
+    {
+      "resource": "CityNames.txt",
+      "source": {
+        "source": "geonames-cities",
+        "version": "modified:2026-10-24",
+        "uri": "https://download.geonames.org/export/dump/cities15000.zip",
+        "license": "CC-BY-4.0",
+        "inputSha256": "373c58841bbe87c742341402d77aee6e8809243b95e9b532fef7b5a40439e7e3",
+        "upstreamSourceSha256": "4c921f81f2cf4cc65cd00e2d7c03a6f6f91da4871044e3640dcea886451f45c7",
+        "transformation": "GeoNames city rows projected to asciiName, with source Name fallback only when asciiName is empty; source order preserved"
+      },
+      "legacyBaseline": {
+        "records": 1809,
+        "sha256": "547ae451ea236afee124f39079bd3cde8f25bab36c1a23d16c4ad89d6e9ea80d"
+      },
+      "outputRecords": 34180,
+      "uniqueOutputRecords": 32161,
+      "outputSha256": "7049486f8de622f973295709974720d4d8c068c4436ae308abc5a31794061e50",
+      "outputBytes": 345504,
+      "sourceRows": 34180,
+      "asciiNameFallbacks": 0
+    },
+    {
+      "resource": "ChineseRegionList.txt",
+      "source": {
+        "source": "yescallop/areacodes 2025-12-31 administrative divisions",
+        "version": "2025-12-31",
+        "uri": "https://github.com/yescallop/areacodes/tree/2da87e7648f0da7e10dea39e8a613107ed3fe273",
+        "license": "CC0-1.0",
+        "inputSha256": "c71c304167c8e686e815ad176bcf0aee1beb036ecef746357f2e599899cd533c",
+        "upstreamRawSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0",
+        "transformation": "Province-level names only; replaces seven legacy macro-region labels with 34 source province names"
+      },
+      "legacyBaseline": {
+        "records": 7,
+        "sha256": "5d7a4aa861590d89eecdc82be1ead4ce3fdbebedce3ea53ca6419c87477b47f7"
+      },
+      "outputRecords": 34,
+      "uniqueOutputRecords": 34,
+      "outputSha256": "50421789e1c47f29261e6e0b1a0ae4ab10b2e2b943c3e71ad9f941d7a3e5e561",
+      "outputBytes": 421,
+      "sourceRows": 3212,
+      "chinaDivisionSourceSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0"
+    },
+    {
+      "resource": "ChineseCityNames.txt",
+      "source": {
+        "source": "yescallop/areacodes 2025-12-31 administrative divisions",
+        "version": "2025-12-31",
+        "uri": "https://github.com/yescallop/areacodes/tree/2da87e7648f0da7e10dea39e8a613107ed3fe273",
+        "license": "CC0-1.0",
+        "inputSha256": "c71c304167c8e686e815ad176bcf0aee1beb036ecef746357f2e599899cd533c",
+        "upstreamRawSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0",
+        "transformation": "All prefecture-level names plus the four direct-administered municipalities represented by their source province records"
+      },
+      "legacyBaseline": {
+        "records": 339,
+        "sha256": "320238b871d2c3c41667f64c97577aa95044d075098a022c617cb74a142827e7"
+      },
+      "outputRecords": 337,
+      "uniqueOutputRecords": 337,
+      "outputSha256": "d56ed64f7cf098db4772eebdbc5ad5b790c02c2098e30fef5c9f4dff91fba46a",
+      "outputBytes": 4015,
+      "sourceRows": 3212,
+      "chinaDivisionSourceSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0"
+    },
+    {
+      "resource": "ProvinceCity.txt",
+      "source": {
+        "source": "yescallop/areacodes 2025-12-31 administrative divisions",
+        "version": "2025-12-31",
+        "uri": "https://github.com/yescallop/areacodes/tree/2da87e7648f0da7e10dea39e8a613107ed3fe273",
+        "license": "CC0-1.0",
+        "inputSha256": "c71c304167c8e686e815ad176bcf0aee1beb036ecef746357f2e599899cd533c",
+        "upstreamRawSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0",
+        "transformation": "County-level records projected by concatenating the actual province-to-county parent path; no missing level is fabricated"
+      },
+      "legacyBaseline": {
+        "records": 345,
+        "sha256": "a0da8bb19c31437095f73c5ac4b4eb2c8b1b709794a3a3d6e6a0034a0fb303cd"
+      },
+      "outputRecords": 2845,
+      "uniqueOutputRecords": 2845,
+      "outputSha256": "9bb4b4665175c25d19fbfbad53aab27a811c97877d8d08b79fb2be4a43c11330",
+      "outputBytes": 91417,
+      "sourceRows": 3212,
+      "chinaDivisionSourceSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0"
+    },
+    {
+      "resource": "ChineseAreaCode.json",
+      "source": {
+        "source": "yescallop/areacodes 2025-12-31 administrative divisions",
+        "version": "2025-12-31",
+        "uri": "https://github.com/yescallop/areacodes/tree/2da87e7648f0da7e10dea39e8a613107ed3fe273",
+        "license": "CC0-1.0",
+        "inputSha256": "c71c304167c8e686e815ad176bcf0aee1beb036ecef746357f2e599899cd533c",
+        "upstreamRawSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0",
+        "transformation": "Province Code first two digits mapped to the province short name; these are Chinese identity-card prefixes, not telephone area codes"
+      },
+      "legacyBaseline": {
+        "records": 35,
+        "sha256": "ff0628f1cbdeefbce37f42c101009ba95d8acf507d2aee6e069f9d42f38726c2"
+      },
+      "outputRecords": 34,
+      "uniqueOutputRecords": 34,
+      "outputSha256": "5a0ac02ffb0f2e2b58303a42d86b3f973718aada4eb02989bb4facff46227585",
+      "outputBytes": 1641,
+      "sourceRows": 3212,
+      "chinaDivisionSourceSha256": "73520f533c8e3f1aadb3bb55166656a491fb1e7703b2e2172e5694ec8845bab0"
+    },
+    {
+      "resource": "Jobs.en.json",
+      "source": {
+        "source": "project-authored CareerCatalog rows",
+        "version": "project-samples-2026-10",
+        "uri": "src/Bing.MockData/Data/ConfigurableSamples.cs#CareerCatalog",
+        "license": "MIT",
+        "inputSha256": "5cdbdc12925e5d5f97dddf2c2a53367a877376bfb5f55c39bbb8787a5359ca95",
+        "transformation": "CareerCatalog job field projected in declaration order; repeated jobs across different profiles are retained"
+      },
+      "legacyBaseline": {
+        "records": 18,
+        "sha256": "bd0cf9ddf9c515b8ff87cc2a0b6998f739bbbf9c9950d343708a0ea34a852541"
+      },
+      "outputRecords": 39,
+      "uniqueOutputRecords": 38,
+      "outputSha256": "6211cea12e0d1b9bfbe6b4260fd23ea7f81725ee0e6630f33ba36c48605214a7",
+      "outputBytes": 911,
+      "sourceRows": 39
+    },
+    {
+      "resource": "Jobs.zh-cn.json",
+      "source": {
+        "source": "project-authored CareerCatalog rows",
+        "version": "project-samples-2026-10",
+        "uri": "src/Bing.MockData/Data/ConfigurableSamples.cs#CareerCatalog",
+        "license": "MIT",
+        "inputSha256": "5cdbdc12925e5d5f97dddf2c2a53367a877376bfb5f55c39bbb8787a5359ca95",
+        "transformation": "CareerCatalog job field projected in declaration order; repeated jobs across different profiles are retained"
+      },
+      "legacyBaseline": {
+        "records": 302,
+        "sha256": "78e324f0be2be19b2f9ca6a32fd9e8c09c529c9c7c335b1eb783e57ddd6ac541"
+      },
+      "outputRecords": 39,
+      "uniqueOutputRecords": 39,
+      "outputSha256": "aaf024c41f8bee96ad6f387e5b73223527c207a86c43afb7c004c920499bb0b8",
+      "outputBytes": 768,
+      "sourceRows": 39
+    },
+    {
+      "resource": "Colors.en.json",
+      "source": {
+        "source": "W3C CSS Color 4 named colors, mirrored by project CSS table",
+        "version": "CSS Color 4 snapshot checked 2026-10-25",
+        "uri": "https://www.w3.org/TR/2026/CRD-css-color-4-20261022/#named-colors",
+        "license": "W3C Software and Document License 2023; project-generated name projection",
+        "inputSha256": "5cdbdc12925e5d5f97dddf2c2a53367a877376bfb5f55c39bbb8787a5359ca95",
+        "transformation": "All 148 verified CSS identifiers; zh-cn has 15 existing project labels and falls back to the stable English identifier for the remaining 133"
+      },
+      "legacyBaseline": {
+        "records": 15,
+        "sha256": "c6c26bb73af299565e57b5c35533fe3acaf0354c912f181e478ec8daa80f76ac"
+      },
+      "outputRecords": 148,
+      "uniqueOutputRecords": 148,
+      "outputSha256": "ac22508b9c1533cbf1c9963e1abd18b4faaeef6e471963aca1256c211c4378ee",
+      "outputBytes": 2213,
+      "sourceRows": 148
+    },
+    {
+      "resource": "Colors.zh-cn.json",
+      "source": {
+        "source": "W3C CSS Color 4 named colors, mirrored by project CSS table",
+        "version": "CSS Color 4 snapshot checked 2026-10-25",
+        "uri": "https://www.w3.org/TR/2026/CRD-css-color-4-20261022/#named-colors",
+        "license": "W3C Software and Document License 2023; project-generated name projection",
+        "inputSha256": "5cdbdc12925e5d5f97dddf2c2a53367a877376bfb5f55c39bbb8787a5359ca95",
+        "transformation": "All 148 verified CSS identifiers; zh-cn has 15 existing project labels and falls back to the stable English identifier for the remaining 133"
+      },
+      "legacyBaseline": {
+        "records": 15,
+        "sha256": "e5c872ce3eacc6f5962f023dc60209ac97005774416a6947cd4a3f22a4e4d131"
+      },
+      "outputRecords": 148,
+      "uniqueOutputRecords": 148,
+      "outputSha256": "627ebf98563095cc62fed116965f7e5223afc148b5de39351f020396a68078bd",
+      "outputBytes": 2229,
+      "sourceRows": 148
+    },
+    {
+      "resource": "Emails.json",
+      "source": {
+        "source": "IANA reserved example domains",
+        "version": "RFC 2606",
+        "uri": "https://www.rfc-editor.org/rfc/rfc2606",
+        "license": "Not applicable; reserved documentation domains",
+        "inputSha256": null,
+        "transformation": "Exact reserved host names only; no unreserved subdomains are created"
+      },
+      "legacyBaseline": {
+        "records": 22,
+        "sha256": "ed06f5e2027eb69e204a699c45d4aadf283d3a1ce352d377ac74649e360d8a4e"
+      },
+      "outputRecords": 3,
+      "uniqueOutputRecords": 3,
+      "outputSha256": "3867ac6766e9ac135b79bf1629d2e1d20c14ec256e4e3dc1f32b5e93b75b27b8",
+      "outputBytes": 54
+    },
+    {
+      "resource": "SimplifiedChinese.txt",
+      "source": {
+        "source": "project-authored simulated common-character set",
+        "version": "project-samples-2026-10",
+        "uri": "tools/LegacyResourceImport/sources/simplified-chinese.txt",
+        "license": "MIT",
+        "inputSha256": "3e88104607bcddb8f51e91ada09b9faa6a864429fe1a6c8cdd23aa2a4b77ee0a",
+        "transformation": "Keep unique Basic CJK Unified Ideographs in source order; discard whitespace and non-CJK characters"
+      },
+      "legacyBaseline": {
+        "records": 2499,
+        "sha256": "0a43b9b88896f7442434f2263c3b1634d2d36aa40bd157c470c0c7163723524e"
+      },
+      "outputRecords": 708,
+      "uniqueOutputRecords": 708,
+      "outputSha256": "a942d12efcf87dafd60a32b3320bccb327b25ce4c176cf15a9b8865badfd4130",
+      "outputBytes": 2124
+    }
+  ],
+  "externallyVerified": {
+    "sourceManifest": "tools/data/iban-js-0.0.14/manifest.json",
+    "sourceVersion": "iban-0.0.14",
+    "license": "MIT",
+    "sourceRecords": 102,
+    "retainedCountries": 54,
+    "excludedRecords": 48,
+    "outputs": {
+      "IBAN.txt": {
+        "records": 54,
+        "sha256": "323f0ba83a1af47bb819e6ce1a40e6fc2d77ee2dff598a4788f3feaefe7493e7",
+        "status": "PASS"
+      },
+      "BBAN.txt": {
+        "records": 54,
+        "sha256": "32e759a8bb3a31b58b9b8a59a26431f67e4f467a65c89b01aacf06cf360f8d0b",
+        "status": "PASS"
+      }
+    }
+  },
+  "blockedUnchanged": {
+    "Banks.json": {
+      "status": "BLOCKED_EXTERNAL",
+      "source": "repository legacy snapshot; upstream unverified",
+      "license": null,
+      "records": 8,
+      "sha256": "c5f09b283b8b608dac16a33c51bf4f7a94e434db2d279331c2ace08de7024fb6",
+      "reason": "No verified source/license was available for replacement; original bytes retained."
+    }
+  }
+}

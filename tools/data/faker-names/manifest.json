@@ -4,5 +4,22 @@
   "license": "MIT",
   "downloaded": "2026-10-25T07:19:05.714980+00:00",
   "records": 322,
-  "sha256": "6f8e0ea280dd8875f06c804c1855c7da01df8db04d51f16be1877aa11c3bfe58"
+  "sha256": "ab13b52d2369ae8cd1d696abd4c7dccce9080c4ea5e170a5fb625cbbf578e5ea",
+  "outputs": [
+    {
+      "file": "FemaleNames.txt",
+      "records": 381,
+      "sha256": "ba11cf1136b5273951cf98eac9c51f08a059871fe42fa27f53ff46d6fc6e8a22"
+    },
+    {
+      "file": "MaleNames.txt",
+      "records": 322,
+      "sha256": "ab13b52d2369ae8cd1d696abd4c7dccce9080c4ea5e170a5fb625cbbf578e5ea"
+    },
+    {
+      "file": "LastNames.txt",
+      "records": 1000,
+      "sha256": "ae9af1dd0704013af8b23f41d7cba41151b898d951e54bbebfce03005aa742fa"
+    }
+  ]
 }
