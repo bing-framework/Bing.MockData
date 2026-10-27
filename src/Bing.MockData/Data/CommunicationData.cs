@@ -22,6 +22,12 @@ namespace Bing.MockData
         { CountryCode=countryCode;CallingCode=callingCode;Type=type;NationalPattern=nationalPattern;NationalPrefix=nationalPrefix;Formats=Array.AsReadOnly((formats??Array.Empty<PhoneNumberFormat>()).ToArray()); }
     }
     public interface IPhoneMetadataProvider { PhonePattern GetPattern(string countryCode,PhoneNumberType type); }
+    /// <summary>可选的非地理号码元数据能力；呼叫码仅用于解析 001 区域，不推测国家。</summary>
+    public interface INonGeographicPhoneMetadataProvider
+    {
+        /// <summary>返回指定国际呼叫码及类型的非地理号码规则。</summary>
+        PhonePattern GetNonGeographicPattern(string callingCode, PhoneNumberType type);
+    }
     public sealed class MockPhone
     {
         public string CountryCode {get;} public string CallingCode {get;} public string NationalNumber {get;} public string Extension {get;}
@@ -36,7 +42,15 @@ namespace Bing.MockData
                 var regex=new Regex("\\A(?:"+format.Pattern+")\\z",RegexOptions.CultureInvariant,timeout);if(!regex.IsMatch(number))continue;
                 string replacement=format.Replacement;
                 if(!string.IsNullOrEmpty(format.NationalPrefixRule))
-                {string rule=format.NationalPrefixRule.Replace("$NP",p.NationalPrefix).Replace("$FG","$1");int group=replacement.IndexOf("$1",StringComparison.Ordinal);if(group>=0)replacement=replacement.Substring(0,group)+rule+replacement.Substring(group+2);}
+                {
+                    // $FG 表示替换表达式中的第一个捕获引用，可能为 $2（例如阿根廷移动号码）。
+                    var firstGroup=Regex.Match(replacement,@"\$[0-9]+",RegexOptions.CultureInvariant,timeout);
+                    if(firstGroup.Success)
+                    {
+                        string rule=format.NationalPrefixRule.Replace("$NP",p.NationalPrefix).Replace("$FG",firstGroup.Value);
+                        replacement=replacement.Substring(0,firstGroup.Index)+rule+replacement.Substring(firstGroup.Index+firstGroup.Length);
+                    }
+                }
                 NationalFormat=regex.Replace(number,replacement);break;
             }
         }
@@ -47,7 +61,29 @@ namespace Bing.MockData
         /// <summary>按已挂载的 libphonenumber 元数据生成；只保证格式，不保证号码已分配。</summary>
         public MockPhone Number(string countryCode="CN",PhoneNumberType type=PhoneNumberType.Mobile,bool extension=false)
         {
+            _c.Check();
+            if (!Enum.IsDefined(typeof(PhoneNumberType), type)) throw new ArgumentOutOfRangeException(nameof(type));
             var pattern=_c.Extension<IPhoneMetadataProvider>("phone-metadata").GetPattern(countryCode,type);
+            return Generate(pattern, extension);
+        }
+        /// <summary>生成 001 非地理号码；呼叫码为无前导零的 1–3 位 ASCII 数字，不含加号。</summary>
+        /// <exception cref="NotSupportedException">已挂载的元数据 Provider 未实现非地理号码能力。</exception>
+        public MockPhone NonGeographicNumber(string callingCode, PhoneNumberType type=PhoneNumberType.Mobile, bool extension=false)
+        {
+            _c.Check();
+            if (callingCode == null) throw new ArgumentNullException(nameof(callingCode));
+            if (callingCode.Length < 1 || callingCode.Length > 3 || callingCode[0] == '0' || !callingCode.All(ch => ch >= '0' && ch <= '9'))
+                throw new ArgumentException("呼叫码必须为无前导零的 1–3 位 ASCII 数字，不含加号。", nameof(callingCode));
+            if (!Enum.IsDefined(typeof(PhoneNumberType), type)) throw new ArgumentOutOfRangeException(nameof(type));
+            var provider = _c.Extension<object>("phone-metadata") as INonGeographicPhoneMetadataProvider;
+            if (provider == null) throw new NotSupportedException("电话元数据 Provider 未实现非地理号码能力。");
+            var pattern = provider.GetNonGeographicPattern(callingCode, type);
+            if (pattern.CountryCode != "001" || pattern.CallingCode != callingCode || pattern.Type != type)
+                throw new InvalidOperationException("非地理号码规则的地区、呼叫码或类型与请求不符。");
+            return Generate(pattern, extension);
+        }
+        private MockPhone Generate(PhonePattern pattern, bool extension)
+        {
             for(int attempt=0;attempt<_c.Limits.MaxAttempts;attempt++)
             {
                 // libphonenumber 的数字元数据使用 ASCII；通用 .NET 正则的 \d 还包含 Unicode 数字。
@@ -55,7 +91,7 @@ namespace Bing.MockData
                 if(!Regex.IsMatch(number,"\\A(?:"+pattern.NationalPattern+")\\z",RegexOptions.CultureInvariant,TimeSpan.FromSeconds(1)) || !number.All(c=>c>='0'&&c<='9') || pattern.CallingCode.Length+number.Length>15)continue;
                 return new MockPhone(pattern,number,extension?_c.Text.Random(4,4,"0123456789"):null);
             }
-            throw new InvalidOperationException(countryCode+"/"+type+" 在尝试预算内未生成满足 E.164 的号码。");
+            throw new InvalidOperationException(pattern.CountryCode+"/"+pattern.CallingCode+"/"+pattern.Type+" 在尝试预算内未生成满足 E.164 的号码。");
         }
     }
     /// <summary>客户端样本所描述的设备类型。</summary>
