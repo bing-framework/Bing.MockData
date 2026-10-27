@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="../Shared/AssetTargetTests.cs" Link="AssetTargetTests.cs" />
+    <Compile Include="../Shared/CatalogData.cs" Link="CatalogData.cs" />
     <ProjectReference Include="../../src/Bing.MockData/Bing.MockData.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true" />
     <ProjectReference Include="../../src/Bing.MockData.Catalogs/Bing.MockData.Catalogs.csproj" SetTargetFramework="TargetFramework=$(MockDataTargetFramework)" SkipGetTargetFrameworkProperties="true" />
   </ItemGroup>

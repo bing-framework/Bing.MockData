@@ -63,6 +63,8 @@ using var context = new MockContext(new MockOptions { Seed = 173 });
 if (ChinaDivisions.All.Count != 3212 || context.Templates.Person("110000").Build().Generate().Address.ProvinceCode != "110000") return 6;
 if (!context.Sequence().Enumerate(20).SequenceEqual(context.Sequence().EnumerateParallel(20, 4))) return 7;
 if (context.Dates.Between(new DateOnly(2025, 1, 1), new DateOnly(2025, 1, 1)) != new DateOnly(2025, 1, 1)) return 8;
+var bankCard = context.Finance.BankCard("308", Bing.MockData.Datas.Models.Banks.CardType.CreditCard);
+if (bankCard.Length < 15 || bankCard.Length > 19 || context.Replay.GenerationContractVersion != "domain-v6") return 9;
 return 0;
 
 static int Mod97(string iban)

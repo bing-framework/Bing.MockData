@@ -3,6 +3,12 @@ using System.Text.Json;
 using Bing.MockData;
 using Bing.MockData.Catalogs;
 
+if(args.Length>2 && (args[2]=="bank-card" || args[2]=="bank-bin"))
+{
+    Environment.ExitCode=BankProbe.Run(args);
+    return;
+}
+
 int count=args.Length>0?int.Parse(args[0]):10000;
 string root=args.Length>1?Path.GetFullPath(args[1]):Path.GetFullPath("src/Bing.MockData.Catalogs/Data/mime-db.sqlite3");
 string workload=args.Length>2?args[2]:"all";

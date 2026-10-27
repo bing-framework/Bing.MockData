@@ -22,6 +22,7 @@ internal static class Program
 
     private static async Task<int> Main(string[] args)
     {
+        if (args.Length > 0 && args[0] == "bank-bins-fixtures") return BankBinImport.RunFixtures();
         if (args.Length == 0 || args[0] is "help" or "--help" or "-h")
         {
             PrintUsage();
@@ -42,7 +43,7 @@ internal static class Program
             {
                 "all-basic" => new[] { "mime-db", "cldr", "pci", "ourairports", "phone-metadata", "geonames-city", "geonames-postal" },
                 "geonames" => new[] { "geonames-city", "geonames-postal" },
-                "mime-db" or "cldr" or "pci" or "ourairports" or "phone-metadata" or "geonames-city" or "geonames-postal" => new[] { args[0] },
+                "mime-db" or "cldr" or "pci" or "ourairports" or "phone-metadata" or "geonames-city" or "geonames-postal" or "bank-bins" => new[] { args[0] },
                 _ => throw new ArgumentException($"未知数据源：{args[0]}")
             };
 
@@ -64,6 +65,7 @@ internal static class Program
                     "ourairports" => await ImportOurAirports(raw, output, refresh, cancellation.Token),
                     "phone-metadata" => await ImportPhoneMetadata(raw, output, refresh, cancellation.Token),
                     "geonames-city" => await ImportGeoNames(raw, output, refresh, cancellation.Token, postal: false),
+                    "bank-bins" => await ImportBankBins(raw, output, refresh, cancellation.Token),
                     _ => throw new InvalidOperationException(name)
                 });
             }
@@ -84,6 +86,30 @@ internal static class Program
             Console.Error.WriteLine(e);
             return 1;
         }
+    }
+
+    private static async Task<CatalogOutput> ImportBankBins(string rawRoot, string outputRoot, bool refresh,
+        CancellationToken token)
+    {
+        var folder = Path.Combine(rawRoot, "bank-bins", BankBinImport.Commit);
+        Directory.CreateDirectory(folder);
+        foreach (var name in BankBinImport.InputFiles)
+        {
+            var url = "https://raw.githubusercontent.com/Techbuddie-Solutions/binlist-data/" +
+                BankBinImport.Commit + "/" + name;
+            await Download(url, Path.Combine(folder, name), refresh, token);
+        }
+
+        var result = BankBinImport.Import(folder, outputRoot, token);
+        CopyNotice(Path.Combine(folder, "README.md"), outputRoot, "bank-bins-README.md");
+        CopyNotice(Path.Combine(folder, "LICENSE"), outputRoot, "bank-bins-CC-BY-4.0-LICENSE.txt");
+        CopyNotice(Path.Combine(folder, "conflicts.csv"), outputRoot, "bank-bins-conflicts.csv");
+        CopyNotice(Path.Combine(folder, "summary.json"), outputRoot, "bank-bins-upstream-summary.json");
+        BankBinImport.WriteNotice(result, outputRoot);
+        BankBinImport.WriteEvidence(result, Path.Combine("artifacts", "bank-resource-closure", "bank-bins-import.json"));
+        return new CatalogOutput(result.Info, result.OutputPath, result.OutputSha256, result.OutputBytes,
+            result.Inputs.Select(input => new InputInfo(input.File, input.Sha256, input.Bytes)).ToArray(),
+            result.KindCounts, result.DuplicateCount);
     }
 
     private static async Task<CatalogOutput> ImportMimeDb(string rawRoot, string outputRoot, bool refresh, CancellationToken token)
@@ -935,7 +961,7 @@ internal static class Program
 
     private static void PrintUsage()
     {
-        Console.WriteLine("Usage: dotnet run --project tools/CatalogImport -- <all-basic|geonames|mime-db|cldr|pci|ourairports|phone-metadata|geonames-city|geonames-postal> [--raw PATH] [--output PATH] [--refresh]");
+        Console.WriteLine("Usage: dotnet run --project tools/CatalogImport -- <all-basic|geonames|mime-db|cldr|pci|ourairports|phone-metadata|geonames-city|geonames-postal|bank-bins|bank-bins-fixtures> [--raw PATH] [--output PATH] [--refresh]");
         Console.WriteLine("Imports fixed, documented snapshots. Network access is used only by this tool; runtime catalogs are offline.");
     }
 

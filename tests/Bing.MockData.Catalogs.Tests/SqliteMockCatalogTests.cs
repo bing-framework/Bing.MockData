@@ -234,14 +234,7 @@ public sealed class SqliteMockCatalogTests
     }
 
     private static string FindRepositoryData(string filename)
-    {
-        for (var directory = new DirectoryInfo(AppContext.BaseDirectory); directory != null; directory = directory.Parent)
-        {
-            var path = Path.Combine(directory.FullName, "src", "Bing.MockData.Catalogs", "Data", filename);
-            if (File.Exists(path)) return path;
-        }
-        throw new DirectoryNotFoundException("Could not locate the repository CLDR catalog data.");
-    }
+        => Bing.MockData.Tests.Infrastructure.CatalogData.FilePath(filename);
 
     private static string CreateCatalog()
     {

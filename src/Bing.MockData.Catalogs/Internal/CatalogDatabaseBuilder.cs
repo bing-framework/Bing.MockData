@@ -51,6 +51,16 @@ namespace Bing.MockData.Catalogs.Internal
 
         public bool Add(string key, string kind, string? countryCode, string name, string payloadJson)
         {
+            return AddCore(key, kind, countryCode, name, payloadJson, false);
+        }
+
+        public bool AddStrict(string key, string kind, string? countryCode, string name, string payloadJson)
+        {
+            return AddCore(key, kind, countryCode, name, payloadJson, true);
+        }
+
+        private bool AddCore(string key, string kind, string? countryCode, string name, string payloadJson, bool verifyDuplicate)
+        {
             if (_disposed || _completed) throw new ObjectDisposedException(nameof(CatalogDatabaseBuilder));
             if (string.IsNullOrWhiteSpace(key)) throw new ArgumentException("稳定键不能为空。", nameof(key));
             if (string.IsNullOrWhiteSpace(kind)) throw new ArgumentException("记录类型不能为空。", nameof(kind));
@@ -62,9 +72,35 @@ namespace Bing.MockData.Catalogs.Internal
             _insertRecord.Parameters["$country"].Value = (object?)countryCode ?? DBNull.Value;
             _insertRecord.Parameters["$name"].Value = name;
             _insertRecord.Parameters["$payload"].Value = payloadJson;
-            if (_insertRecord.ExecuteNonQuery() == 0) { _duplicateCount++; return false; }
+            if (_insertRecord.ExecuteNonQuery() == 0)
+            {
+                if (verifyDuplicate) VerifyIdenticalDuplicate(key, kind, countryCode, name, payloadJson);
+                _duplicateCount++;
+                return false;
+            }
             _count++;
             return true;
+        }
+
+        private void VerifyIdenticalDuplicate(string key, string kind, string? countryCode, string name, string payloadJson)
+        {
+            using (var command = _connection.CreateCommand())
+            {
+                command.Transaction = _transaction;
+                command.CommandText = "SELECT Kind, CountryCode, Name, PayloadJson FROM Records WHERE Key=$key;";
+                command.Parameters.AddWithValue("$key", key);
+                using (var reader = command.ExecuteReader())
+                {
+                    if (!reader.Read())
+                        throw new InvalidDataException("记录插入被忽略，但稳定键不存在：" + key);
+                    var existingCountryCode = reader.IsDBNull(1) ? null : reader.GetString(1);
+                    if (!string.Equals(reader.GetString(0), kind, StringComparison.Ordinal)
+                        || !string.Equals(existingCountryCode, countryCode, StringComparison.Ordinal)
+                        || !string.Equals(reader.GetString(2), name, StringComparison.Ordinal)
+                        || !string.Equals(reader.GetString(3), payloadJson, StringComparison.Ordinal))
+                        throw new InvalidDataException("同一稳定键映射到不同目录内容：" + key);
+                }
+            }
         }
 
         public void Complete(DataSetInfo info) => Complete((_, _) => info);
