@@ -1,6 +1,6 @@
 # 全领域 API 迁移说明
 
-最新补齐使用 `domain-v3` / `schema-search-v3` 生成身份，旧身份需使用旧实现重放；包版本未提升。新增有限正则长度重载、自动嵌套对象/字典/集合与可配置样本，详见[迁移与示例](constraint-completion-examples.md)。
+当前使用 `domain-v6` / `schema-search-v5` 生成身份，目录集合身份为 `catalog-set-v2`；内置数据身份为 `china-2025-12-31-domain-v5`。当前实现拒绝不匹配身份的历史重放记录。历史输出能否复现取决于完整原始代码、运行时、数据和配置环境是否仍可用；无法使用原环境时，应从原始业务输入在当前版本重新生成并保存重放信息。包版本未提升。格式断言资源控制、方言识别、显式规则定位和目录身份修复见[最新报告](review-followup-fixes-2026-10-26.md)，[上一轮报告](review-fixes-2026-10-26.md)保留；用法见[迁移与示例](constraint-completion-examples.md)。
 
 此版本统一以 `MockContext`、`MockGenerator<T>` 和领域门面作为主要入口。业务模型和模板已升级，旧式逐个随机器的使用方式应迁移到统一上下文；重放契约也已带版本，旧重放记录不会自动解释为新的生成规则。
 
@@ -59,7 +59,7 @@ var sameRecord = replayContext.ForRecord(17).Text.Name();
 
 ### 行为兼容提醒
 
-当前生成契约为 `domain-v2`。旧 `domain-v1` 的 `ReplayInfo.ToOptions()` 会抛出 `InvalidOperationException`，不能通过改写版本字段迁移；应依据原始业务输入重新生成并保存新的重放信息。CLDR 目录身份为 `49.0.0-import-v2`，历史币种和地区关系已纳入版本化数据。
+当前生成契约为 `domain-v6`，内置数据身份为 `china-2025-12-31-domain-v5`；Schema 搜索和目录集合身份分别为 `schema-search-v5` 与 `catalog-set-v2`。历史 `domain-v1`、`domain-v2` 等不匹配记录不受当前实现支持，`ReplayInfo.ToOptions()` 会因身份不兼容而抛出 `InvalidOperationException`。历史结果能否复现取决于原始完整环境是否仍可用；不能只改写版本字段。迁移到当前版本时，应根据原始业务输入重新生成并保存新的重放信息。CLDR 目录身份为 `49.0.0-import-v2`，历史币种和地区关系已纳入版本化数据。
 
 就诊模板的药品引用默认数为 1，因此默认要求挂载 `medications` 目录；仅需诊断和检查时，设置 `new EncounterOptions { Medications = 0 }` 可保留无药品目录的旧流程。传入的患者、订单、商品、目录记录或设备由调用方持有，生成后仍按字段引用规则关联；生成期间请保持这些实体稳定。
 
@@ -79,7 +79,7 @@ var deviceCatalog = context.Catalog("devices");
 DataSetInfo source = deviceCatalog.Info;
 ```
 
-多次 `UseCatalogFile(s)` 会组合进同一个 `CatalogSet`。单上下文最多挂载 8 个文件，路径数据库单个不超过 512 MiB。`UseGeographicCatalogs` 可挂载多个邮编分片，按过滤后的记录数加权抽样。Catalogs 代码包不包含大型数据库；使用 `build/pack-domains.ps1` 生成的 `catalog-data.zip`，并随应用部署/更新。
+多次 `UseCatalogFile(s)` 会组合进同一个 `CatalogSet`。单上下文最多挂载 8 个文件，路径数据库单个不超过 512 MiB。`UseGeographicCatalogs` 可挂载多个邮编分片，按过滤后的记录数加权抽样。Catalogs 代码包不包含大型数据库；使用 `build/pack-data.ps1` 独立生成版本化归档，经 `build/restore-data.ps1` 与可信清单验证后随应用部署/更新，详见[恢复与迁移](catalog-data-migration.md)。
 
 借用目录生命周期示例：
 
@@ -116,4 +116,4 @@ var sample = context.Schema("invoice").Generate();
 
 新入口和示例见 [本轮功能示例](domain-next-examples.md)。`ConfiguredFlight(FlightOptions)` 将出发国家、到达国家及航空公司国家拆分配置，也可指定当前目录中的记录；`Seats` 会复制子选项。旧 `Flight(string)` 保持原有行为。
 
-本轮核心重放契约仍为 `domain-v2`，Schema 的编译身份额外包含 `schema-search-v2`。挂载 Schema 的历史重放记录如果带旧身份，恢复上下文会拒绝；需要使用旧版本重放，或在新算法下生成并保存新身份。没有 Schema 的旧 domain-v2 上下文不受这一身份变化影响。
+当前核心重放契约为 `domain-v6`，内置数据身份为 `china-2025-12-31-domain-v5`；Schema 编译身份包含 `schema-search-v5`，目录集合身份为 `catalog-set-v2`。当前实现不恢复使用旧契约或旧 Schema 身份的历史记录；没有挂载 Schema 也不会使旧生成契约自动兼容。历史输出只有在原代码、运行时、数据与配置环境齐备时才可能复现；否则应使用原始业务输入在当前版本重新生成并保存完整重放信息。

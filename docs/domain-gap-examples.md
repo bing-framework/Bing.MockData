@@ -215,4 +215,4 @@ var yen = currencyContext.Finance.Currency("JPY");
 var cldrVersion = currencyContext.Replay.ExtensionVersions["currency-metadata"];
 ```
 
-重放格式为 `domain-v2`。从旧 `domain-v1` 记录读取的 `ReplayInfo` 调用 `ToOptions()` 会因生成契约版本不兼容而抛出 `InvalidOperationException`；不要只改写版本标记。应使用原始业务输入，在当前版本重新生成并保存新的重放信息。
+当前重放契约为 `domain-v6`，内置数据身份为 `china-2025-12-31-domain-v5`；Schema 搜索身份为 `schema-search-v5`，目录集合身份为 `catalog-set-v2`。旧 `domain-v1`、`domain-v2` 等历史记录不受当前契约支持，`ReplayInfo.ToOptions()` 会因身份不兼容而抛出 `InvalidOperationException`；不要只改版本标记。历史结果能否复现取决于原始完整运行环境是否仍可用。迁移到当前版本时，应使用原始业务输入重新生成并保存新的重放信息。

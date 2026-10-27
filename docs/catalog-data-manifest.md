@@ -12,6 +12,7 @@
 | `geonames-cities.sqlite3` | GeoNames `cities15000.zip`，2026-10-24 | CC BY 4.0 | 34,180 `city` | 全球人口门槛城市快照，不含所有聚落 |
 | `geonames-postal-0.sqlite3` | GeoNames `allCountries.zip`，2026-10-24，源行偶数分片 | CC BY 4.0 | 913,482 `postal` | 全球邮编源记录分片；保留来源粒度及精度 |
 | `geonames-postal-1.sqlite3` | 同上，源行奇数分片 | CC BY 4.0 | 913,483 `postal` | 与分片 0 合并使用才覆盖完整导入记录 |
+| `bank-bins.sqlite3` | Techbuddie-Solutions/binlist-data 提交 `fcc907c81cf02b12e396b0c12a8c16472b47619a`，导入标识 import-v1，2026-09-03 | CC BY 4.0 | 458,051 `bank-bin`，CN 18,389 | 原始 BIN、品牌、类型、分类、机构及联系信息、国家、source/seen；未知保持 null；5/6/8 位分别 7/454,496/3,548 条；不含完整卡号长度，不承诺八位 BIN 分配已核验或覆盖完整 |
 
 上游入口：[mime-db](https://github.com/jshttp/mime-db)、[CLDR JSON](https://github.com/unicode-org/cldr-json/tree/49.0.0)、[PCI IDs](https://github.com/pciutils/pciids/tree/fe7fceb2e1153d495e1deefacf59c5d61c36ef8e)、[OurAirports 数据](https://github.com/davidmegginson/ourairports-data/tree/711cf6754ef05a1ccedc2482cc1e838032249d3c)、[Google libphonenumber](https://github.com/google/libphonenumber/tree/6d349ac62b76a86eccba0ac1d2fc83ea2b00a841)、[GeoNames 城市快照](https://download.geonames.org/export/dump/cities15000.zip)、[GeoNames 邮编快照](https://download.geonames.org/export/zip/allCountries.zip)。GeoNames 来源说明和 CC BY 4.0 文本随数据保存在 `notices/geonames-*-readme.txt`。
 
@@ -27,6 +28,7 @@
 | `geonames-cities.sqlite3` | `4c921f81f2cf4cc65cd00e2d7c03a6f6f91da4871044e3640dcea886451f45c7` | `373c58841bbe87c742341402d77aee6e8809243b95e9b532fef7b5a40439e7` | 24,887,296 |
 | `geonames-postal-0.sqlite3` | `7aff9e9cf85d16a1ee978e55aeab38c59ed79cb58cf299998fd76dc844042c68` | `2f67b0234162a3fffe53e56b2fcfcfce0bf438e69569e88a4415d50991c7c4f3` | 446,251,008 |
 | `geonames-postal-1.sqlite3` | `7aff9e9cf85d16a1ee978e55aeab38c59ed79cb58cf299998fd76dc844042c68` | `a41de1ca23080b616102b6bc1a44fe301aba41a9ec7c87f15593645a8e2b5c4e` | 446,197,760 |
+| `bank-bins.sqlite3` | `4db6fd3e0fd0a9baa2973776bfa6559ce584952e287fa5d1a16414445b891126` | `646a7ec092b0b019d17ed5723c64b0c2ece648231d595cf0fa901c6d8ebe5d86` | 172,437,504 |
 
 导入工具保留每个下载的原始文件，并在写目录时验证稳定键唯一性、输出记录数和数据库结构。邮编原始 ZIP 约 19.7 MB，但 SQLite 单库超过 512 MiB 默认目录上限；因此按来源行序号奇偶分为两个确定性文件，记录数之和为 1,826,965。两片查询按过滤后的行数加权选择，不会只抽到单个分片。各 SHA-256、版本、源文件校验值、输入字节数、Kind 计数及排除数量以 JSON manifest 为权威证据。
 
@@ -41,6 +43,8 @@
 `tools/CatalogImport` 是显式网络导入工具，正常库运行不会调用它。使用 `dotnet run --project tools/CatalogImport -- all-basic --output <目录>` 下载并转换上述基础快照。GeoNames 命令可单独运行 `geonames-city` 或 `geonames-postal`。原始输入按数据源及版本保存在 `tools/CatalogImport/raw/`；生成物可写到独立 staging 目录核对后再更新 `src/Bing.MockData.Catalogs/Data/`。重新生成 manifest 后，必须审阅上游许可和覆盖说明；不要将测试样本或部分快照描述为完整目录。
 
 行业数据单独列于 `src/Bing.MockData.Catalogs/Data/industry.manifest.json`，由 `tools/IndustryImport` 管理；本清单仅负责上述基础五类目录和 GeoNames。行业目录及其覆盖边界见 [全领域示例](domain-examples.md)。
+
+全球 BIN 使用独立命令 `dotnet run --project tools/CatalogImport -- bank-bins`，固定输入来自 [Techbuddie 来源提交](https://github.com/Techbuddie-Solutions/binlist-data/tree/fcc907c81cf02b12e396b0c12a8c16472b47619a)，保留 README、CC BY 4.0 正文、合并脚本与上游冲突记录。署名包括 Techbuddie Solutions、Ian Nuttall 和 Venelin Kochev。读取时不发起网络请求；库不把 `seen` 解释为银行核验时间，不把机构名称模糊匹配为旧八银行关联。具体恢复及接口见[银行示例](bank-resource-examples.md)，导入验证与当前门禁见[银行交付报告](bank-resource-report.md)。
 
 
 ## 行业快照（完整本地交付）

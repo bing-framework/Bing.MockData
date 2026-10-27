@@ -97,6 +97,6 @@ string seat = context.Transport().Seat(new SeatOptions
 
 ## 重放与生命周期
 
-核心生成契约仍为 `domain-v2`；本轮 Schema 搜索版本 `schema-search-v2` 已参与 `CompiledSchema.Identity`。挂载 Schema 的旧重放身份不能静默套用新的生成算法，会在恢复上下文时拒绝。重新生成新记录应保存新的完整重放信息，不能只改身份字段。
+当前核心生成契约为 `domain-v6`，内置数据身份为 `china-2025-12-31-domain-v5`；Schema 搜索版本 `schema-search-v5` 参与 `CompiledSchema.Identity`，目录集合身份为 `catalog-set-v2`。当前实现会拒绝旧契约或旧 Schema 身份的历史重放记录，不会静默套用新算法。历史结果能否复现取决于原代码、运行时、数据和配置环境是否齐备；在当前版本重新生成记录时，应从原始业务输入出发并保存新的完整重放信息，不能只改身份字段。
 
 直接创建的 `CompiledSchema` 由调用方 `using` 释放；`UseSchema` 挂载的实例由上下文释放。目录路径挂载由上下文拥有；取消、枚举及外部实例所有权契约保持既有约定。

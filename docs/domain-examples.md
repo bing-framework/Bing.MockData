@@ -142,7 +142,7 @@ string overlongBoundary = context.Boundaries.Text(TextBoundary.Overlong, busines
 
 ## 离线目录挂载
 
-基础目录数据包和许可文件见 [catalog-data-manifest.md](catalog-data-manifest.md)。下面把城市、两个邮编分片、CLDR、libphonenumber 和 mime-db 挂载到同一上下文；数据文件先从 `catalog-data.zip` 解压到 `dataDir`。每个显式传入的目录都转移给这个上下文，不能在其他上下文或另一个 options 配置中复用。
+基础目录数据包和许可文件见 [catalog-data-manifest.md](catalog-data-manifest.md)。下面把城市、两个邮编分片、CLDR、libphonenumber 和 mime-db 挂载到同一上下文；数据文件先使用 `build/restore-data.ps1` 与可信清单校验并恢复到 `dataDir`。每个显式传入的目录都转移给这个上下文，不能在其他上下文或另一个 options 配置中复用。
 
 ```csharp
 using Bing.MockData.Catalogs;
