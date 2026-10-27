@@ -5,8 +5,10 @@ namespace Bing.MockData.Schema
     /// <summary>Schema 编译与生成预算。上下文捕获配置副本。</summary>
     public sealed class SchemaOptions
     {
+        /// <summary>Schema 文档组、单次验证实例及内部共享格式约束各自允许的最大 UTF-8 字节数。</summary>
         public long MaxDocumentBytes {get;set;}=16*1024*1024;
         public int MaxDocuments {get;set;}=256;
+        /// <summary>单条生成（包括格式处理）的步骤上限；直接 Validate 调用使用独立的同额预算。</summary>
         public int MaxSearchSteps {get;set;}=100000;
         public int MaxDepth {get;set;}=8;
         public TimeSpan RegexTimeout {get;set;}=TimeSpan.FromSeconds(1);

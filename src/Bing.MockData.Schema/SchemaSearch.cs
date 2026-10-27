@@ -46,6 +46,10 @@ namespace Bing.MockData.Schema
                 if(e.InstanceLocation.Length>0)throw;
                 throw new SchemaGenerationException(e.Failure,e.Message,e.SchemaLocation=="#"?_graph.Location(inputs.FirstOrDefault()):e.SchemaLocation,instancePath,inner:e);
             }
+            catch(MockLimitException e)
+            {
+                throw new SchemaGenerationException(SchemaFailure.BudgetExhausted,e.Message,_graph.Location(inputs.FirstOrDefault()),instancePath,inner:e);
+            }
         }
         private JToken GenerateCore(IEnumerable<JToken> source,MockContext c,int depth,List<JObject> parentScope,string instancePath)
         {
@@ -127,7 +131,10 @@ namespace Bing.MockData.Schema
             var patterns=ss.Select(s=>(string)s["pattern"]).Where(s=>s!=null).ToArray();string value;
             if(patterns.Length>0)
             {
-                try{value=c.Text.Regex(patterns[c.Numbers.Int(0,patterns.Length-1)]);}catch(ArgumentException){value=c.Text.Random(min,sampleMax);}catch(NotSupportedException){value=c.Text.Random(min,sampleMax);}
+                try{value=c.Text.RegexCodePoints(patterns[c.Numbers.Int(0,patterns.Length-1)],min,max);}
+                catch(ArgumentException){value=c.Text.Random(min,sampleMax);}
+                catch(NotSupportedException){value=c.Text.Random(min,sampleMax);}
+                catch(InvalidOperationException e) when(!(e is MockLimitException)){throw new CandidateRejected();}
                 foreach(var pattern in patterns){Step();if(!Regex.IsMatch(value,JsonSchemaEvaluator.ToDotNetPattern(pattern),RegexOptions.CultureInvariant,_options.RegexTimeout))throw new CandidateRejected();}
             }
             else

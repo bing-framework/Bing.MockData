@@ -11,52 +11,17 @@ using Newtonsoft.Json.Linq;
 
 namespace Bing.MockData.Schema
 {
-    // Replace asserted formats with equivalent finite exclusions for this instance.
-    // The underlying evaluator still handles all applicators, dynamic scope and evaluated locations.
+    // Format predicates used by shared private constraints. Corvus retains applicator/dynamic scope semantics.
     internal static class FormatAssertions
     {
         private static readonly string[] Single={"additionalProperties","unevaluatedProperties","propertyNames","items","unevaluatedItems","contains","not","if","then","else","contentSchema"};
         private static readonly string[] Maps={"properties","patternProperties","$defs","definitions","dependentSchemas"};
         private static readonly string[] Arrays={"allOf","anyOf","oneOf","prefixItems"};
-        internal static IEnumerable<JToken> Children(JObject o)
+        internal static IEnumerable<JToken> Children(JObject o,Func<string,bool> enabled=null)
         {
-            foreach(string key in Single)if(o[key]!=null)yield return o[key];
-            foreach(string key in Maps)if(o[key] is JObject map)foreach(var p in map.Properties().ToArray())yield return p.Value;
-            foreach(string key in Arrays)if(o[key] is JArray array)foreach(var child in array.ToArray())yield return child;
-        }
-        internal static void Visit(JToken node,Action<JObject> apply)
-        {if(!(node is JObject o))return;apply(o);foreach(var child in Children(o))Visit(child,apply);}
-        internal static bool AssertsFormats(string json)=>(ExactJson.Parse(json) as JObject)?["$vocabulary"]?["https://json-schema.org/draft/2020-12/vocab/format-assertion"]?.Value<bool>()==true;
-        internal static HashSet<string> Strings(JToken instance)
-        {var result=new HashSet<string>(StringComparer.Ordinal);Collect(instance,result);return result;}
-        private static void Collect(JToken t,HashSet<string> result)
-        {if(t.Type==JTokenType.String)result.Add((string)t);else if(t is JObject o)foreach(var p in o.Properties()){result.Add(p.Name);Collect(p.Value,result);}else if(t is JArray array)foreach(var item in array)Collect(item,result);}
-        internal static string Rewrite(string schema,HashSet<string> strings,TimeSpan timeout,bool? assertion,IReadOnlyDictionary<string,string> documents)
-        {
-            var root=ExactJson.Parse(schema);
-            void RewriteNode(JToken token,bool active,string dialect=null)
-            {
-                if(!(token is JObject o))return;
-                if(o["$schema"]?.Type==JTokenType.String)dialect=(string)o["$schema"];
-                if(dialect!=null&&documents.TryGetValue(dialect,out var definition)&&(ExactJson.Parse(definition) as JObject)?["$vocabulary"] is JObject vocabulary)
-                {
-                    // Added private constraints need validation/applicator support. Remove originally
-                    // inactive keywords before enabling those vocabularies in the private meta-schema.
-                    if(vocabulary["https://json-schema.org/draft/2020-12/vocab/validation"]==null)
-                        foreach(string key in new[]{"type","const","enum","multipleOf","minimum","maximum","exclusiveMinimum","exclusiveMaximum","minLength","maxLength","pattern","minItems","maxItems","uniqueItems","minContains","maxContains","minProperties","maxProperties","required","dependentRequired"})o.Remove(key);
-                    if(vocabulary["https://json-schema.org/draft/2020-12/vocab/applicator"]==null)
-                        foreach(string key in new[]{"allOf","anyOf","oneOf","not","if","then","else","properties","patternProperties","additionalProperties","dependentSchemas","propertyNames","prefixItems","items","contains"})o.Remove(key);
-                }
-                if(o["$vocabulary"] is JObject privateVocabulary)
-                {privateVocabulary["https://json-schema.org/draft/2020-12/vocab/validation"]=true;privateVocabulary["https://json-schema.org/draft/2020-12/vocab/applicator"]=true;}
-                if(assertion.HasValue)active=assertion.Value;
-                else if(o["$schema"]?.Type==JTokenType.String)active=documents.TryGetValue((string)o["$schema"],out var metaDocument)&&AssertsFormats(metaDocument);
-                foreach(var child in Children(o).ToArray())RewriteNode(child,active,dialect);
-                if(!active||o["format"]?.Type!=JTokenType.String)return;string format=(string)o["format"];if(!Corrected.Contains(format))return;
-                var invalid=new JArray(strings.Where(value=>!Valid(format,value,timeout)));o.Remove("format");
-                if(invalid.Count>0){var constraint=new JObject{["not"]=new JObject{["enum"]=invalid}};if(!(o["allOf"] is JArray all)){all=new JArray();o["allOf"]=all;}all.Add(constraint);}
-            }
-            RewriteNode(root,assertion==true);return ExactJson.Write(root);
+            foreach(string key in Single)if((enabled==null||enabled(key))&&o[key]!=null)yield return o[key];
+            foreach(string key in Maps)if((enabled==null||enabled(key))&&o[key] is JObject map)foreach(var p in map.Properties().ToArray())yield return p.Value;
+            foreach(string key in Arrays)if((enabled==null||enabled(key))&&o[key] is JArray array)foreach(var child in array.ToArray())yield return child;
         }
         internal static readonly HashSet<string> Corrected=new HashSet<string>(new[]{"date-time","time","duration","regex","email","idn-email","idn-hostname","ipv6","uri","uri-reference","iri","iri-reference","uri-template"},StringComparer.Ordinal);
         private static bool Match(string value,string pattern,TimeSpan timeout)=>Regex.IsMatch(value,"\\A(?:"+pattern+")\\z",RegexOptions.CultureInvariant,timeout);
@@ -72,8 +37,9 @@ namespace Bing.MockData.Schema
                     if(!Match(value,"P(?:[0-9]+W|(?=[0-9T])(?:[0-9]+Y)?(?:[0-9]+M)?(?:[0-9]+D)?(?:T(?=[0-9])(?:[0-9]+H)?(?:[0-9]+M)?(?:[0-9]+S)?)?)",timeout)||value=="P")return false;
                     string[] parts=value.Split('T');if(parts[0].Contains("Y")&&parts[0].Contains("D")&&!parts[0].Contains("M"))return false;if(parts.Length>1&&parts[1].Contains("H")&&parts[1].Contains("S")&&!parts[1].Contains("M"))return false;return true;
                 case "regex":
-                    // The ECMA parser is used by the evaluator's own pattern translator.
-                    try{for(int i=0;i<value.Length;i++)if(value[i]=='\\'&&i+1<value.Length){char escaped=value[++i];if(escaped=='a'||escaped=='e')return false;}if(Regex.IsMatch(value,@"\(\?(?:#|P[<=]|[imsx-]+\))",RegexOptions.CultureInvariant,timeout))return false;new Regex(JsonSchemaEvaluator.ToDotNetPattern(value).Replace("[]","(?!)"),RegexOptions.ECMAScript,timeout);return true;}catch(ArgumentException){return false;}catch(FormatException){return false;}
+                    // Translation already handles empty classes. Replacing text afterwards corrupts
+                    // escaped brackets such as [\[]. The .NET fallback also needs a dialect guard.
+                    try{if(!RegexDialectAllowed(value))return false;new Regex(JsonSchemaEvaluator.ToDotNetPattern(value),RegexOptions.CultureInvariant,timeout);return true;}catch(ArgumentException){return false;}catch(FormatException){return false;}
                 case "email":return Email(value,false,timeout);case "idn-email":return Email(value,true,timeout);
                 case "idn-hostname":return IdnHost(value);
                 case "ipv6":return Ipv6(value);
@@ -81,6 +47,45 @@ namespace Bing.MockData.Schema
                 case "uri-template":return Template(value,timeout);
                 default:return true;
             }
+        }
+        private static bool RegexDialectAllowed(string pattern)
+        {
+            bool inClass=false;
+            for(int i=0;i<pattern.Length;i++)
+            {
+                char c=pattern[i];
+                if(c=='\\'&&i+1<pattern.Length)
+                {
+                    char escaped=pattern[++i];
+                    if(escaped=='a'||escaped=='e')return false;
+                    if(escaped=='k'&&i+1<pattern.Length&&pattern[i+1]=='\'')return false;
+                    continue;
+                }
+                if(inClass){if(c==']')inClass=false;continue;}
+                if(c=='['){inClass=true;continue;}
+                if(c!='('||i+1>=pattern.Length||pattern[i+1]!='?')continue;
+                int start=i+2;if(start>=pattern.Length)return false;
+                char kind=pattern[start];
+                if(kind==':'||kind=='='||kind=='!')continue;
+                if(kind=='<')
+                {
+                    if(start+1<pattern.Length&&(pattern[start+1]=='='||pattern[start+1]=='!'))continue;
+                    int end=pattern.IndexOf('>',start+1);if(end<0)return false;
+                    string name=pattern.Substring(start+1,end-start-1);
+                    if(name.Length==0||name.Contains("-")||char.IsDigit(name[0]))return false;
+                    continue;
+                }
+                // ES2025 scoped modifiers permit i/m/s only, without repeated flags.
+                int cursor=start;bool minus=false;var flags=new HashSet<char>();
+                for(;cursor<pattern.Length&&pattern[cursor]!=':';cursor++)
+                {
+                    char flag=pattern[cursor];
+                    if(flag=='-'&&!minus){minus=true;continue;}
+                    if((flag!='i'&&flag!='m'&&flag!='s')||!flags.Add(flag))return false;
+                }
+                if(cursor==pattern.Length||flags.Count==0||pattern[cursor-1]=='-')return false;
+            }
+            return true;
         }
         private static bool Time(string value,TimeSpan timeout)
         {
