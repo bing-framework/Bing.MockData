@@ -103,15 +103,31 @@ namespace Bing.MockData.Catalogs
 
         private static string ComputeVersion(IEnumerable<CatalogAttachment> items)
         {
-            var builder = new StringBuilder("catalog-set-v1\n");
-            foreach (var item in items.OrderBy(x => x.Name, StringComparer.Ordinal))
+            var ordered = items.OrderBy(x => x.Name, StringComparer.Ordinal).ToArray();
+            using (var stream = new MemoryStream())
+            using (var writer = new BinaryWriter(stream, Encoding.UTF8, true))
             {
-                var info = item.Catalog.Info;
-                builder.Append(item.Name).Append('\t').Append(info.Id).Append('\t').Append(info.Version).Append('\t')
-                    .Append(info.SourceSha256).Append('\n');
+                WriteVersionString(writer, "catalog-set-v2");
+                writer.Write(ordered.Length);
+                foreach (var item in ordered)
+                {
+                    var info = item.Catalog.Info;
+                    WriteVersionString(writer, item.Name);
+                    WriteVersionString(writer, info.Id);
+                    WriteVersionString(writer, info.Version);
+                    WriteVersionString(writer, info.SourceSha256);
+                }
+                writer.Flush();
+                using (var sha = SHA256.Create())
+                    return "catalog-set-v2-" + string.Concat(sha.ComputeHash(stream.ToArray()).Select(x => x.ToString("x2")));
             }
-            using (var sha = SHA256.Create())
-                return "catalog-set-v1-" + string.Concat(sha.ComputeHash(Encoding.UTF8.GetBytes(builder.ToString())).Select(x => x.ToString("x2")));
+        }
+
+        private static void WriteVersionString(BinaryWriter writer, string value)
+        {
+            writer.Write(value.Length);
+            foreach (var codeUnit in value)
+                writer.Write((ushort)codeUnit);
         }
 
         private void ThrowIfDisposed()
